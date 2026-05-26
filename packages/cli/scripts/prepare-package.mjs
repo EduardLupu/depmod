@@ -76,12 +76,24 @@ if (process.env.DEPMOD_SKIP_WEB_BUILD === "1") {
   log("DEPMOD_SKIP_WEB_BUILD=1 — skipping `pnpm --filter web build`.");
 } else {
   log("Building apps/web (Next.js standalone)…");
+  // `shell: true` is required on Windows because there's no `pnpm`
+  // executable on PATH — only `pnpm.cmd`. Without it, Node's spawnSync
+  // can't find the binary and the child exits with code `null` (killed
+  // before launch). The shell flag also resolves `pnpm.ps1` / `pnpm.cmd`
+  // properly via cmd.exe. POSIX systems are unaffected since `pnpm` is
+  // a real binary there; using shell mode is a tiny overhead.
   const r = spawnSync("pnpm", ["--filter", "web", "build"], {
     cwd: monorepoRoot,
     stdio: "inherit",
     env: process.env,
+    shell: true,
   });
-  if (r.status !== 0) fail(`pnpm --filter web build exited with code ${r.status}`);
+  if (r.status !== 0) {
+    const errPart = r.error ? ` error=${r.error.message}` : "";
+    fail(
+      `pnpm --filter web build exited with status=${r.status} signal=${r.signal ?? "none"}${errPart}`,
+    );
+  }
 }
 
 if (!existsSync(standalone)) {

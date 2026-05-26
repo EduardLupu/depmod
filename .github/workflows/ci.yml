@@ -57,6 +57,10 @@ jobs:
       - name: Pack depmod-ui tarball
         # `--pack-destination` keeps the tarball location predictable across
         # pnpm versions (10.x packs in the workspace root by default).
+        # `DEPMOD_SKIP_WEB_BUILD=1` tells `prepare-package.mjs` not to re-run
+        # `pnpm --filter web build` — the previous step already built it.
+        env:
+          DEPMOD_SKIP_WEB_BUILD: "1"
         run: pnpm --filter depmod-ui pack --pack-destination ./packages/cli
 
   # Cross-platform tarball smoke test. Proves the *published* artifact
@@ -95,6 +99,10 @@ jobs:
       - name: Pack depmod-ui tarball
         # `--pack-destination` keeps the tarball location predictable across
         # pnpm versions (10.x packs in the workspace root by default).
+        # `DEPMOD_SKIP_WEB_BUILD=1` tells `prepare-package.mjs` not to re-run
+        # `pnpm --filter web build` — the previous step already built it.
+        env:
+          DEPMOD_SKIP_WEB_BUILD: "1"
         run: pnpm --filter depmod-ui pack --pack-destination ./packages/cli
 
       # Two-tier install test — local + global. The local test catches
