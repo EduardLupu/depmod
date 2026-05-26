@@ -1,5 +1,18 @@
 # depmod-ui
 
+## 0.4.0
+
+### Minor Changes
+
+- [`ec1de63`](https://github.com/EduardLupu/depmod/commit/ec1de636b0dc2472eb9fa7508a9a04e1a6f85d5a) Thanks [@EduardLupu](https://github.com/EduardLupu)! - Add a daily background check for new `depmod-ui` versions. Print a one-line
+  notice on the user's next invocation when an upgrade is available. Uses
+  [`update-notifier`](https://github.com/yeoman/update-notifier) — the same
+  pattern npm itself uses ("New minor version of npm available!").
+
+  Respects `NO_UPDATE_NOTIFIER=1` and `--no-update-notifier` for CI scripts
+  and self-suppresses in non-TTY contexts. Cached at the OS-standard config
+  dir (e.g. `~/.config/configstore/update-notifier-depmod-ui.json`).
+
 ## 0.3.0
 
 ### Minor Changes
