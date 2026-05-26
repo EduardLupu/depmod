@@ -143,7 +143,7 @@ describe("GraphSchema", () => {
 
     it("rejects instability outside [0, 1]", () => {
       const bad = structuredClone(fixture) as Graph;
-      bad.nodes[0]?.metrics.instability = 1.5;
+      bad.nodes[0]!.metrics.instability = 1.5;
       expect(safeParseGraph(bad).success).toBe(false);
     });
 
