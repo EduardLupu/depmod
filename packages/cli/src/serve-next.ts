@@ -279,25 +279,15 @@ interface SpawnOpts {
   quiet: boolean;
 }
 
-function readBundledNodePath(webRoot: string): string | undefined {
-  const manifest = join(webRoot, "node-path.txt");
-  if (!existsSync(manifest)) return undefined;
-  const sep = process.platform === "win32" ? ";" : ":";
-  const lines = readFileSync(manifest, "utf-8")
-    .split("\n")
-    .map((l) => l.trim())
-    .filter(Boolean);
-  return lines.length > 0 ? lines.join(sep) : undefined;
-}
-
 function spawnServer(server: ResolvedServer, opts: SpawnOpts): ChildProcess {
-  const webRoot = join(server.cwd, "..", "..");
-  const bundledNodePath = readBundledNodePath(webRoot);
-  const nodePath = bundledNodePath
-    ? [bundledNodePath, process.env.NODE_PATH]
-        .filter(Boolean)
-        .join(process.platform === "win32" ? ";" : ":")
-    : process.env.NODE_PATH;
+  // No NODE_PATH gymnastics: `next`, `react`, `sharp` etc. are declared as
+  // runtime `dependencies` of `depmod-ui`, so they live in the install
+  // root's `node_modules` next to depmod-ui itself. Node's standard module
+  // resolution walks up from `web/apps/web/server.js` and finds them in
+  // `<install-root>/node_modules/depmod-ui/node_modules/` (or the hoisted
+  // `<install-root>/node_modules/` for modern npm). Works identically on
+  // every OS and architecture because npm picks the right native binaries
+  // at install time.
   const env = {
     ...process.env,
     DEPMOD_SESSION_PATH: opts.sessionPath,
@@ -305,7 +295,6 @@ function spawnServer(server: ResolvedServer, opts: SpawnOpts): ChildProcess {
     DEPMOD_TARGET_ROOT: opts.targetRoot,
     PORT: String(opts.port),
     HOSTNAME: opts.host,
-    ...(nodePath ? { NODE_PATH: nodePath } : {}),
   };
 
   let child: ChildProcess;

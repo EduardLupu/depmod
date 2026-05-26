@@ -5,13 +5,21 @@
 //
 // Layout produced:
 //   packages/cli/web/
-//     apps/web/server.js         (standalone entry, run with `node server.js`)
-//     apps/web/.next/            (compiled chunks + static)
-//     apps/web/public/           (public assets, if present)
-//     node_modules/              (only deps the trace actually used)
+//     apps/web/server.js   (standalone entry, run with `node server.js`)
+//     apps/web/.next/      (compiled chunks + static + public)
+//     apps/web/public/     (public assets, if present)
 //
-// Why pure-Node: this runs at publish-time on machines that may not have
-// rsync or specific shells; avoiding shell deps keeps the script portable.
+// The bundled `node_modules` from Next's standalone output is intentionally
+// stripped. We declare `next`, `react`, `react-dom`, `sharp` etc. as runtime
+// `dependencies` of `depmod-ui` instead, so npm installs the correct
+// platform binaries per-user (Windows x64, Linux x64, macOS arm64, …).
+// Node's module resolution walks up from `server.js` and finds them in
+// `depmod-ui`'s own `node_modules` at install time.
+//
+// Why we stopped bundling them: the prior approach shipped macOS arm64
+// binaries (`@img/sharp-darwin-arm64`, `@swc/core-darwin-arm64`) baked into
+// the tarball, which broke installs on every other platform. It also hit
+// Windows MAX_PATH limits on the deeply nested pnpm-style paths.
 
 import { spawnSync } from "node:child_process";
 import {
@@ -20,13 +28,11 @@ import {
   existsSync,
   mkdirSync,
   readdirSync,
-  realpathSync,
   rmSync,
   statSync,
 } from "node:fs";
 import { dirname, join, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { writeNodePathManifest } from "./write-node-path-manifest.mjs";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const cliRoot = resolve(here, "..");
@@ -42,33 +48,6 @@ function log(msg) {
 function fail(msg) {
   process.stderr.write(`[prepare-package] ERROR: ${msg}\n`);
   process.exit(1);
-}
-
-/** npm pack drops symlink entries; replace top-level hoists with real directories. */
-function materializeHoists(nmDir) {
-  if (!existsSync(nmDir)) return;
-  for (const entry of readdirSync(nmDir, { withFileTypes: true })) {
-    if (!entry.isSymbolicLink()) continue;
-    const p = join(nmDir, entry.name);
-    const target = realpathSync(p);
-    rmSync(p, { recursive: true, force: true });
-    cpSync(target, p, { recursive: true, dereference: true });
-  }
-}
-
-/** Copy Next's virtual-store peers (styled-jsx, etc.) next to the hoisted `next`. */
-function hoistNextVirtualStore(bundleRoot) {
-  const pnpmDir = join(bundleRoot, "node_modules", ".pnpm");
-  const appNm = join(bundleRoot, "apps", "web", "node_modules");
-  if (!existsSync(pnpmDir) || !existsSync(appNm)) return;
-  const nextStore = readdirSync(pnpmDir).find((d) => d.startsWith("next@"));
-  if (!nextStore) return;
-  const virt = join(pnpmDir, nextStore, "node_modules");
-  for (const pkg of readdirSync(virt)) {
-    const dst = join(appNm, pkg);
-    if (existsSync(dst)) continue;
-    cpSync(join(virt, pkg), dst, { recursive: true, dereference: true });
-  }
 }
 
 function dirSize(p) {
@@ -116,26 +95,38 @@ log(`Recreating ${relative(monorepoRoot, targetWeb)}/`);
 rmSync(targetWeb, { recursive: true, force: true });
 mkdirSync(targetWeb, { recursive: true });
 
-// ── 3. Copy standalone tree ──────────────────────────────────────────────
-// Next puts the *app* under standalone/<workspace-path>/, mirroring the
-// `outputFileTracingRoot` layout. The web app's postbuild step
-// (`apps/web/scripts/finalize-standalone.mjs`) has already populated
-// `.next/static` and `public/` next to the server, so we only need to copy
-// the whole tree verbatim.
-// Dereference all symlinks so `npm pack` ships real files (pnpm links break on install).
-log("Copying .next/standalone → web/ (dereferencing symlinks)…");
+// ── 3. Copy the standalone tree, then strip the bundled node_modules ────
+// Next.js standalone lays files out under `standalone/<workspace-path>/`.
+// We mirror that whole tree so server.js's relative requires resolve
+// internally, then delete the bundled `node_modules` so the tarball stays
+// portable. The runtime dependencies are declared in `package.json` and
+// installed per-platform by npm.
+log("Copying .next/standalone → web/");
 cpSync(standalone, targetWeb, { recursive: true, dereference: true });
-materializeHoists(join(targetWeb, "apps", "web", "node_modules"));
-hoistNextVirtualStore(targetWeb);
 
-// npm pack omits scoped packages under nested `node_modules/` (e.g. `@swc/*`).
-// Flatten hoisted deps to `web/standalone-deps/` and resolve via NODE_PATH at runtime.
-const standaloneDeps = join(targetWeb, "standalone-deps");
-const appNm = join(targetWeb, "apps", "web", "node_modules");
-rmSync(standaloneDeps, { recursive: true, force: true });
-cpSync(appNm, standaloneDeps, { recursive: true, dereference: true });
-log(`Flattened runtime deps → ${relative(monorepoRoot, standaloneDeps)}/`);
-writeNodePathManifest(targetWeb);
+// Strip every `node_modules/` anywhere under the standalone tree. Walks
+// the tree once and removes them in place — there are usually two:
+//   web/node_modules                  (Next's runtime resolves)
+//   web/apps/web/node_modules         (workspace-specific resolves)
+function stripNodeModules(root) {
+  let count = 0;
+  const walk = (dir) => {
+    for (const entry of readdirSync(dir, { withFileTypes: true })) {
+      if (!entry.isDirectory()) continue;
+      const p = join(dir, entry.name);
+      if (entry.name === "node_modules") {
+        rmSync(p, { recursive: true, force: true });
+        count++;
+        continue;
+      }
+      walk(p);
+    }
+  };
+  walk(root);
+  return count;
+}
+const stripped = stripNodeModules(targetWeb);
+log(`Stripped ${stripped} bundled node_modules tree(s) — runtime deps come from npm install.`);
 
 // ── 4. Copy README + LICENSE next to the package ────────────────────────
 for (const f of ["README.md", "LICENSE"]) {

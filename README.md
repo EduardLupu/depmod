@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="docs/img/logo.png" alt="depmod logo" width="240" />
+  <img src="https://raw.githubusercontent.com/EduardLupu/depmod/refs/heads/main/docs/img/logo.png" alt="depmod logo" width="240" />
 
   # depmod
 
@@ -27,7 +27,7 @@
 
 depmod is a small CLI that reads your TypeScript or JavaScript project, builds an import graph, and opens an interactive dashboard in your browser. It works on single apps, monorepos, and most setups that [ts-morph](https://ts-morph.com) can parse. Nothing is uploaded anywhere; parsing and the UI stay on your machine.
 
-(Not the Linux `depmod` command, and not Depeche Mode, though I do like them.)
+(Not the Linux `depmod` command, and not Depeche Mode, though I do love them :D)
 
 It is meant for the moment you land in a repo and need answers quickly:
 
@@ -40,15 +40,35 @@ It is meant for the moment you land in a repo and need answers quickly:
 
 ## Quickstart
 
+### Install
+
+**Global** (recommended if you reach for it often):
+
+```sh
+npm install -g depmod-ui
+# or: pnpm add -g depmod-ui
+# or: yarn global add depmod-ui
+```
+
+**One-off** (no install):
+
+```sh
+npx depmod-ui
+```
+
+### Run
+
+After a global install, `depmod-ui` is on your `PATH`. With `npx`, prefix commands the same way.
+
 ```sh
 # Current directory
-npx depmod-ui
+depmod-ui
 
 # Any project path
-npx depmod-ui /path/to/project
+depmod-ui /path/to/project
 
 # Re-parse when files change
-npx depmod-ui . --watch
+depmod-ui . --watch
 ```
 
 By default the dashboard listens on `http://127.0.0.1:45455`. If that port is busy, depmod-ui tries the next one so you can run several projects side by side.
