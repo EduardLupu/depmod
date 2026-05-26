@@ -73,7 +73,7 @@ export function buildDirectoryTree(graph: Graph): DirectoryNode[] {
     return total;
   }
   const root = byPath.get(ROOT_KEY);
-  if (!root) return undefined;
+  if (!root) return [];
   dfs(root);
 
   return root.children;
