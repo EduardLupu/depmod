@@ -43,4 +43,11 @@ jobs:
           title: "Version Packages"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # `actions/setup-node` with `registry-url:` writes an `.npmrc`
+          # that references ${NODE_AUTH_TOKEN}. `npm publish` follows it via
+          # NPM_CONFIG_USERCONFIG, so NODE_AUTH_TOKEN must be set or the
+          # token resolves to an empty string and the registry replies 404.
+          # NPM_TOKEN is kept because `changesets/action` reads it for its
+          # own `.npmrc` fallback.
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
