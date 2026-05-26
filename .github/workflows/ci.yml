@@ -97,10 +97,11 @@ jobs:
         # pnpm versions (10.x packs in the workspace root by default).
         run: pnpm --filter depmod-ui pack --pack-destination ./packages/cli
 
-      # Install the freshly packed tarball into a throwaway directory, then
-      # run the bin shim. If extraction fails (e.g. Windows MAX_PATH) the
-      # shim won't exist and `--version` will exit non-zero.
-      - name: Smoke install + --version
+      # Two-tier install test — local + global. The local test catches
+      # tarball extraction and bin shim creation bugs. The global test
+      # catches the failure users actually hit in the wild: install
+      # globally, then run by name (resolved via PATH). Both must pass.
+      - name: Smoke (local install)
         shell: bash
         run: |
           set -euo pipefail
@@ -109,6 +110,23 @@ jobs:
           mkdir -p smoke && cd smoke
           npm init -y >/dev/null
           npm install --no-audit --no-fund "../$TARBALL"
-          # The bin lives at `node_modules/.bin/depmod-ui` on POSIX and
-          # `node_modules/.bin/depmod-ui.cmd` on Windows; npm exec handles both.
+          # Resolves via node_modules/.bin/{depmod-ui,depmod-ui.cmd}.
           npx --no-install depmod-ui --version
+
+      - name: Smoke (global install + PATH invocation)
+        shell: bash
+        run: |
+          set -euo pipefail
+          TARBALL=$(ls packages/cli/depmod-ui-*.tgz | head -n 1)
+          echo "Installing $TARBALL globally"
+          npm install -g --no-audit --no-fund "$TARBALL"
+          # Ensure npm's global prefix is on PATH (Windows runners include
+          # it; macOS sometimes doesn't on freshly set-up actions/setup-node).
+          NPM_PREFIX=$(npm config get prefix)
+          case "$RUNNER_OS" in
+            Windows) export PATH="$NPM_PREFIX:$PATH" ;;
+            *)       export PATH="$NPM_PREFIX/bin:$PATH" ;;
+          esac
+          echo "PATH includes npm prefix: $NPM_PREFIX"
+          # This is the invocation real users hit — resolved purely via PATH.
+          depmod-ui --version

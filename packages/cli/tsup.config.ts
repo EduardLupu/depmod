@@ -34,6 +34,7 @@ export default defineConfig({
     "typescript",
     "ignore",
     "picomatch",
+    "update-notifier",
     "yaml",
   ],
   banner: {

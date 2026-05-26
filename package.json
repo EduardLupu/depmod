@@ -18,13 +18,20 @@
     "bench:quick": "pnpm --filter @depmod/bench bench:quick",
     "bench:list": "pnpm --filter @depmod/bench bench:list",
     "changeset": "changeset",
-    "changeset:version": "changeset version"
+    "changeset:version": "changeset version",
+    "format:fix": "biome check --write .",
+    "format:check": "biome check .",
+    "prepare": "simple-git-hooks"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "pnpm exec biome check --no-errors-on-unmatched --files-ignore-unknown=true . || { echo ''; echo '  Biome formatting check failed. Run \\`pnpm format:fix\\` and re-stage.' >&2; echo ''; exit 1; }"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
     "@changesets/changelog-github": "^0.5.0",
     "@changesets/cli": "^2.27.10",
     "depmod-ui": "workspace:*",
+    "simple-git-hooks": "^2.11.1",
     "typescript": "^5.6.3"
   }
 }

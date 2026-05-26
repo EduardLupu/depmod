@@ -3,16 +3,11 @@
   "version": "0.3.0",
   "description": "Visualise the dependency graph of a JavaScript / TypeScript project from your terminal.",
   "type": "module",
-  "main": "./dist/index.js",
+  "main": "dist/index.js",
   "bin": {
-    "depmod-ui": "./dist/index.js"
+    "depmod-ui": "dist/index.js"
   },
-  "files": [
-    "dist",
-    "web",
-    "README.md",
-    "LICENSE"
-  ],
+  "files": ["dist", "web", "README.md", "LICENSE"],
   "scripts": {
     "build": "tsup",
     "prepare-package": "node scripts/prepare-package.mjs",
@@ -67,12 +62,14 @@
     "sharp": "^0.34.0",
     "ts-morph": "^24.0.0",
     "typescript": "^5.6.3",
+    "update-notifier": "^7.3.1",
     "yaml": "^2.6.0"
   },
   "devDependencies": {
     "@depmod/parser": "workspace:*",
     "@depmod/types": "workspace:*",
     "@types/node": "^22.7.5",
+    "@types/update-notifier": "^6.0.8",
     "tsup": "^8.3.5",
     "typescript": "^5.6.3",
     "vitest": "^2.1.4"

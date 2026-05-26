@@ -1,8 +1,10 @@
-import { realpathSync } from "node:fs";
+import { readFileSync, realpathSync } from "node:fs";
+import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { PARSER_VERSION, parseGlobList } from "@depmod/parser";
 import { Command } from "commander";
 import kleur from "kleur";
+import updateNotifier from "update-notifier";
 import { runCheck as defaultRunCheck, parseFailOn } from "./commands/check.js";
 import { runServe as defaultRunServe } from "./commands/serve.js";
 import { runAnalyze as defaultRunAnalyze } from "./run.js";
@@ -46,6 +48,12 @@ export function buildProgram(deps: ProgramDeps = {}): Command {
       process.exitCode = 1;
     });
   const onSignal = deps.onSignal ?? ((sig, handler) => process.on(sig, handler));
+
+  // Check the registry once per day in a detached background process; on
+  // the *next* invocation after a new version lands, print a styled notice.
+  // `update-notifier` no-ops automatically in non-TTY contexts and respects
+  // NO_UPDATE_NOTIFIER=1 / `--no-update-notifier`, so CI scripts stay quiet.
+  notifyOfUpdates();
 
   const program = new Command();
 
@@ -281,5 +289,37 @@ function isMainModule(): boolean {
     return here === entry;
   } catch {
     return false;
+  }
+}
+
+/**
+ * Fire a daily background check against the npm registry for a newer
+ * `depmod-ui` version, and print a one-line notice on the user's next run
+ * if one exists. `update-notifier` handles the daily debounce, the
+ * detached child process, and the TTY / `NO_UPDATE_NOTIFIER` / `--no-update-notifier`
+ * opt-outs — we just need to give it the current package version.
+ *
+ * Reads `package.json` from disk at runtime instead of importing it: tsup
+ * bundles the CLI as ESM and inlining JSON would freeze the version into
+ * `dist/index.js` at *build* time, so a `pnpm publish` that bumps the
+ * version after the build would ship the old number. Reading at startup
+ * keeps the notice accurate.
+ */
+function notifyOfUpdates(): void {
+  try {
+    const here = dirname(fileURLToPath(import.meta.url));
+    const pkgPath = join(here, "..", "package.json");
+    const pkg = JSON.parse(readFileSync(pkgPath, "utf-8")) as {
+      name?: string;
+      version?: string;
+    };
+    if (!pkg.name || !pkg.version) return;
+    // 1-day update interval is the package default. Calling `.notify({ defer: true })`
+    // (the default) prints on `process.exit`, so the notice lands *after* the user's
+    // command output rather than splitting it in two.
+    updateNotifier({ pkg: { name: pkg.name, version: pkg.version } }).notify();
+  } catch {
+    // Network errors, missing config dir, sandboxed installs — none of it
+    // should prevent the CLI from running. Swallow.
   }
 }
