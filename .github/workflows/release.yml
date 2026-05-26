@@ -37,7 +37,12 @@ jobs:
         id: changesets
         uses: changesets/action@v1
         with:
-          version: pnpm changeset version
+          # `pnpm changeset:version` runs `changeset version` AND immediately
+          # reformats the rewritten package.json files through biome — without
+          # that follow-up, the changesets' own JSON writer expands the `files`
+          # array onto multiple lines and our pre-commit hook (plus CI lint)
+          # rejects the resulting "chore: version packages" commit.
+          version: pnpm changeset:version
           publish: pnpm publish -r --access public --provenance
           commit: "chore: version packages"
           title: "Version Packages"
@@ -51,3 +56,7 @@ jobs:
           # own `.npmrc` fallback.
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          # Belt-and-suspenders: CI runs `pnpm lint` on its own, so the
+          # local pre-commit hook is redundant here. Skip it so a transient
+          # biome version mismatch can never strand the release workflow.
+          SKIP_SIMPLE_GIT_HOOKS: "1"

@@ -18,7 +18,7 @@
     "bench:quick": "pnpm --filter @depmod/bench bench:quick",
     "bench:list": "pnpm --filter @depmod/bench bench:list",
     "changeset": "changeset",
-    "changeset:version": "changeset version",
+    "changeset:version": "changeset version && biome check --write --no-errors-on-unmatched --files-ignore-unknown=true .",
     "format:fix": "biome check --write .",
     "format:check": "biome check .",
     "prepare": "simple-git-hooks"
