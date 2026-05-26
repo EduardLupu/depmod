@@ -1,0 +1,318 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-05-17T17:39:50.341Z",
+  "rootDir": "/code/packages/parser/test/fixtures/sample-app",
+  "stats": {
+    "files": 10,
+    "nodes": 10,
+    "edges": 13,
+    "cycles": 0,
+    "parseMs": 312
+  },
+  "nodes": [
+    {
+      "id": "actions/saveProfile.server.ts",
+      "name": "saveProfile.server.ts",
+      "classification": "api",
+      "loc": 5,
+      "exports": [
+        {
+          "name": "saveProfile",
+          "type": "typeof saveProfile"
+        }
+      ],
+      "metrics": {
+        "Ca": 0,
+        "Ce": 1,
+        "instability": 1
+      },
+      "metricsRuntimeOnly": {
+        "Ca": 0,
+        "Ce": 1,
+        "instability": 1
+      }
+    },
+    {
+      "id": "app/api/users/route.ts",
+      "name": "route.ts",
+      "classification": "api",
+      "loc": 11,
+      "exports": [
+        {
+          "name": "GET",
+          "type": "typeof GET"
+        },
+        {
+          "name": "POST",
+          "type": "typeof POST"
+        }
+      ],
+      "metrics": {
+        "Ca": 0,
+        "Ce": 1,
+        "instability": 1
+      },
+      "metricsRuntimeOnly": {
+        "Ca": 0,
+        "Ce": 1,
+        "instability": 1
+      }
+    },
+    {
+      "id": "app/layout.tsx",
+      "name": "layout.tsx",
+      "classification": "page",
+      "loc": 13,
+      "exports": [
+        {
+          "name": "default",
+          "type": "typeof RootLayout"
+        },
+        {
+          "name": "metadata",
+          "type": "{ title: string; }"
+        }
+      ],
+      "metrics": {
+        "Ca": 0,
+        "Ce": 0,
+        "instability": 0
+      },
+      "metricsRuntimeOnly": {
+        "Ca": 0,
+        "Ce": 0,
+        "instability": 0
+      }
+    },
+    {
+      "id": "app/page.tsx",
+      "name": "page.tsx",
+      "classification": "page",
+      "loc": 16,
+      "exports": [
+        {
+          "name": "default",
+          "type": "typeof HomePage"
+        }
+      ],
+      "metrics": {
+        "Ca": 0,
+        "Ce": 4,
+        "instability": 1
+      },
+      "metricsRuntimeOnly": {
+        "Ca": 0,
+        "Ce": 4,
+        "instability": 1
+      }
+    },
+    {
+      "id": "components/Footer.tsx",
+      "name": "Footer.tsx",
+      "classification": "component",
+      "loc": 5,
+      "exports": [
+        {
+          "name": "Footer",
+          "type": "typeof Footer"
+        }
+      ],
+      "metrics": {
+        "Ca": 1,
+        "Ce": 1,
+        "instability": 0.5
+      },
+      "metricsRuntimeOnly": {
+        "Ca": 1,
+        "Ce": 1,
+        "instability": 0.5
+      }
+    },
+    {
+      "id": "components/Header.tsx",
+      "name": "Header.tsx",
+      "classification": "component",
+      "loc": 14,
+      "exports": [
+        {
+          "name": "Header",
+          "type": "typeof Header"
+        },
+        {
+          "name": "HeaderProps",
+          "type": "HeaderProps"
+        }
+      ],
+      "metrics": {
+        "Ca": 1,
+        "Ce": 1,
+        "instability": 0.5
+      },
+      "metricsRuntimeOnly": {
+        "Ca": 1,
+        "Ce": 1,
+        "instability": 0.5
+      }
+    },
+    {
+      "id": "components/LazyModal.tsx",
+      "name": "LazyModal.tsx",
+      "classification": "component",
+      "loc": 6,
+      "exports": [
+        {
+          "name": "LazyModal",
+          "type": "typeof LazyModal"
+        }
+      ],
+      "metrics": {
+        "Ca": 1,
+        "Ce": 1,
+        "instability": 0.5
+      },
+      "metricsRuntimeOnly": {
+        "Ca": 1,
+        "Ce": 1,
+        "instability": 0.5
+      }
+    },
+    {
+      "id": "hooks/useUser.ts",
+      "name": "useUser.ts",
+      "classification": "hook",
+      "loc": 7,
+      "exports": [
+        {
+          "name": "useUser",
+          "type": "typeof useUser"
+        }
+      ],
+      "metrics": {
+        "Ca": 1,
+        "Ce": 2,
+        "instability": 0.6666666666666666
+      },
+      "metricsRuntimeOnly": {
+        "Ca": 1,
+        "Ce": 1,
+        "instability": 0.5
+      }
+    },
+    {
+      "id": "lib/api.ts",
+      "name": "api.ts",
+      "classification": "lib",
+      "loc": 9,
+      "exports": [
+        {
+          "name": "apiClient",
+          "type": "{ get(path: string): unknown; }"
+        }
+      ],
+      "metrics": {
+        "Ca": 3,
+        "Ce": 1,
+        "instability": 0.25
+      },
+      "metricsRuntimeOnly": {
+        "Ca": 3,
+        "Ce": 1,
+        "instability": 0.25
+      }
+    },
+    {
+      "id": "lib/utils.ts",
+      "name": "utils.ts",
+      "classification": "lib",
+      "loc": 8,
+      "exports": [
+        {
+          "name": "User",
+          "type": "User"
+        },
+        {
+          "name": "cn",
+          "type": "typeof cn"
+        }
+      ],
+      "metrics": {
+        "Ca": 5,
+        "Ce": 0,
+        "instability": 0
+      },
+      "metricsRuntimeOnly": {
+        "Ca": 4,
+        "Ce": 0,
+        "instability": 0
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "actions/saveProfile.server.ts",
+      "target": "lib/api.ts",
+      "kind": "import"
+    },
+    {
+      "source": "app/api/users/route.ts",
+      "target": "lib/api.ts",
+      "kind": "import"
+    },
+    {
+      "source": "app/page.tsx",
+      "target": "components/Footer.tsx",
+      "kind": "import"
+    },
+    {
+      "source": "app/page.tsx",
+      "target": "components/Header.tsx",
+      "kind": "import"
+    },
+    {
+      "source": "app/page.tsx",
+      "target": "components/LazyModal.tsx",
+      "kind": "dynamic"
+    },
+    {
+      "source": "app/page.tsx",
+      "target": "hooks/useUser.ts",
+      "kind": "import"
+    },
+    {
+      "source": "components/Footer.tsx",
+      "target": "lib/utils.ts",
+      "kind": "import"
+    },
+    {
+      "source": "components/Header.tsx",
+      "target": "lib/utils.ts",
+      "kind": "import"
+    },
+    {
+      "source": "components/Header.tsx",
+      "target": "lib/utils.ts",
+      "kind": "type-only"
+    },
+    {
+      "source": "components/LazyModal.tsx",
+      "target": "lib/utils.ts",
+      "kind": "import"
+    },
+    {
+      "source": "hooks/useUser.ts",
+      "target": "lib/api.ts",
+      "kind": "import"
+    },
+    {
+      "source": "hooks/useUser.ts",
+      "target": "lib/utils.ts",
+      "kind": "type-only"
+    },
+    {
+      "source": "lib/api.ts",
+      "target": "lib/utils.ts",
+      "kind": "import"
+    }
+  ],
+  "cycles": []
+}

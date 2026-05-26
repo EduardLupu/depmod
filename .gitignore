@@ -1,0 +1,25 @@
+node_modules/
+**/node_modules/
+**/dist/
+**/build/
+**/.next/
+**/.turbo/
+**/coverage/
+**/.tsbuildinfo
+*.log
+.cache/
+.env
+.env.local
+.env.*.local
+.DS_Store
+bench/.targets-cache/
+
+# Local / IDE
+.idea/
+.depmod-cache/
+
+# CLI publish artifacts (built by `prepack` / `pnpm pack`)
+packages/cli/web/
+packages/cli/README.md
+packages/cli/LICENSE
+*.tgz

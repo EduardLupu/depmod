@@ -1,0 +1,208 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-05-17T17:39:52.954Z",
+  "rootDir": "/code/packages/parser/test/fixtures/cyclic-app",
+  "stats": {
+    "files": 7,
+    "nodes": 7,
+    "edges": 6,
+    "cycles": 2,
+    "parseMs": 273
+  },
+  "nodes": [
+    {
+      "id": "a.ts",
+      "name": "a.ts",
+      "classification": "lib",
+      "loc": 2,
+      "exports": [
+        {
+          "name": "A",
+          "type": "unknown"
+        }
+      ],
+      "metrics": {
+        "Ca": 2,
+        "Ce": 1,
+        "instability": 0.3333333333333333
+      },
+      "metricsRuntimeOnly": {
+        "Ca": 2,
+        "Ce": 1,
+        "instability": 0.3333333333333333
+      }
+    },
+    {
+      "id": "b.ts",
+      "name": "b.ts",
+      "classification": "lib",
+      "loc": 2,
+      "exports": [
+        {
+          "name": "B",
+          "type": "any"
+        }
+      ],
+      "metrics": {
+        "Ca": 1,
+        "Ce": 1,
+        "instability": 0.5
+      },
+      "metricsRuntimeOnly": {
+        "Ca": 1,
+        "Ce": 1,
+        "instability": 0.5
+      }
+    },
+    {
+      "id": "c.ts",
+      "name": "c.ts",
+      "classification": "lib",
+      "loc": 2,
+      "exports": [
+        {
+          "name": "C",
+          "type": "any"
+        }
+      ],
+      "metrics": {
+        "Ca": 1,
+        "Ce": 1,
+        "instability": 0.5
+      },
+      "metricsRuntimeOnly": {
+        "Ca": 1,
+        "Ce": 1,
+        "instability": 0.5
+      }
+    },
+    {
+      "id": "gateway.ts",
+      "name": "gateway.ts",
+      "classification": "lib",
+      "loc": 2,
+      "exports": [
+        {
+          "name": "Gateway",
+          "type": "unknown"
+        }
+      ],
+      "metrics": {
+        "Ca": 0,
+        "Ce": 1,
+        "instability": 1
+      },
+      "metricsRuntimeOnly": {
+        "Ca": 0,
+        "Ce": 1,
+        "instability": 1
+      }
+    },
+    {
+      "id": "solo.ts",
+      "name": "solo.ts",
+      "classification": "lib",
+      "loc": 1,
+      "exports": [
+        {
+          "name": "Solo",
+          "type": "\"solo\""
+        }
+      ],
+      "metrics": {
+        "Ca": 0,
+        "Ce": 0,
+        "instability": 0
+      },
+      "metricsRuntimeOnly": {
+        "Ca": 0,
+        "Ce": 0,
+        "instability": 0
+      }
+    },
+    {
+      "id": "x.ts",
+      "name": "x.ts",
+      "classification": "lib",
+      "loc": 2,
+      "exports": [
+        {
+          "name": "X",
+          "type": "unknown"
+        }
+      ],
+      "metrics": {
+        "Ca": 1,
+        "Ce": 1,
+        "instability": 0.5
+      },
+      "metricsRuntimeOnly": {
+        "Ca": 1,
+        "Ce": 1,
+        "instability": 0.5
+      }
+    },
+    {
+      "id": "y.ts",
+      "name": "y.ts",
+      "classification": "lib",
+      "loc": 2,
+      "exports": [
+        {
+          "name": "Y",
+          "type": "any"
+        }
+      ],
+      "metrics": {
+        "Ca": 1,
+        "Ce": 1,
+        "instability": 0.5
+      },
+      "metricsRuntimeOnly": {
+        "Ca": 1,
+        "Ce": 1,
+        "instability": 0.5
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "a.ts",
+      "target": "b.ts",
+      "kind": "import"
+    },
+    {
+      "source": "b.ts",
+      "target": "c.ts",
+      "kind": "import"
+    },
+    {
+      "source": "c.ts",
+      "target": "a.ts",
+      "kind": "import"
+    },
+    {
+      "source": "gateway.ts",
+      "target": "a.ts",
+      "kind": "import"
+    },
+    {
+      "source": "x.ts",
+      "target": "y.ts",
+      "kind": "import"
+    },
+    {
+      "source": "y.ts",
+      "target": "x.ts",
+      "kind": "import"
+    }
+  ],
+  "cycles": [
+    {
+      "nodes": ["a.ts", "b.ts", "c.ts"]
+    },
+    {
+      "nodes": ["x.ts", "y.ts"]
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "name": "@depmod/parser",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "vitest run --passWithNoTests"
+  },
+  "dependencies": {
+    "@depmod/types": "workspace:*",
+    "ignore": "^7.0.0",
+    "picomatch": "^4.0.2",
+    "ts-morph": "^24.0.0",
+    "yaml": "^2.6.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.7.5",
+    "@types/picomatch": "^3.0.2",
+    "typescript": "^5.6.3",
+    "vitest": "^2.1.4"
+  }
+}

@@ -1,0 +1,73 @@
+name: Bug report
+description: Something isn't working as expected
+title: "[bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a bug. The more detail you provide,
+        the faster we can reproduce and fix it.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: What happened?
+      description: Describe the bug and what you expected instead.
+      placeholder: depmod-ui crashes when I run it on ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to reproduce
+      description: Minimal commands or repo steps that trigger the issue.
+      placeholder: |
+        1. npx depmod-ui /path/to/project --no-open
+        2. Open http://127.0.0.1:45455
+        3. ...
+    validations:
+      required: true
+
+  - type: input
+    id: depmod_version
+    attributes:
+      label: depmod-ui version
+      placeholder: "0.1.0 or npx depmod-ui@latest"
+    validations:
+      required: true
+
+  - type: input
+    id: node_version
+    attributes:
+      label: Node.js version
+      placeholder: "node -v output, e.g. v22.11.0"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: os
+    attributes:
+      label: Operating system
+      options:
+        - macOS
+        - Linux
+        - Windows
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: target_size
+    attributes:
+      label: Target project size (approx.)
+      description: File count, monorepo vs single app, framework if relevant.
+      placeholder: "~200 TS files, Next.js monorepo"
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs / screenshots
+      description: Terminal output, browser console errors, or screenshots.
+      render: shell

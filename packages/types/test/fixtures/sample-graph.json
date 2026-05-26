@@ -1,0 +1,76 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-05-17T13:00:00.000Z",
+  "rootDir": "/fixtures/sample-app",
+  "stats": {
+    "files": 6,
+    "nodes": 6,
+    "edges": 8,
+    "cycles": 0,
+    "parseMs": 142
+  },
+  "nodes": [
+    {
+      "id": "app/page.tsx",
+      "name": "page.tsx",
+      "classification": "page",
+      "loc": 45,
+      "exports": [{ "name": "default", "type": "() => JSX.Element" }],
+      "metrics": { "Ca": 0, "Ce": 3, "instability": 1 }
+    },
+    {
+      "id": "components/Header.tsx",
+      "name": "Header.tsx",
+      "classification": "component",
+      "loc": 60,
+      "exports": [{ "name": "Header", "type": "(props: HeaderProps) => JSX.Element" }],
+      "metrics": { "Ca": 1, "Ce": 1, "instability": 0.5 }
+    },
+    {
+      "id": "components/Footer.tsx",
+      "name": "Footer.tsx",
+      "classification": "component",
+      "loc": 40,
+      "exports": [{ "name": "Footer", "type": "() => JSX.Element" }],
+      "metrics": { "Ca": 1, "Ce": 1, "instability": 0.5 }
+    },
+    {
+      "id": "hooks/useUser.ts",
+      "name": "useUser.ts",
+      "classification": "hook",
+      "loc": 35,
+      "exports": [{ "name": "useUser", "type": "() => { user: User | null; loading: boolean }" }],
+      "metrics": { "Ca": 1, "Ce": 2, "instability": 0.6666666666666666 }
+    },
+    {
+      "id": "lib/api.ts",
+      "name": "api.ts",
+      "classification": "api",
+      "loc": 80,
+      "exports": [{ "name": "apiClient", "type": "{ get: (path: string) => Promise<unknown> }" }],
+      "metrics": { "Ca": 1, "Ce": 1, "instability": 0.5 }
+    },
+    {
+      "id": "lib/utils.ts",
+      "name": "utils.ts",
+      "classification": "lib",
+      "loc": 25,
+      "exports": [
+        { "name": "cn", "type": "(...inputs: ClassValue[]) => string" },
+        { "name": "User", "type": "{ id: string; name: string }" }
+      ],
+      "metrics": { "Ca": 4, "Ce": 0, "instability": 0 }
+    }
+  ],
+  "edges": [
+    { "source": "app/page.tsx", "target": "components/Header.tsx", "kind": "import" },
+    { "source": "app/page.tsx", "target": "components/Footer.tsx", "kind": "import" },
+    { "source": "app/page.tsx", "target": "hooks/useUser.ts", "kind": "import" },
+    { "source": "components/Header.tsx", "target": "lib/utils.ts", "kind": "import" },
+    { "source": "components/Footer.tsx", "target": "lib/utils.ts", "kind": "import" },
+    { "source": "hooks/useUser.ts", "target": "lib/api.ts", "kind": "import" },
+    { "source": "hooks/useUser.ts", "target": "lib/utils.ts", "kind": "type-only" },
+    { "source": "lib/api.ts", "target": "lib/utils.ts", "kind": "import" }
+  ],
+  "cycles": []
+}

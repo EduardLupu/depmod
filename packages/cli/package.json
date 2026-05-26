@@ -1,0 +1,71 @@
+{
+  "name": "depmod-ui",
+  "version": "0.1.0",
+  "description": "Visualise the dependency graph of a JavaScript / TypeScript project from your terminal.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "bin": {
+    "depmod-ui": "./dist/index.js"
+  },
+  "files": ["dist", "web", "README.md", "LICENSE"],
+  "scripts": {
+    "build": "tsup",
+    "prepare-package": "node scripts/prepare-package.mjs",
+    "prepack": "pnpm run prepare-package",
+    "prepublishOnly": "pnpm -w run typecheck && pnpm -w run test && pnpm -w run build",
+    "test": "vitest run --passWithNoTests"
+  },
+  "keywords": [
+    "dependency",
+    "dependencies",
+    "module",
+    "modules",
+    "graph",
+    "visualization",
+    "visualisation",
+    "typescript",
+    "javascript",
+    "react",
+    "next",
+    "monorepo",
+    "architecture",
+    "static-analysis",
+    "depmod"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">=20.18"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/EduardLupu/depmod.git",
+    "directory": "packages/cli"
+  },
+  "homepage": "https://github.com/EduardLupu/depmod#readme",
+  "bugs": {
+    "url": "https://github.com/EduardLupu/depmod/issues"
+  },
+  "author": "Eduard Lupu",
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "dependencies": {
+    "chokidar": "^5.0.0",
+    "commander": "^12.1.0",
+    "ignore": "^7.0.0",
+    "kleur": "^4.1.5",
+    "picomatch": "^4.0.2",
+    "ts-morph": "^24.0.0",
+    "typescript": "^5.6.3",
+    "yaml": "^2.6.0"
+  },
+  "devDependencies": {
+    "@depmod/parser": "workspace:*",
+    "@depmod/types": "workspace:*",
+    "@types/node": "^22.7.5",
+    "tsup": "^8.3.5",
+    "typescript": "^5.6.3",
+    "vitest": "^2.1.4"
+  }
+}
