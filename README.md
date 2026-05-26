@@ -160,13 +160,22 @@ More design notes: [`docs/specs/`](docs/specs).
 
 ## Benchmark snapshot
 
+Cold `analyze()` on real OSS repos (parser **0.3.0**, incremental cache off). Wall-clock parse time; full metrics in [`bench/results/`](bench/results/).
+
 | Target | Tier | Files | Edges | Cycles | LOC | Parse |
 | --- | --- | ---: | ---: | ---: | ---: | ---: |
-| `vercel-commerce` | primary | 65 | 120 | 1 | 3,896 | 403 ms |
-| `shadcn-taxonomy` | medium | 127 | 247 | 0 | 7,730 | 344 ms |
-| `documenso` | stress | 1,845 | 2,834 | 23 | 232,396 | 3,584 ms |
+| `vercel-commerce` | primary | 65 | 120 | 1 | 3,896 | 407 ms |
+| `shadcn-taxonomy` | medium | 127 | 247 | 0 | 7,730 | 350 ms |
+| `create-t3-turbo` | medium | 74 | 62 | 1 | 3,370 | 331 ms |
+| `unkey` | medium | 1,921 | 2,914 | 10 | 180,304 | 2.7 s |
+| `react-email` | medium | 1,089 | 1,785 | 7 | 200,826 | 1.6 s |
+| `documenso` | stress | 1,855 | 3,540 | 25 | 233,359 | 2.9 s |
+| `dub` | stress | 3,913 | 10,897 | 19 | 435,857 | 4.7 s |
+| `cal-web` | stress | 988 | 1,287 | 9 | 126,331 | 1.6 s |
+| `cal.com` | stretch | 4,999 | 9,157 | 24 | 546,207 | 7.1 s |
+| `music.eduardlupu.com` | stretch | 41 | 77 | 0 | 7,677 | 1.3 s |
 
-Full tables: [`bench/results/`](bench/results/). Re-run with `pnpm bench`.
+`cal-web` analyzes only `apps/web` from the Cal.com monorepo (shared clone). Re-run with `pnpm bench` or smoke-test with `pnpm bench:quick`; see [`bench/README.md`](bench/README.md).
 
 ## Contributing
 

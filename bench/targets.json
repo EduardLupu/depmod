@@ -1,0 +1,76 @@
+{
+  "targets": [
+    {
+      "name": "vercel-commerce",
+      "repo": "https://github.com/vercel/commerce.git",
+      "ref": null,
+      "tier": "primary",
+      "description": "Vercel Next.js commerce starter (small, single app)"
+    },
+    {
+      "name": "shadcn-taxonomy",
+      "repo": "https://github.com/shadcn-ui/taxonomy.git",
+      "ref": null,
+      "tier": "medium",
+      "description": "shadcn/ui taxonomy demo app"
+    },
+    {
+      "name": "create-t3-turbo",
+      "repo": "https://github.com/t3-oss/create-t3-turbo.git",
+      "ref": null,
+      "tier": "medium",
+      "description": "T3 + Turborepo monorepo template"
+    },
+    {
+      "name": "unkey",
+      "repo": "https://github.com/unkeyed/unkey.git",
+      "ref": null,
+      "tier": "medium",
+      "description": "API key platform (Turborepo, multiple apps)"
+    },
+    {
+      "name": "react-email",
+      "repo": "https://github.com/resend/react-email.git",
+      "ref": null,
+      "tier": "medium",
+      "description": "React Email component monorepo"
+    },
+    {
+      "name": "documenso",
+      "repo": "https://github.com/documenso/documenso.git",
+      "ref": null,
+      "tier": "stress",
+      "description": "Document signing platform (large Turborepo)"
+    },
+    {
+      "name": "dub",
+      "repo": "https://github.com/dubinc/dub.git",
+      "ref": null,
+      "tier": "stress",
+      "description": "Link management platform (large Turborepo)"
+    },
+    {
+      "name": "cal.com",
+      "repo": "https://github.com/calcom/cal.com.git",
+      "ref": null,
+      "tier": "stretch",
+      "description": "Scheduling monorepo (full repo; very large)"
+    },
+    {
+      "name": "cal-web",
+      "repo": "https://github.com/calcom/cal.com.git",
+      "ref": null,
+      "tier": "stress",
+      "cacheName": "cal.com",
+      "subdir": "apps/web",
+      "description": "Cal.com web app only (reuses cal.com clone, analyzes apps/web)"
+    },
+    {
+      "name": "music.eduardlupu.com",
+      "repo": "https://github.com/EduardLupu/spotify-artists.git",
+      "ref": null,
+      "tier": "stretch",
+      "description": "Personal Next.js app (small real-world sample)"
+    }
+  ]
+}

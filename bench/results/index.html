@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>depmod · benchmark results</title>
+<style>
+  :root { color-scheme: dark; }
+  body { background:#0a0a0a; color:#d4d4d4; font-family: ui-sans-serif, system-ui, sans-serif; margin:0; padding:32px; }
+  h1 { font-size:1.4rem; margin:0 0 8px; }
+  p { color:#8a8a8a; max-width:820px; line-height:1.5; }
+  table { border-collapse:collapse; margin:24px 0; font-size:0.8rem; }
+  th, td { padding:6px 10px; border-bottom:1px solid #1f1f1f; text-align:left; }
+  th { color:#8a8a8a; font-weight:600; text-transform:uppercase; font-size:0.68rem; letter-spacing:0.06em; }
+  td.num { text-align:right; font-variant-numeric: tabular-nums; }
+  code { font-size:0.85em; }
+  object { max-width:100%; display:block; margin:16px 0; }
+  ul { line-height:1.6; }
+</style>
+</head>
+<body>
+<h1>depmod · benchmark results</h1>
+<p>10 targets · parser 0.3.0 · generated 2026-05-26T19:03:06.468Z. Open <code>results.json</code> for classification breakdowns and per-run timings.</p>
+
+<h2>Summary</h2>
+<table>
+<thead><tr>
+  <th>repo</th><th>tier</th><th>sha</th>
+  <th>files</th><th>nodes</th><th>edges</th><th>cycles</th>
+  <th>LOC</th><th>wall</th><th>parser</th><th>unused</th><th>dead</th>
+  <th>p95 deg</th><th>max I</th>
+</tr></thead>
+<tbody>
+      <tr>
+        <td>vercel-commerce</td>
+        <td>primary</td>
+        <td><code>1df2cf6f</code></td>
+        <td class="num">65</td>
+        <td class="num">65</td>
+        <td class="num">120</td>
+        <td class="num">1</td>
+        <td class="num">3,896</td>
+        <td class="num">407 ms</td>
+        <td class="num">400 ms</td>
+        <td class="num">3</td>
+        <td class="num">5</td>
+        <td class="num">9</td>
+        <td class="num">1.000</td>
+      </tr>
+
+      <tr>
+        <td>shadcn-taxonomy</td>
+        <td>medium</td>
+        <td><code>298a8857</code></td>
+        <td class="num">127</td>
+        <td class="num">127</td>
+        <td class="num">247</td>
+        <td class="num">0</td>
+        <td class="num">7,730</td>
+        <td class="num">350 ms</td>
+        <td class="num">341 ms</td>
+        <td class="num">27</td>
+        <td class="num">25</td>
+        <td class="num">9</td>
+        <td class="num">1.000</td>
+      </tr>
+
+      <tr>
+        <td>create-t3-turbo</td>
+        <td>medium</td>
+        <td><code>8f945b7b</code></td>
+        <td class="num">74</td>
+        <td class="num">74</td>
+        <td class="num">62</td>
+        <td class="num">1</td>
+        <td class="num">3,370</td>
+        <td class="num">331 ms</td>
+        <td class="num">321 ms</td>
+        <td class="num">48</td>
+        <td class="num">22</td>
+        <td class="num">5</td>
+        <td class="num">1.000</td>
+      </tr>
+
+      <tr>
+        <td>unkey</td>
+        <td>medium</td>
+        <td><code>377402df</code></td>
+        <td class="num">1921</td>
+        <td class="num">1921</td>
+        <td class="num">2914</td>
+        <td class="num">10</td>
+        <td class="num">180,304</td>
+        <td class="num">2699 ms</td>
+        <td class="num">2632 ms</td>
+        <td class="num">68</td>
+        <td class="num">320</td>
+        <td class="num">7</td>
+        <td class="num">1.000</td>
+      </tr>
+
+      <tr>
+        <td>react-email</td>
+        <td>medium</td>
+        <td><code>ba993652</code></td>
+        <td class="num">1089</td>
+        <td class="num">1089</td>
+        <td class="num">1785</td>
+        <td class="num">7</td>
+        <td class="num">200,826</td>
+        <td class="num">1639 ms</td>
+        <td class="num">1598 ms</td>
+        <td class="num">95</td>
+        <td class="num">325</td>
+        <td class="num">9</td>
+        <td class="num">1.000</td>
+      </tr>
+
+      <tr>
+        <td>documenso</td>
+        <td>stress</td>
+        <td><code>3cef238f</code></td>
+        <td class="num">1855</td>
+        <td class="num">1855</td>
+        <td class="num">3540</td>
+        <td class="num">25</td>
+        <td class="num">233,359</td>
+        <td class="num">2881 ms</td>
+        <td class="num">2837 ms</td>
+        <td class="num">84</td>
+        <td class="num">569</td>
+        <td class="num">11</td>
+        <td class="num">1.000</td>
+      </tr>
+
+      <tr>
+        <td>dub</td>
+        <td>stress</td>
+        <td><code>93e3d8bc</code></td>
+        <td class="num">3913</td>
+        <td class="num">3913</td>
+        <td class="num">10897</td>
+        <td class="num">19</td>
+        <td class="num">435,857</td>
+        <td class="num">4727 ms</td>
+        <td class="num">4670 ms</td>
+        <td class="num">49</td>
+        <td class="num">278</td>
+        <td class="num">14</td>
+        <td class="num">1.000</td>
+      </tr>
+
+      <tr>
+        <td>cal.com</td>
+        <td>stretch</td>
+        <td><code>180ede28</code></td>
+        <td class="num">4999</td>
+        <td class="num">4999</td>
+        <td class="num">9157</td>
+        <td class="num">24</td>
+        <td class="num">546,207</td>
+        <td class="num">7143 ms</td>
+        <td class="num">6917 ms</td>
+        <td class="num">343</td>
+        <td class="num">1194</td>
+        <td class="num">12</td>
+        <td class="num">1.000</td>
+      </tr>
+
+      <tr>
+        <td>cal-web</td>
+        <td>stress</td>
+        <td><code>180ede28</code></td>
+        <td class="num">988</td>
+        <td class="num">988</td>
+        <td class="num">1287</td>
+        <td class="num">9</td>
+        <td class="num">126,331</td>
+        <td class="num">1594 ms</td>
+        <td class="num">1551 ms</td>
+        <td class="num">64</td>
+        <td class="num">162</td>
+        <td class="num">6</td>
+        <td class="num">1.000</td>
+      </tr>
+
+      <tr>
+        <td>music.eduardlupu.com</td>
+        <td>stretch</td>
+        <td><code>6fc26414</code></td>
+        <td class="num">41</td>
+        <td class="num">41</td>
+        <td class="num">77</td>
+        <td class="num">0</td>
+        <td class="num">7,677</td>
+        <td class="num">1334 ms</td>
+        <td class="num">1142 ms</td>
+        <td class="num">6</td>
+        <td class="num">4</td>
+        <td class="num">10</td>
+        <td class="num">1.000</td>
+      </tr></tbody>
+</table>
+
+<h2>Parser performance vs codebase size</h2>
+<object type="image/svg+xml" data="./parser-perf.svg"></object>
+
+<h2>Node-degree distribution (per repo)</h2>
+<ul><li><a href="./degree-vercel-commerce.svg">degree-vercel-commerce.svg</a></li>
+<li><a href="./degree-shadcn-taxonomy.svg">degree-shadcn-taxonomy.svg</a></li>
+<li><a href="./degree-create-t3-turbo.svg">degree-create-t3-turbo.svg</a></li>
+<li><a href="./degree-unkey.svg">degree-unkey.svg</a></li>
+<li><a href="./degree-react-email.svg">degree-react-email.svg</a></li>
+<li><a href="./degree-documenso.svg">degree-documenso.svg</a></li>
+<li><a href="./degree-dub.svg">degree-dub.svg</a></li>
+<li><a href="./degree-cal.com.svg">degree-cal.com.svg</a></li>
+<li><a href="./degree-cal-web.svg">degree-cal-web.svg</a></li>
+<li><a href="./degree-music.eduardlupu.com.svg">degree-music.eduardlupu.com.svg</a></li></ul>
+</body>
+</html>
