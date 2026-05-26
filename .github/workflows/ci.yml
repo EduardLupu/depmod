@@ -33,6 +33,17 @@ jobs:
       - name: Lint
         run: pnpm lint
 
+      # Internal packages (`@depmod/types`, `@depmod/parser`) expose their
+      # `exports` map at `./dist/index.js`, so anything that resolves them via
+      # the package map needs them built first. Vitest in `packages/parser`
+      # is the main consumer — it fails with "Failed to resolve entry for
+      # package @depmod/types" on a fresh checkout otherwise. Build the
+      # internals before typecheck/test; the CLI bundle build still happens
+      # via the full `pnpm build` step below so the tarball includes the
+      # latest sources.
+      - name: Build internal packages
+        run: pnpm --filter @depmod/types --filter @depmod/parser build
+
       - name: Typecheck
         run: pnpm typecheck
 
