@@ -69,14 +69,14 @@ describe("findCycles", () => {
     // 5000-node chain: no cycle, no stack overflow.
     const n = 5000;
     const nodes = Array.from({ length: n }, (_, i) => `n${String(i).padStart(5, "0")}`);
-    const edges = nodes.slice(1).map((id, i) => edge(nodes[i]!, id));
+    const edges = nodes.slice(1).map((id, i) => edge(nodes[i] as string, id));
     expect(findCycles(nodes, edges)).toEqual([]);
   });
 
   it("scales: detects a single long cycle on a 1000-node ring", () => {
     const n = 1000;
     const nodes = Array.from({ length: n }, (_, i) => `r${String(i).padStart(4, "0")}`);
-    const edges = nodes.map((id, i) => edge(id, nodes[(i + 1) % n]!));
+    const edges = nodes.map((id, i) => edge(id, nodes[(i + 1) % n] as string));
     const cycles = findCycles(nodes, edges);
     expect(cycles).toHaveLength(1);
     expect(cycles[0]?.nodes).toHaveLength(n);

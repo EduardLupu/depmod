@@ -231,7 +231,7 @@ export function CytoscapeCanvas({ graph }: CytoscapeCanvasProps) {
         try {
           ensureNavigatorRegistered();
           navRef.current = cy.navigator({
-            container: `#${minimapRef.current!.id}` as unknown as HTMLElement,
+            container: `#${minimapRef.current?.id}` as unknown as HTMLElement,
             viewLiveFramerate: 30,
             rerenderDelay: 300,
             removeCustomContainer: false,
@@ -339,9 +339,8 @@ export function CytoscapeCanvas({ graph }: CytoscapeCanvasProps) {
     setFocusedDirectory,
     setCollapseDirectories,
     router,
-    graph.nodes.length,
-    graph.rootDir,
-    graph.generatedAt,
+    graph,
+    collapseDirectories,
   ]);
 
   // React to filter / search / selection / blast-radius / focus-mode / directory changes.
@@ -580,15 +579,15 @@ function applyOverlays(
     // loop without surrounding noise. Internal edges that close the cycle
     // light up with the existing `blast` class; already styled amber-ish,
     // close enough to "this is the important bit" without a new selector.
-    cy.nodes().forEach((n) => {
-      if (n.isParent()) return;
+    for (const n of cy.nodes()) {
+      if (n.isParent()) continue;
       if (!cycleNodeIds.has(n.id())) addCls(next.classes, n.id(), "filtered-out");
-    });
-    cy.edges().forEach((e) => {
+    }
+    for (const e of cy.edges()) {
       const sIn = cycleNodeIds.has(e.source().id());
       const tIn = cycleNodeIds.has(e.target().id());
       if (!sIn || !tIn) addCls(next.classes, e.id(), "filtered-out");
-    });
+    }
   } else if (focusNeighborhood && focusNeighborhood.size > 0) {
     // Hard isolation, matching cycle mode: only nodes inside the
     // neighbourhood stay on the canvas, everything else is dropped. Avoids
@@ -597,16 +596,16 @@ function applyOverlays(
     // out for hidden ones. In-scope nodes always render (they override the
     // classification toggle on purpose — focus mode says "show me the
     // network around X, including pieces I'd normally hide").
-    cy.nodes().forEach((n) => {
-      if (n.isParent()) return;
+    for (const n of cy.nodes()) {
+      if (n.isParent()) continue;
       const depth = focusNeighborhood.depthByNode.get(n.id());
       if (depth === undefined) {
         addCls(next.classes, n.id(), "filtered-out");
       } else {
         addCls(next.classes, n.id(), depth === 0 ? "focus-root" : "focus");
       }
-    });
-    cy.edges().forEach((e) => {
+    }
+    for (const e of cy.edges()) {
       const sd = focusNeighborhood.depthByNode.get(e.source().id());
       const td = focusNeighborhood.depthByNode.get(e.target().id());
       if (sd === undefined || td === undefined) {
@@ -614,13 +613,13 @@ function applyOverlays(
       } else {
         addCls(next.classes, e.id(), "focus");
       }
-    });
+    }
   } else if (blastRadius && blastRadius.size > 0) {
     // Same hard-isolation pattern as focus: the blast radius is the answer
     // to "what would break if I change this?", so everything outside it is
     // noise. In-scope nodes get blast styling regardless of classification.
-    cy.nodes().forEach((n) => {
-      if (n.isParent()) return;
+    for (const n of cy.nodes()) {
+      if (n.isParent()) continue;
       const depth = blastRadius.depthByNode.get(n.id());
       if (depth === undefined) {
         addCls(next.classes, n.id(), "filtered-out");
@@ -628,8 +627,8 @@ function applyOverlays(
         next.blastDepth.set(n.id(), depth);
         addCls(next.classes, n.id(), depth === 0 ? "blast-root" : "blast");
       }
-    });
-    cy.edges().forEach((e) => {
+    }
+    for (const e of cy.edges()) {
       const sd = blastRadius.depthByNode.get(e.source().id());
       const td = blastRadius.depthByNode.get(e.target().id());
       if (sd === undefined || td === undefined) {
@@ -637,13 +636,13 @@ function applyOverlays(
       } else {
         addCls(next.classes, e.id(), "blast");
       }
-    });
+    }
   } else {
     // Default branch: classifications, path mask, directory focus.
     const filteredOutIds = new Set<string>();
     const dimmedIds = new Set<string>();
-    cy.nodes().forEach((n) => {
-      if (n.isParent()) return;
+    for (const n of cy.nodes()) {
+      if (n.isParent()) continue;
       const cls = n.data("classification") as keyof ClassificationModes | undefined;
       const id = (n.data("id") as string | undefined) ?? "";
       const structOk =
@@ -652,7 +651,7 @@ function applyOverlays(
       if (!structOk) {
         addCls(next.classes, n.id(), "filtered-out");
         filteredOutIds.add(n.id());
-        return;
+        continue;
       }
       if (soloCls) {
         if (cls !== soloCls) {
@@ -661,13 +660,13 @@ function applyOverlays(
         } else if (pathMask.include.length > 0 || pathMask.exclude.length > 0) {
           addCls(next.classes, n.id(), "match");
         }
-        return;
+        continue;
       }
       const mode = cls ? classificationModes[cls] : "neutral";
       if (mode === "excluded") {
         addCls(next.classes, n.id(), "filtered-out");
         filteredOutIds.add(n.id());
-        return;
+        continue;
       }
       if (!directoryOk || mode === "dimmed") {
         addCls(next.classes, n.id(), "dimmed");
@@ -675,11 +674,11 @@ function applyOverlays(
       } else if (pathMask.include.length > 0 || pathMask.exclude.length > 0) {
         addCls(next.classes, n.id(), "match");
       }
-    });
+    }
     // Edges inherit filtered-out / dimmed from their endpoints. We compute
     // off the in-memory Sets we just built (NOT off DOM classes, since we
     // haven't applied anything yet).
-    cy.edges().forEach((e) => {
+    for (const e of cy.edges()) {
       const s = e.source().id();
       const t = e.target().id();
       if (filteredOutIds.has(s) || filteredOutIds.has(t)) {
@@ -687,7 +686,7 @@ function applyOverlays(
       } else if (dimmedIds.has(s) || dimmedIds.has(t)) {
         addCls(next.classes, e.id(), "dimmed");
       }
-    });
+    }
   }
 
   if (selectedNodeId) {

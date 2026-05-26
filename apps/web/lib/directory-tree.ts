@@ -38,7 +38,7 @@ export function buildDirectoryTree(graph: Graph): DirectoryNode[] {
     const segments = node.id.split("/");
     if (segments.length === 1) {
       // Repo-root file with no directory; attach to virtual root.
-      byPath.get(ROOT_KEY)!.directFileIds.push(node.id);
+      byPath.get(ROOT_KEY)?.directFileIds.push(node.id);
       continue;
     }
     const dirSegments = segments.slice(0, -1);
@@ -51,14 +51,14 @@ export function buildDirectoryTree(graph: Graph): DirectoryNode[] {
       }
     }
     const parentPath = dirSegments.join("/");
-    byPath.get(parentPath)!.directFileIds.push(node.id);
+    byPath.get(parentPath)?.directFileIds.push(node.id);
   }
 
   // Link children to parents (top-level dirs become children of the virtual root).
   for (const [path, node] of byPath) {
     if (path === ROOT_KEY) continue;
     const parentPath = path.includes("/") ? path.slice(0, path.lastIndexOf("/")) : ROOT_KEY;
-    byPath.get(parentPath)!.children.push(node);
+    byPath.get(parentPath)?.children.push(node);
   }
 
   // Sort + roll up file counts via a single post-order DFS.
@@ -72,9 +72,11 @@ export function buildDirectoryTree(graph: Graph): DirectoryNode[] {
     n.fileCount = total;
     return total;
   }
-  dfs(byPath.get(ROOT_KEY)!);
+  const root = byPath.get(ROOT_KEY);
+  if (!root) return undefined;
+  dfs(root);
 
-  return byPath.get(ROOT_KEY)!.children;
+  return root.children;
 }
 
 /**

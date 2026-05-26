@@ -1,8 +1,8 @@
 import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import type { Graph } from "@depmod/types";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 const sessionModule = vi.hoisted(() => ({
   readGraphSessionJson: vi.fn<() => string | null>(),

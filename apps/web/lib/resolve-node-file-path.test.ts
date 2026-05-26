@@ -1,6 +1,6 @@
 import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from "node:fs";
-import { dirname } from "node:path";
 import { tmpdir } from "node:os";
+import { dirname } from "node:path";
 import { join } from "node:path";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import { resolveNodeFilePath } from "./resolve-node-file-path";
@@ -23,7 +23,7 @@ describe("resolveNodeFilePath", () => {
     writeFileSync(absTarget, "export {}");
     const abs = resolveNodeFilePath(root, rel);
     expect(abs).toBeTruthy();
-    expect(abs!.endsWith("src/app/page.tsx")).toBe(true);
+    expect(abs?.endsWith("src/app/page.tsx")).toBe(true);
   });
 
   it("rejects path traversal", () => {

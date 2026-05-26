@@ -57,9 +57,6 @@ export function NodeSearch({ graph }: NodeSearchProps) {
     return () => window.removeEventListener("mousedown", onMouseDown);
   }, [open]);
 
-  // Reset highlight when the result list changes.
-  useEffect(() => setActiveIndex(0), [query]);
-
   const choose = useCallback(
     (result: SearchResult) => {
       setSelection(result.entry.id);
@@ -106,6 +103,7 @@ export function NodeSearch({ graph }: NodeSearchProps) {
         value={query}
         onChange={(e) => {
           setQuery(e.target.value);
+          setActiveIndex(0);
           setOpen(true);
         }}
         onFocus={() => setOpen(true)}
@@ -115,6 +113,9 @@ export function NodeSearch({ graph }: NodeSearchProps) {
         aria-autocomplete="list"
         aria-controls={open ? listboxId : undefined}
         aria-expanded={open && results.length > 0}
+        aria-activedescendant={
+          open && results.length > 0 ? `${listboxId}-option-${activeIndex}` : undefined
+        }
         className="w-56 rounded-md border border-neutral-800 bg-neutral-900 py-1.5 pl-7 pr-12 text-sm text-neutral-200 placeholder:text-neutral-600 focus:border-neutral-600 focus:outline-none"
       />
       <kbd className="pointer-events-none absolute right-2 inline-flex items-center gap-[2px] rounded border border-neutral-800 bg-neutral-950 px-1.5 py-0.5 text-[10px] text-neutral-500">
@@ -122,17 +123,17 @@ export function NodeSearch({ graph }: NodeSearchProps) {
       </kbd>
 
       {open && query.length > 0 ? (
-        <div
+        <ul
           id={listboxId}
-          role="listbox"
-          className="absolute left-0 top-full z-40 mt-1 max-h-80 w-[28rem] overflow-y-auto rounded-md border border-neutral-800 bg-neutral-950 shadow-lg"
+          className="absolute left-0 top-full z-40 mt-1 max-h-80 w-[28rem] list-none overflow-y-auto rounded-md border border-neutral-800 bg-neutral-950 p-0 shadow-lg"
         >
           {results.length === 0 ? (
-            <div className="px-3 py-2 text-xs text-neutral-500">No matches.</div>
+            <li className="px-3 py-2 text-xs text-neutral-500">No matches.</li>
           ) : (
             results.map((r, i) => (
               <ResultRow
                 key={r.entry.id}
+                optionId={`${listboxId}-option-${i}`}
                 result={r}
                 active={i === activeIndex}
                 onMouseEnter={() => setActiveIndex(i)}
@@ -140,18 +141,20 @@ export function NodeSearch({ graph }: NodeSearchProps) {
               />
             ))
           )}
-        </div>
+        </ul>
       ) : null}
     </div>
   );
 }
 
 function ResultRow({
+  optionId,
   result,
   active,
   onMouseEnter,
   onClick,
 }: {
+  optionId: string;
   result: SearchResult;
   active: boolean;
   onMouseEnter: () => void;
@@ -159,35 +162,37 @@ function ResultRow({
 }) {
   const { entry, hitField, hitExport } = result;
   return (
-    <button
-      type="button"
-      role="option"
-      aria-selected={active}
-      onMouseEnter={onMouseEnter}
-      onClick={onClick}
-      className={`flex w-full items-center gap-2 px-3 py-1.5 text-left text-xs transition-colors ${
-        active ? "bg-neutral-900" : "bg-transparent hover:bg-neutral-900/60"
-      }`}
-    >
-      <ClassificationSwatch classification={entry.classification} size={10} />
-      <span className="min-w-0 flex-1">
-        <span className="block truncate font-mono text-neutral-100">{entry.basename}</span>
-        <span className="block truncate text-[10px] text-neutral-500">
-          {entry.path === entry.basename ? " " : entry.path}
+    <li>
+      <button
+        type="button"
+        id={optionId}
+        aria-current={active ? "true" : undefined}
+        onMouseEnter={onMouseEnter}
+        onClick={onClick}
+        className={`flex w-full items-center gap-2 px-3 py-1.5 text-left text-xs transition-colors ${
+          active ? "bg-neutral-900" : "bg-transparent hover:bg-neutral-900/60"
+        }`}
+      >
+        <ClassificationSwatch classification={entry.classification} size={10} />
+        <span className="min-w-0 flex-1">
+          <span className="block truncate font-mono text-neutral-100">{entry.basename}</span>
+          <span className="block truncate text-[10px] text-neutral-500">
+            {entry.path === entry.basename ? " " : entry.path}
+          </span>
         </span>
-      </span>
-      {hitField === "export" && hitExport ? (
-        <span
-          className="shrink-0 rounded px-1.5 py-0.5 font-mono text-[10px]"
-          style={{
-            background: `${CLASSIFICATION_COLORS[entry.classification]}22`,
-            color: CLASSIFICATION_COLORS[entry.classification],
-          }}
-          title="Match found in export name"
-        >
-          {hitExport}
-        </span>
-      ) : null}
-    </button>
+        {hitField === "export" && hitExport ? (
+          <span
+            className="shrink-0 rounded px-1.5 py-0.5 font-mono text-[10px]"
+            style={{
+              background: `${CLASSIFICATION_COLORS[entry.classification]}22`,
+              color: CLASSIFICATION_COLORS[entry.classification],
+            }}
+            title="Match found in export name"
+          >
+            {hitExport}
+          </span>
+        ) : null}
+      </button>
+    </li>
   );
 }

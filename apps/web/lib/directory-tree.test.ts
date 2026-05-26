@@ -32,14 +32,17 @@ describe("buildDirectoryTree", () => {
   it("creates intermediate directory nodes for every ancestor", () => {
     const tree = buildDirectoryTree(graphOf(["a/b/c/file.ts"]));
     expect(tree).toHaveLength(1);
-    const a = tree[0]!;
-    expect(a.path).toBe("a");
-    expect(a.children).toHaveLength(1);
-    const ab = a.children[0]!;
-    expect(ab.path).toBe("a/b");
-    const abc = ab.children[0]!;
-    expect(abc.path).toBe("a/b/c");
-    expect(abc.directFileIds).toEqual(["a/b/c/file.ts"]);
+    const a = tree[0];
+    expect(a).toBeDefined();
+    expect(a?.path).toBe("a");
+    expect(a?.children).toHaveLength(1);
+    const ab = a?.children[0];
+    expect(ab).toBeDefined();
+    expect(ab?.path).toBe("a/b");
+    const abc = ab?.children[0];
+    expect(abc).toBeDefined();
+    expect(abc?.path).toBe("a/b/c");
+    expect(abc?.directFileIds).toEqual(["a/b/c/file.ts"]);
   });
 
   it("rolls up fileCount recursively", () => {
@@ -47,11 +50,13 @@ describe("buildDirectoryTree", () => {
       graphOf(["a/x.ts", "a/y.ts", "a/b/z.ts", "a/b/c/w.ts", "other/file.ts"]),
     );
     expect(tree).toHaveLength(2);
-    const a = tree.find((d) => d.path === "a")!;
-    expect(a.fileCount).toBe(4);
-    const ab = a.children.find((c) => c.path === "a/b")!;
-    expect(ab.fileCount).toBe(2);
-    expect(tree.find((d) => d.path === "other")!.fileCount).toBe(1);
+    const a = tree.find((d) => d.path === "a");
+    expect(a).toBeDefined();
+    expect(a?.fileCount).toBe(4);
+    const ab = a?.children.find((c) => c.path === "a/b");
+    expect(ab).toBeDefined();
+    expect(ab?.fileCount).toBe(2);
+    expect(tree.find((d) => d.path === "other")?.fileCount).toBe(1);
   });
 
   it("sorts children alphabetically at every level", () => {
@@ -82,10 +87,11 @@ describe("buildDirectoryTree", () => {
       ]),
     );
     expect(tree.map((d) => d.path)).toEqual(["actions", "app", "components", "hooks", "lib"]);
-    const app = tree.find((d) => d.path === "app")!;
-    expect(app.fileCount).toBe(3);
-    expect(app.children.map((c) => c.path)).toEqual(["app/api"]);
-    expect(app.children[0]!.children.map((c) => c.path)).toEqual(["app/api/users"]);
+    const app = tree.find((d) => d.path === "app");
+    expect(app).toBeDefined();
+    expect(app?.fileCount).toBe(3);
+    expect(app?.children.map((c) => c.path)).toEqual(["app/api"]);
+    expect(app?.children[0]?.children.map((c) => c.path)).toEqual(["app/api/users"]);
   });
 });
 

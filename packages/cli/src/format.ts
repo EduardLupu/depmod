@@ -51,7 +51,7 @@ export function summarize(graph: Graph, options: FormatOptions = {}): string {
   }
 
   const topAfferent = pickTop(graph.nodes, (a, b) => b.metrics.Ca - a.metrics.Ca);
-  if (topAfferent.length > 0 && topAfferent[0]!.metrics.Ca > 0) {
+  if (topAfferent.length > 0 && topAfferent[0]?.metrics.Ca > 0) {
     lines.push("");
     lines.push(k.bold(`Top afferent coupling (${topAfferent.length})`));
     for (const n of topAfferent) {

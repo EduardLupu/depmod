@@ -1,18 +1,18 @@
 import { type ChildProcess, spawn } from "node:child_process";
-import { createServer } from "node:net";
 import { existsSync, readFileSync } from "node:fs";
+import { createServer } from "node:net";
 import { dirname, isAbsolute, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { analyze } from "@depmod/parser";
 import kleur from "kleur";
-import type { ServeOptions, ServeHandle } from "./commands/serve.js";
-import { progressPathForSession, writeParseProgress } from "./session-progress.js";
+import type { ServeHandle, ServeOptions } from "./commands/serve.js";
 import { createSessionFilePath, writeGraphSession } from "./session-file.js";
+import { progressPathForSession, writeParseProgress } from "./session-progress.js";
 import { watchProject } from "./watch.js";
 
 /** Lowest port we'll try by default. Avoids the usual 3000 / 5173 collisions. */
 export const DEFAULT_PORT = 45455;
-/** Cap to avoid scanning forever ù 100 simultaneous instances is generous. */
+/** Cap to avoid scanning forever - 100 simultaneous instances is generous. */
 const PORT_SCAN_LIMIT = 100;
 
 export interface NextServeInternals {
@@ -27,7 +27,7 @@ export interface NextServeInternals {
  *
  * - `standalone`: the published tarball layout. `webAppDir` holds
  *   `apps/web/server.js` from Next's `output: "standalone"` build.
- *   No `next` binary is needed ù we spawn `node server.js` directly.
+ *   No `next` binary is needed - we spawn `node server.js` directly.
  * - `next-start`: dev fallback. `webAppDir` is a raw `apps/web` with `.next/`
  *   inside; we spawn `next start` from the workspace's `node_modules`.
  */
@@ -85,10 +85,7 @@ export async function runServeNext(
   const server = resolveServer(webAppDir);
   if (!server) {
     throw new Error(
-      "depmod-ui: no prebuilt dashboard found under " +
-        `${webAppDir}. Expected either a standalone \`apps/web/server.js\` ` +
-        "(published tarball) or `.next/` (dev). If you're developing the " +
-        "monorepo, run `pnpm --filter web build` first.",
+      `depmod-ui: no prebuilt dashboard found under ${webAppDir}. Expected either a standalone \`apps/web/server.js\` (published tarball) or \`.next/\` (dev). If you're developing the monorepo, run \`pnpm --filter web build\` first.`,
     );
   }
 
@@ -114,7 +111,7 @@ export async function runServeNext(
   const sessionDir = dirname(sessionPath);
   const progressPath = progressPathForSession(sessionPath);
 
-  // ?? Banner ??????????????????????????????????????????????????????????
+  // Banner
   log("");
   log(
     `  ${colour("depmod-ui", (s) => kleur.cyan().bold(s))} ${colour(
@@ -127,7 +124,7 @@ export async function runServeNext(
 
   writeParseProgress(progressPath, {
     phase: "starting",
-    message: "Starting dashboardù",
+    message: "Starting dashboard...",
     percent: 0,
   });
 
@@ -146,10 +143,10 @@ export async function runServeNext(
 
   writeParseProgress(progressPath, {
     phase: "parsing",
-    message: "Analyzing projectù",
+    message: "Analyzing project...",
     percent: 10,
   });
-  log(`  ${colour("?", kleur.dim)} ${colour("Analyzingù", kleur.dim)}`);
+  log(`  ${colour("*", kleur.dim)} ${colour("Analyzing...", kleur.dim)}`);
   const analyzeStart = Date.now();
 
   const [initial] = await Promise.all([
@@ -174,18 +171,18 @@ export async function runServeNext(
           kleur.yellow,
         );
   log(
-    `  ${colour("?", kleur.green)} ` +
-      `${colour(initial.stats.nodes.toLocaleString(), kleur.bold)} ${colour("nodes", kleur.dim)} ù ` +
-      `${colour(initial.stats.edges.toLocaleString(), kleur.bold)} ${colour("edges", kleur.dim)} ù ` +
+    `  ${colour("*", kleur.green)} ` +
+      `${colour(initial.stats.nodes.toLocaleString(), kleur.bold)} ${colour("nodes", kleur.dim)} | ` +
+      `${colour(initial.stats.edges.toLocaleString(), kleur.bold)} ${colour("edges", kleur.dim)} | ` +
       `${cyclesText} ` +
-      `${colour(`ù ${formatDuration(analyzeMs)}`, kleur.dim)}`,
+      `${colour(`+ ${formatDuration(analyzeMs)}`, kleur.dim)}`,
   );
 
   await waitForGraphEndpoint(baseUrl, 15_000);
 
-  log(`  ${colour("?", kleur.green)} ${colour(baseUrl, (s) => kleur.cyan().underline(s))}`);
+  log(`  ${colour("*", kleur.green)} ${colour(baseUrl, (s) => kleur.cyan().underline(s))}`);
   if (options.watch) {
-    log(`  ${colour("?", kleur.green)} ${colour("Watching for changes", kleur.dim)}`);
+    log(`  ${colour("*", kleur.green)} ${colour("Watching for changes", kleur.dim)}`);
   }
   log("");
   log(`  ${colour("Press Ctrl-C to stop.", kleur.dim)}`);
@@ -199,7 +196,7 @@ export async function runServeNext(
         try {
           writeParseProgress(progressPath, {
             phase: "parsing",
-            message: "Re-analyzingù",
+            message: "Re-analyzing...",
             percent: 20,
           });
           const next = await analyze(absPath, analyzeOptions);
@@ -213,27 +210,27 @@ export async function runServeNext(
           });
           if (!options.quiet) {
             log(
-              `  ${colour("?", kleur.cyan)} ` +
-                `${colour(next.stats.nodes.toLocaleString(), kleur.bold)} ${colour(
-                  "nodes",
-                  kleur.dim,
-                )} ù ` +
-                `${colour(next.stats.edges.toLocaleString(), kleur.bold)} ${colour(
-                  "edges",
-                  kleur.dim,
-                )} ù ` +
-                (next.stats.cycles === 0
+              `  ${colour("*", kleur.cyan)} ${colour(next.stats.nodes.toLocaleString(), kleur.bold)} ${colour(
+                "nodes",
+                kleur.dim,
+              )} | ${colour(next.stats.edges.toLocaleString(), kleur.bold)} ${colour(
+                "edges",
+                kleur.dim,
+              )} | ${
+                next.stats.cycles === 0
                   ? colour("no cycles", kleur.dim)
                   : colour(
                       `${next.stats.cycles} ${next.stats.cycles === 1 ? "cycle" : "cycles"}`,
                       kleur.yellow,
-                    )) +
-                ` ${colour(`ù ${formatDuration(next.stats.parseMs)}`, kleur.dim)}`,
+                    )
+              } ${colour(`+ ${formatDuration(next.stats.parseMs)}`, kleur.dim)}`,
             );
           }
         } catch (err) {
           const message = err instanceof Error ? err.message : String(err);
-          process.stderr.write(`${colour("depmod-ui:", kleur.red)} re-analyze failed: ${message}\n`);
+          process.stderr.write(
+            `${colour("depmod-ui:", kleur.red)} re-analyze failed: ${message}\n`,
+          );
         }
       },
     });
@@ -297,7 +294,9 @@ function spawnServer(server: ResolvedServer, opts: SpawnOpts): ChildProcess {
   const webRoot = join(server.cwd, "..", "..");
   const bundledNodePath = readBundledNodePath(webRoot);
   const nodePath = bundledNodePath
-    ? [bundledNodePath, process.env.NODE_PATH].filter(Boolean).join(process.platform === "win32" ? ";" : ":")
+    ? [bundledNodePath, process.env.NODE_PATH]
+        .filter(Boolean)
+        .join(process.platform === "win32" ? ";" : ":")
     : process.env.NODE_PATH;
   const env = {
     ...process.env,
@@ -313,7 +312,7 @@ function spawnServer(server: ResolvedServer, opts: SpawnOpts): ChildProcess {
   if (server.mode === "standalone") {
     // Next.js standalone: a self-contained server.js with its own minimal
     // node_modules. No external `next` binary required, which is the whole
-    // point ù published tarballs don't have to bundle the Next CLI.
+    // point - published tarballs don't have to bundle the Next CLI.
     child = spawn(process.execPath, ["server.js"], {
       cwd: server.cwd,
       env,
@@ -328,11 +327,11 @@ function spawnServer(server: ResolvedServer, opts: SpawnOpts): ChildProcess {
           [nextBin, "start", "--port", String(opts.port), "--hostname", opts.host],
           { cwd: server.cwd, env, stdio: ["ignore", "pipe", "pipe"] },
         )
-      : spawn(
-          "npx",
-          ["next", "start", "--port", String(opts.port), "--hostname", opts.host],
-          { cwd: server.cwd, env, stdio: ["ignore", "pipe", "pipe"] },
-        );
+      : spawn("npx", ["next", "start", "--port", String(opts.port), "--hostname", opts.host], {
+          cwd: server.cwd,
+          env,
+          stdio: ["ignore", "pipe", "pipe"],
+        });
   }
 
   if (!opts.quiet) {
@@ -348,23 +347,20 @@ function spawnServer(server: ResolvedServer, opts: SpawnOpts): ChildProcess {
  * the line *content* (stripped of ANSI) so colour codes don't defeat us.
  */
 const NEXT_NOISE_PATTERNS: readonly RegExp[] = [
-  /^\s*?\s+Next\.js/i,
+  /Next\.js/i,
   /^\s*-\s*Local:/i,
   /^\s*-\s*Network:/i,
   /^\s*-\s*Environments:/i,
   /^\s*-\s*Experiments\b/i,
-  /^\s*?\s+Starting/i,
-  /^\s*?\s+Ready in/i,
-  /^\s*?\s+Compiled/i,
+  /^\s*Starting/i,
+  /^\s*Ready in/i,
+  /^\s*Compiled/i,
   /^\s*Used `--port` is /i,
   // Next.js telemetry / collected-data notices.
   /^\s*Attention:/i,
 ];
 
-function pipeNextOutput(
-  source: NodeJS.ReadableStream | null,
-  sink: NodeJS.WritableStream,
-): void {
+function pipeNextOutput(source: NodeJS.ReadableStream | null, sink: NodeJS.WritableStream): void {
   if (!source) return;
   let buffer = "";
   source.setEncoding?.("utf8");
@@ -384,7 +380,9 @@ function pipeNextOutput(
 }
 
 function isNextNoise(line: string): boolean {
-  const stripped = line.replace(/\[[0-9;]*m/g, "").trim();
+  const stripped = line
+    .replace(new RegExp(`${String.fromCharCode(27)}\\[[0-9;]*m`, "g"), "")
+    .trim();
   if (stripped.length === 0) return true; // drop the blank separator lines too
   return NEXT_NOISE_PATTERNS.some((re) => re.test(stripped));
 }
@@ -402,17 +400,11 @@ function resolveNextBin(webAppDir: string): string | null {
 }
 
 /** Fail fast when `next start` exits (e.g. EADDRINUSE on the port). */
-function watchNextExit(
-  child: ChildProcess,
-  port: number,
-  boot: { failed: Error | null },
-): void {
+function watchNextExit(child: ChildProcess, port: number, boot: { failed: Error | null }): void {
   child.on("exit", (code, signal) => {
     if (code === 0 && !signal) return;
     const hint =
-      code === 1
-        ? ` Is port ${port} already in use? Stop the other process or pass --port.`
-        : "";
+      code === 1 ? ` Is port ${port} already in use? Stop the other process or pass --port.` : "";
     boot.failed = new Error(
       `Next.js exited before ready (code=${code ?? "null"}, signal=${signal ?? "null"}).${hint}`,
     );
@@ -436,14 +428,13 @@ async function waitForNextReady(
       // Next still booting or not responding yet.
     }
     if (log && !loggedWait) {
-      log(kleur.dim("  ? Booting serverù"));
+      log(kleur.dim("  * Booting server..."));
       loggedWait = true;
     }
     await new Promise((r) => setTimeout(r, 300));
   }
   throw new Error(
-    `depmod-ui: Next.js did not become ready at ${baseUrl} within ${timeoutMs / 1000}s. ` +
-      "Check the logs above for the underlying error.",
+    `depmod-ui: Next.js did not become ready at ${baseUrl} within ${timeoutMs / 1000}s. Check the logs above for the underlying error.`,
   );
 }
 
@@ -476,8 +467,7 @@ export async function findFreePort(host: string, start: number, limit: number): 
     if (await isPortFree(host, port)) return port;
   }
   throw new Error(
-    `depmod-ui: no free port in [${start}, ${start + limit}) on ${host}. ` +
-      "Pass --port to pick one explicitly.",
+    `depmod-ui: no free port in [${start}, ${start + limit}) on ${host}. Pass --port to pick one explicitly.`,
   );
 }
 
@@ -508,7 +498,7 @@ function openBrowser(url: string): void {
 
 /**
  * Locate the dashboard's web directory. Returns whatever `resolveServer`
- * will recognise ù either:
+ * will recognise - either:
  *   - the published tarball's bundled `web/` directory (containing
  *     `apps/web/server.js`), or
  *   - the dev monorepo's `apps/web/` directory (containing `.next/` or its
@@ -529,7 +519,10 @@ export function findMonorepoWebApp(): string | null {
     // Bundled tarball layout: web/apps/web/server.js
     if (existsSync(join(resolved, "apps", "web", "server.js"))) return resolved;
     // Dev source layout: package.json + next.config.ts marker files
-    if (existsSync(join(resolved, "package.json")) && existsSync(join(resolved, "next.config.ts"))) {
+    if (
+      existsSync(join(resolved, "package.json")) &&
+      existsSync(join(resolved, "next.config.ts"))
+    ) {
       return resolved;
     }
   }

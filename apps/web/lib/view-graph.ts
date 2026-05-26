@@ -1,5 +1,5 @@
-import { isNodeUnderDirectory } from "./directory-tree";
 import type { Edge, EdgeKind, Graph, Metrics, Node } from "@depmod/types";
+import { isNodeUnderDirectory } from "./directory-tree";
 export type DirectoryVisibility = "neutral" | "excluded" | "included";
 
 export interface ViewFilters {

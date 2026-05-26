@@ -42,9 +42,9 @@ export function computeFocusNeighborhood(
   const inc = new Map<string, Set<string>>();
   for (const edge of graph.edges) {
     if (!out.has(edge.source)) out.set(edge.source, new Set());
-    out.get(edge.source)!.add(edge.target);
+    out.get(edge.source)?.add(edge.target);
     if (!inc.has(edge.target)) inc.set(edge.target, new Set());
-    inc.get(edge.target)!.add(edge.source);
+    inc.get(edge.target)?.add(edge.source);
   }
 
   const clampedDepth = Math.max(
@@ -58,8 +58,10 @@ export function computeFocusNeighborhood(
   let maxObservedDepth = 0;
 
   while (queue.length > 0) {
-    const current = queue.shift()!;
-    const currentDepth = depthByNode.get(current)!;
+    const current = queue.shift();
+    if (current === undefined) break;
+    const currentDepth = depthByNode.get(current);
+    if (currentDepth === undefined) continue;
     if (currentDepth >= clampedDepth) continue;
 
     const neighbours = new Set<string>([...(out.get(current) ?? []), ...(inc.get(current) ?? [])]);

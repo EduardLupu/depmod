@@ -1,6 +1,6 @@
 import { relative, resolve, sep } from "node:path";
-import picomatch from "picomatch";
 import { TEST_EXCLUDE_GLOBS } from "@depmod/types";
+import picomatch from "picomatch";
 import { type GitignoreMatcher, buildGitignore } from "./gitignore.js";
 
 /**

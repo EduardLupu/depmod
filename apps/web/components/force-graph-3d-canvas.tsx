@@ -233,7 +233,7 @@ export function ForceGraph3DCanvas({ graph }: { graph: Graph }) {
       }
     });
     return () => cancelAnimationFrame(raf);
-  }, [data]);
+  }, []);
 
   // After the simulation cools, frame the camera on whatever nodes exist.
   // Belt-and-braces for the same remount race: even if forces failed to
@@ -242,7 +242,7 @@ export function ForceGraph3DCanvas({ graph }: { graph: Graph }) {
   const framedOnceRef = useRef(false);
   useEffect(() => {
     framedOnceRef.current = false;
-  }, [data]);
+  }, []);
 
   // Register the active fg instance for toolbar consumers (Export menu reads
   // the underlying three.js renderer through this handle). Re-registers any
@@ -253,7 +253,7 @@ export function ForceGraph3DCanvas({ graph }: { graph: Graph }) {
     if (!fg) return;
     registerFg(fg);
     return () => unregisterFg(fg);
-  }, [data]);
+  }, []);
 
   // `r` resets the camera (zoom to fit). Ignored while typing in form fields.
   useEffect(() => {

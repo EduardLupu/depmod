@@ -32,7 +32,7 @@ export function computeBlastRadius(graph: Graph, rootId: string, maxDepth?: numb
   const reverse = new Map<string, Set<string>>();
   for (const edge of graph.edges) {
     if (!reverse.has(edge.target)) reverse.set(edge.target, new Set());
-    reverse.get(edge.target)!.add(edge.source);
+    reverse.get(edge.target)?.add(edge.source);
   }
 
   depthByNode.set(rootId, 0);
@@ -40,8 +40,10 @@ export function computeBlastRadius(graph: Graph, rootId: string, maxDepth?: numb
   let maxObservedDepth = 0;
 
   while (queue.length > 0) {
-    const current = queue.shift()!;
-    const depth = depthByNode.get(current)!;
+    const current = queue.shift();
+    if (current === undefined) break;
+    const depth = depthByNode.get(current);
+    if (depth === undefined) continue;
     if (maxDepth !== undefined && depth >= maxDepth) continue;
     const upstream = reverse.get(current);
     if (!upstream) continue;

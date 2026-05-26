@@ -89,10 +89,10 @@ export function saveCachedPositions(graph: Graph, collapseMode: CollapseMode, cy
   const storage = safeGetStorage();
   if (!storage) return;
   const positions: Record<string, { x: number; y: number }> = {};
-  cy.nodes().forEach((n) => {
+  for (const n of cy.nodes()) {
     const p = n.position();
     positions[n.id()] = { x: p.x, y: p.y };
-  });
+  }
   const payload: CachedLayout = {
     v: 1,
     rootDir: graph.rootDir,
@@ -115,7 +115,7 @@ export function saveCachedPositions(graph: Graph, collapseMode: CollapseMode, cy
     const drop: string[] = [];
     for (let i = 0; i < storage.length; i++) {
       const k = storage.key(i);
-      if (k && k.startsWith(prefix) && k !== targetKey) {
+      if (k?.startsWith(prefix) && k !== targetKey) {
         // Keep entries for the same generatedAt but a *different* collapse
         // mode; both views are valid for the current parse.
         const samePayload = k.includes(`:${graph.generatedAt}:`);
@@ -143,15 +143,15 @@ export function applyCachedPositions(
 ): boolean {
   let complete = true;
   cy.batch(() => {
-    cy.nodes().forEach((n) => {
-      if (n.isParent()) return;
+    for (const n of cy.nodes()) {
+      if (n.isParent()) continue;
       const p = positions.get(n.id());
       if (!p) {
         complete = false;
-        return;
+        continue;
       }
       n.position(p);
-    });
+    }
   });
   return complete;
 }

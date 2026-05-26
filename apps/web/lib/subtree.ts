@@ -39,7 +39,7 @@ export function extractSubtree(
   const out = new Map<string, Set<string>>();
   for (const e of graph.edges) {
     if (!out.has(e.source)) out.set(e.source, new Set());
-    out.get(e.source)!.add(e.target);
+    out.get(e.source)?.add(e.target);
   }
 
   const depthByNode = new Map<string, number>();
@@ -49,8 +49,10 @@ export function extractSubtree(
   let truncated = false;
 
   while (queue.length > 0) {
-    const current = queue.shift()!;
-    const depth = depthByNode.get(current)!;
+    const current = queue.shift();
+    if (current === undefined) break;
+    const depth = depthByNode.get(current);
+    if (depth === undefined) continue;
     if (depth >= maxDepth) {
       // If anything dangling beyond the depth wall exists, mark truncated.
       const neighbours = out.get(current);

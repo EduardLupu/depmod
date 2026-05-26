@@ -112,7 +112,7 @@ export async function runAnalyze(options: RunAnalyzeOptions): Promise<RunAnalyze
       stdout(`depmod-ui analyze ${absPath}`);
       stdout("");
       stdout(summarize(graph, formatOpts));
-      if (cacheStatsRef.value && cacheStatsRef.value.enabled) {
+      if (cacheStatsRef.value?.enabled) {
         const total = cacheStatsRef.value.hits + cacheStatsRef.value.misses;
         const ratio = total === 0 ? 0 : Math.round((cacheStatsRef.value.hits / total) * 100);
         const reason = cacheStatsRef.value.invalidatedReason

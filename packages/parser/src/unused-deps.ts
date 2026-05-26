@@ -121,7 +121,7 @@ function walk(dir: string, out: string[], depth: number): void {
   for (const entry of entries) {
     if (SKIP_DIRS.has(entry)) continue;
     const abs = join(dir, entry);
-    let stat;
+    let stat: ReturnType<typeof statSync> | undefined;
     try {
       stat = statSync(abs);
     } catch {

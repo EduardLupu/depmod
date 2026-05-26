@@ -39,11 +39,19 @@ describe("analyze(); Track I incremental cache", () => {
     });
 
     let firstStats: CacheStats | null = null;
-    await analyze(root, { onCacheStats: (s) => (firstStats = s) });
+    await analyze(root, {
+      onCacheStats: (s) => {
+        firstStats = s;
+      },
+    });
     expect(firstStats).toMatchObject({ enabled: true, hits: 0, misses: 2 });
 
     let secondStats: CacheStats | null = null;
-    await analyze(root, { onCacheStats: (s) => (secondStats = s) });
+    await analyze(root, {
+      onCacheStats: (s) => {
+        secondStats = s;
+      },
+    });
     expect(secondStats).toMatchObject({
       enabled: true,
       hits: 2,
@@ -63,7 +71,11 @@ describe("analyze(); Track I incremental cache", () => {
     writeFileSync(join(root, "src/a.ts"), "export const a = 42;\n");
 
     let stats: CacheStats | null = null;
-    await analyze(root, { onCacheStats: (s) => (stats = s) });
+    await analyze(root, {
+      onCacheStats: (s) => {
+        stats = s;
+      },
+    });
     expect(stats?.hits).toBe(2);
     expect(stats?.misses).toBe(1);
   });
@@ -75,7 +87,11 @@ describe("analyze(); Track I incremental cache", () => {
     writeFileSync(join(root, "src/aa.ts"), "export const a = 1;\n");
 
     let stats: CacheStats | null = null;
-    await analyze(root, { onCacheStats: (s) => (stats = s) });
+    await analyze(root, {
+      onCacheStats: (s) => {
+        stats = s;
+      },
+    });
     expect(stats?.invalidatedReason).toBe("file-set");
     expect(stats?.hits).toBe(0);
     expect(stats?.misses).toBe(1);
@@ -92,7 +108,11 @@ describe("analyze(); Track I incremental cache", () => {
     );
 
     let stats: CacheStats | null = null;
-    await analyze(root, { onCacheStats: (s) => (stats = s) });
+    await analyze(root, {
+      onCacheStats: (s) => {
+        stats = s;
+      },
+    });
     expect(stats?.invalidatedReason).toBe("tsconfig");
   });
 
@@ -101,7 +121,12 @@ describe("analyze(); Track I incremental cache", () => {
     await analyze(root);
 
     let stats: CacheStats | null = null;
-    await analyze(root, { cache: false, onCacheStats: (s) => (stats = s) });
+    await analyze(root, {
+      cache: false,
+      onCacheStats: (s) => {
+        stats = s;
+      },
+    });
     expect(stats).toMatchObject({ enabled: false, hits: 0, misses: 1 });
   });
 

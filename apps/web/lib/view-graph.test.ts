@@ -1,5 +1,5 @@
-import { describe, expect, it } from "vitest";
 import type { Graph } from "@depmod/types";
+import { describe, expect, it } from "vitest";
 import { DEFAULT_VIEW_FILTERS, filterGraphView, nodeVisible } from "./view-graph";
 
 const miniGraph: Graph = {

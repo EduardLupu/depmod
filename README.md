@@ -3,7 +3,7 @@
 
   # depmod
 
-  **See the shape of your codebase.** A terminal-launched, browser-rendered dependency-graph explorer for TypeScript and JavaScript projects.
+  **See the shape of your codebase.** A terminal-launched, browser-rendered dependency graph explorer for TypeScript and JavaScript projects.
 
   [![npm version](https://img.shields.io/npm/v/depmod-ui?color=4f7fdf&label=depmod-ui)](https://www.npmjs.com/package/depmod-ui)
   [![npm downloads](https://img.shields.io/npm/dm/depmod-ui?color=4f7fdf)](https://www.npmjs.com/package/depmod-ui)
@@ -25,72 +25,74 @@
 
 ## What is depmod?
 
-`depmod` is a CLI that statically parses any TypeScript / JavaScript project — Next.js apps, monorepos, libraries, anything `ts-morph` can read — and renders the resulting directed import graph as an interactive dashboard in your browser. Nothing leaves your machine.
+depmod is a small CLI that reads your TypeScript or JavaScript project, builds an import graph, and opens an interactive dashboard in your browser. It works on single apps, monorepos, and most setups that [ts-morph](https://ts-morph.com) can parse. Nothing is uploaded anywhere; parsing and the UI stay on your machine.
 
-It is fast, opinionated, and built to answer the questions that matter when you're trying to understand a codebase you didn't write (or one you wrote two years ago):
+(Not the Linux `depmod` command, and not Depeche Mode, though I do like them.)
 
-- **Which modules are at the center of everything?** (Martin coupling: `Ca`, `Ce`, instability)
-- **What would break if I changed this file?** (Blast radius — reverse-BFS over the import graph)
-- **What does this page actually pull in?** (Focus mode — `N`-hop neighbourhood, zoom to it)
-- **Where are the cycles?** (Iterative Tarjan's SCC; click a cycle to isolate it)
-- **What's dead?** (Unreferenced modules, runtime-only-type modules, empty stubs)
-- **Which npm packages are declared but never imported?** (Per-workspace static analysis)
+It is meant for the moment you land in a repo and need answers quickly:
+
+- **Who sits in the middle of the graph?** Martin coupling (`Ca`, `Ce`, instability)
+- **If I change this file, what breaks?** Blast radius (reverse reachability on the import graph)
+- **What does this module actually pull in?** Focus mode around a node
+- **Where are the import cycles?** Tarjan SCCs, with isolation per cycle
+- **What looks unused?** Unreferenced files, type-only imports, thin stubs
+- **What is declared in package.json but never imported?** Per-workspace static check
 
 ## Quickstart
 
 ```sh
-# Run on the current directory.
+# Current directory
 npx depmod-ui
 
-# Run on any other project.
+# Any project path
 npx depmod-ui /path/to/project
 
-# Watch for changes and reload the dashboard as you edit.
+# Re-parse when files change
 npx depmod-ui . --watch
 ```
 
-The dashboard opens at `http://127.0.0.1:45455` (or the next free port). Multiple projects can be open at the same time — `depmod-ui` scans upward from `45455` automatically.
+By default the dashboard listens on `http://127.0.0.1:45455`. If that port is busy, depmod-ui tries the next one so you can run several projects side by side.
 
 ## Features
 
 | | |
 | --- | --- |
-| **Two canvases** | 2D Cytoscape (WebGL) for big graphs, 3D three.js force-directed for visual exploration. Toggle with one click. |
-| **Classification** | Every module is bucketed (`page` / `api` / `hook` / `component` / `lib` / `test` / `config`). Pills filter, dim, solo, or hide each class. |
-| **Path mask** | Comma-separated globs filter the canvas in real time. `**/*.tsx,!**/*.test.*` is one keystroke away. |
-| **Inspector** | Selecting a module shows LOC, bytes, `Ca`/`Ce`/instability, exports, dependents, dependencies, transitive bundle estimate, and cycle membership. |
-| **Blast radius** | Press `B` on a selected node. The orange overlay shows every module that transitively depends on it, depth-graded. |
-| **Focus mode** | Press `F`. The graph hard-isolates the `N`-hop neighbourhood around the selection — across hidden classifications too. |
-| **Cycle isolation** | The Cycles list highlights every SCC; click to isolate one and trace the loop. |
-| **Dead-code report** | Modules with no incoming edges, no exports, runtime-only-type-imports, or near-empty stubs are surfaced in the Inspector and the directory sidebar. |
-| **Unused-deps report** | Cross-references every workspace's `package.json` against actual imports. Honours monorepo `paths` aliases. |
-| **Code viewer** | Press `C` (or click "View source") to read the selected file inline in a Monaco editor, with syntax highlighting. |
-| **Live reload** | `--watch` re-parses on every save and pushes the new graph over SSE — selection, filters, and view are preserved. |
-| **Layout cache** | The first `next build` is the only slow one. After that, layouts are cached per graph version and applied instantly. |
+| **Two canvases** | 2D Cytoscape (WebGL) for large graphs; 3D force-directed view for exploration. Switch with one click. |
+| **Classification** | Modules tagged as `page`, `api`, `hook`, `component`, `lib`, `test`, or `config`. Filter, dim, solo, or hide by class. |
+| **Path mask** | Comma-separated globs on the canvas, e.g. `**/*.tsx,!**/*.test.*` |
+| **Inspector** | LOC, size, `Ca` / `Ce`, instability, exports, dependents, dependencies, rough bundle hint, cycle membership |
+| **Blast radius** | Press `B` on a selection to highlight everything that depends on it |
+| **Focus mode** | Press `F` to keep only an N-hop neighbourhood (even across hidden classes) |
+| **Cycle isolation** | List cycles and isolate one to trace the loop |
+| **Dead-code hints** | No importers, no exports, type-only usage, near-empty files |
+| **Unused-deps report** | Compares `package.json` to real imports; respects monorepo `paths` |
+| **Code viewer** | Press `C` or open source in a Monaco panel |
+| **Live reload** | With `--watch`, saves trigger a re-parse over SSE; filters and selection stick |
+| **Layout cache** | First layout can take a moment; later loads reuse cached positions per graph version |
 
 ## Commands
 
 | Command | Purpose |
 | --- | --- |
-| `depmod-ui [path]` | Default — analyse + serve + open browser |
-| `depmod-ui serve [path]` | Same as default, made explicit |
-| `depmod-ui analyze <path>` | Emit `graph.json` + `metrics.json` to disk (CI/CD) |
-| `depmod-ui check <path> --fail-on <rules>` | Exit non-zero when the project breaks an architectural rule |
+| `depmod-ui [path]` | Parse, serve, open browser (default) |
+| `depmod-ui serve [path]` | Same as default |
+| `depmod-ui analyze <path>` | Write `graph.json` and `metrics.json` to disk |
+| `depmod-ui check <path> --fail-on <rules>` | Exit non-zero when rules fail (CI-friendly) |
 
 ### Useful flags
 
 ```sh
-depmod-ui .                        # analyse the current directory
-depmod-ui /repo --watch            # re-analyse on every file save
-depmod-ui /repo --port 51000       # pin a specific port
-depmod-ui /repo --no-open          # don't auto-open the browser
-depmod-ui /repo --include "src/**" # restrict the parsed set
+depmod-ui .
+depmod-ui /repo --watch
+depmod-ui /repo --port 51000
+depmod-ui /repo --no-open
+depmod-ui /repo --include "src/**"
 depmod-ui /repo --exclude "**/*.test.*"
-depmod-ui /repo --no-gitignore     # ignore .gitignore (parse everything)
-depmod-ui /repo --exclude-tests    # omit .test.ts / .spec.ts from the graph
-depmod-ui /repo --no-cache         # bypass the incremental .depmod-cache
+depmod-ui /repo --no-gitignore
+depmod-ui /repo --exclude-tests
+depmod-ui /repo --no-cache
 
-depmod-ui check .                  # CI gate: cycles, dead-code, unused deps, instability
+depmod-ui check .
 depmod-ui check . --fail-on cycles,unused-deps
 depmod-ui check . --fail-on instability:>0.7
 ```
@@ -99,64 +101,62 @@ depmod-ui check . --fail-on instability:>0.7
 
 ### Requirements
 
-- Node ≥ 20.18 (`.nvmrc` pins 24.14)
-- [pnpm](https://pnpm.io) ≥ 10 (`corepack enable` is enough)
+- Node 20.18 or newer (`.nvmrc` pins 24.14)
+- pnpm 10+ (`corepack enable` is enough)
 
 ### Setup
 
 ```sh
-nvm use            # pins the right Node
-corepack enable    # turns on the bundled pnpm
+nvm use
+corepack enable
 pnpm install
-pnpm build         # types → parser → web (Next build) → CLI
-pnpm depmod-ui .   # smoke-run against the monorepo itself
+pnpm build
+pnpm depmod-ui .
 ```
 
 ### Daily loop
 
 ```sh
-pnpm -r test                     # all packages, all tests
-pnpm typecheck                   # tsc --noEmit across every workspace
-pnpm lint                        # biome
-pnpm format                      # biome --write
-pnpm --filter web dev            # iterate on the dashboard with HMR
+pnpm -r test
+pnpm typecheck
+pnpm lint
+pnpm format
+pnpm --filter web dev
 ```
 
 ### Workspace layout
 
 | Path | Role | Published? |
 | --- | --- | --- |
-| [`packages/types`](packages/types) | Zod-validated `Graph` schema. Single source of truth shared across CLI + web. | private (workspace) |
-| [`packages/parser`](packages/parser) | `ts-morph` static analyser, metrics, cycles, dead-code, unused-deps. | private (workspace) |
-| [`packages/cli`](packages/cli) | The `depmod-ui` command. Spawns the bundled Next.js server, pipes the graph in via a session file. | **public** (`depmod-ui` on npm) |
-| [`apps/web`](apps/web) | Next.js 15 App Router dashboard. Cytoscape canvas, three.js canvas, inspector, status bar, settings. | bundled inside the CLI tarball |
-| [`bench`](bench) | Benchmark harness over OSS targets (`vercel-commerce`, `shadcn-taxonomy`, `documenso`, `cal.com`). | private (workspace) |
+| [`packages/types`](packages/types) | Zod `Graph` schema shared by CLI and web | private |
+| [`packages/parser`](packages/parser) | Static analysis, metrics, cycles, dead-code, unused-deps | private |
+| [`packages/cli`](packages/cli) | `depmod-ui` command; bundles parser and dashboard | **npm: `depmod-ui`** |
+| [`apps/web`](apps/web) | Next.js dashboard (Cytoscape, three.js, inspector) | bundled in the CLI tarball |
+| [`bench`](bench) | Benchmarks on OSS repos | private |
 
 ## How it works
 
 ```
 ┌────────────────────────┐     ┌─────────────────────────┐     ┌─────────────────────┐
 │      depmod-ui         │     │   Next.js server        │     │       browser       │
-│  (this CLI process)    │     │   (spawned by the CLI)  │     │                     │
+│  (CLI process)         │     │   (spawned by CLI)      │     │                     │
 │                        │     │                         │     │                     │
-│  1. ts-morph parse  ───┼──▶  │   /api/graph reads      │  ──▶│  Cytoscape / three  │
-│  2. write session.json │     │   the session file ───▶ │     │  Inspector / etc.   │
-│  3. spawn next start   │     │                         │     │                     │
-│  4. (--watch) chokidar │     │   /api/events streams   │  ──▶│  Live reload on SSE │
-│     re-parse on save   │     │   reanalyzed events     │     │                     │
+│  1. parse (ts-morph)   │────▶│  /api/graph reads       │────▶│  Cytoscape / 3D     │
+│  2. write session file │     │     session JSON        │     │  Inspector, etc.    │
+│  3. spawn server       │     │  /api/events (watch)    │────▶│  live updates       │
 └────────────────────────┘     └─────────────────────────┘     └─────────────────────┘
 ```
 
-The parser is pure (`(rootDir) → Graph`). The web app never re-parses; it only consumes the JSON the CLI publishes. Same input → same byte-identical graph in the CLI summary and the dashboard.
+The parser is a pure function: `(rootDir) -> Graph`. The web app does not re-parse; it only reads what the CLI wrote. Same input should match between the terminal summary and the dashboard.
 
-Implementation notes worth knowing:
+A few implementation details:
 
-- **Path aliases**: in monorepos, each workspace's `tsconfig.json` `paths` aliases are read independently and used as a fallback resolver. ts-morph alone would only honour the root tsconfig — depmod's [`workspace-aliases.ts`](packages/parser/src/workspace-aliases.ts) closes the gap.
-- **External capture**: when ts-morph resolves `react` to its `.d.ts` in `node_modules`, that's not an internal edge. depmod records it as an external import for the unused-deps report instead of silently dropping it.
-- **Hard isolation**: focus and blast modes use `display: none` on out-of-scope nodes (not opacity dimming), so the canvas reflects exactly what the user asked for. In-scope hidden-class nodes still appear — the network is the answer.
-- **Incremental cache**: per-file slices keyed by content hash + parser version + tsconfig hash + file-set hash live in `.depmod-cache`. Unchanged files are reused; a `PARSER_VERSION` bump invalidates everything.
+- **Path aliases**: each workspace `tsconfig` `paths` map is applied when resolving imports ([`workspace-aliases.ts`](packages/parser/src/workspace-aliases.ts)).
+- **Externals**: imports resolved to `node_modules` types are tracked for the unused-deps report, not dropped.
+- **Focus / blast**: out-of-scope nodes use `display: none`, not opacity, so the view matches the question you asked.
+- **Incremental cache**: per-file slices in `.depmod-cache`; bump `PARSER_VERSION` in the parser to invalidate.
 
-For the long-form design rationale, see [`docs/specs/`](docs/specs).
+More design notes: [`docs/specs/`](docs/specs).
 
 ## Benchmark snapshot
 
@@ -166,17 +166,17 @@ For the long-form design rationale, see [`docs/specs/`](docs/specs).
 | `shadcn-taxonomy` | medium | 127 | 247 | 0 | 7,730 | 344 ms |
 | `documenso` | stress | 1,845 | 2,834 | 23 | 232,396 | 3,584 ms |
 
-Full results live in [`bench/results/`](bench/results/). Re-run locally with `pnpm bench`.
+Full tables: [`bench/results/`](bench/results/). Re-run with `pnpm bench`.
 
 ## Contributing
 
-PRs welcome — see [CONTRIBUTING.md](CONTRIBUTING.md) for setup, daily commands, branching, changesets, and the release flow. Before opening a PR:
+See [CONTRIBUTING.md](CONTRIBUTING.md) for setup, changesets, and the release flow. Before a PR:
 
-1. Run `pnpm typecheck`, `pnpm -r test`, and `pnpm lint`. All three must pass.
-2. Add tests next to whatever you changed. The parser, CLI, and web layers all have vitest suites in `test/` or `*.test.ts` siblings.
-3. Keep the diff focused. User-visible CLI changes need a `.changeset/` file (`pnpm changeset`).
+1. `pnpm typecheck`, `pnpm -r test`, and `pnpm lint` should pass.
+2. Add or update tests next to the code you change.
+3. User-visible CLI changes need a changeset (`pnpm changeset`).
 
-If you want to suggest a direction, open an issue first — happy to talk shape before code.
+For larger ideas, open an issue first.
 
 ## License
 

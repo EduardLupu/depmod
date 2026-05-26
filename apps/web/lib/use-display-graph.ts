@@ -1,7 +1,7 @@
 "use client";
 
-import { filterGraphView } from "@/lib/view-graph";
 import { useGraphStore } from "@/lib/store";
+import { filterGraphView } from "@/lib/view-graph";
 import type { Graph } from "@depmod/types";
 import { useMemo } from "react";
 

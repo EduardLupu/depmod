@@ -99,7 +99,7 @@ function ToggleRow({
 function Cog() {
   return (
     <svg
-      aria-hidden
+      aria-hidden="true"
       viewBox="0 0 16 16"
       width="13"
       height="13"
@@ -109,6 +109,7 @@ function Cog() {
       strokeLinecap="round"
       strokeLinejoin="round"
     >
+      <title>Settings</title>
       <circle cx="8" cy="8" r="2.2" />
       <path d="M8 1.2v1.6M8 13.2v1.6M14.8 8h-1.6M2.8 8H1.2M12.8 3.2l-1.1 1.1M4.3 11.7l-1.1 1.1M12.8 12.8l-1.1-1.1M4.3 4.3 3.2 3.2" />
     </svg>

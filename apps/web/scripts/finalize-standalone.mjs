@@ -9,7 +9,7 @@
 // + `pnpm depmod-ui`) and the published-tarball assemble (`prepare-package`)
 // both produce a complete standalone tree.
 
-import { existsSync, mkdirSync, cpSync } from "node:fs";
+import { cpSync, existsSync, mkdirSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -24,8 +24,7 @@ const publicSrc = join(webRoot, "public");
 
 if (!existsSync(standaloneAppDir)) {
   console.error(
-    `[finalize-standalone] standalone tree not found at ${standaloneAppDir}.\n` +
-      'Is `output: "standalone"` set in next.config?',
+    `[finalize-standalone] standalone tree not found at ${standaloneAppDir}.\nIs \`output: "standalone"\` set in next.config?`,
   );
   process.exit(1);
 }

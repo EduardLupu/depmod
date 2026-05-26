@@ -1,4 +1,4 @@
-import { readFileSync, watch, type FSWatcher } from "node:fs";
+import { type FSWatcher, readFileSync, watch } from "node:fs";
 
 const SESSION_ENV = "DEPMOD_SESSION_PATH";
 

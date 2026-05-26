@@ -13,19 +13,19 @@
 // Why pure-Node: this runs at publish-time on machines that may not have
 // rsync or specific shells; avoiding shell deps keeps the script portable.
 
+import { spawnSync } from "node:child_process";
 import {
-  existsSync,
-  mkdirSync,
-  rmSync,
-  statSync,
-  readdirSync,
   copyFileSync,
   cpSync,
+  existsSync,
+  mkdirSync,
+  readdirSync,
   realpathSync,
+  rmSync,
+  statSync,
 } from "node:fs";
 import { dirname, join, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { spawnSync } from "node:child_process";
 import { writeNodePathManifest } from "./write-node-path-manifest.mjs";
 
 const here = dirname(fileURLToPath(import.meta.url));

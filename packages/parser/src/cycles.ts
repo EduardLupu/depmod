@@ -1,12 +1,12 @@
 import type { Cycle, Edge } from "@depmod/types";
 
 /**
- * Find strongly-connected components of size ≥ 2 (i.e. real cycles) using Tarjan's
+ * Find strongly-connected components of size >= 2 (i.e. real cycles) using Tarjan's
  * algorithm. Self-loops are not reported; the parser already skips self-edges, so
  * SCCs of size 1 reaching this code are necessarily non-cyclic single nodes.
  *
  * Implementation is iterative to avoid blowing the JS stack on large codebases
- * (cal.com-scale projects have ≥ 10 000 modules; default Node.js stack handles
+ * (cal.com-scale projects have >= 10 000 modules; default Node.js stack handles
  * around 10 000 recursion frames before throwing RangeError).
  *
  * Output is deterministic: nodes within each cycle are sorted alphabetically, and
@@ -49,12 +49,14 @@ export function findCycles(
     onStack.add(start);
 
     while (callStack.length > 0) {
-      const frame = callStack[callStack.length - 1]!;
+      const frame = callStack[callStack.length - 1];
+      if (!frame) break;
       const neighbours = adj.get(frame.node) ?? [];
 
       if (frame.i < neighbours.length) {
-        const w = neighbours[frame.i]!;
+        const w = neighbours[frame.i];
         frame.i++;
+        if (w === undefined) continue;
         if (!indices.has(w)) {
           indices.set(w, index);
           lowlink.set(w, index);
@@ -64,7 +66,11 @@ export function findCycles(
           callStack.push({ node: w, i: 0 });
         } else if (onStack.has(w)) {
           const v = frame.node;
-          lowlink.set(v, Math.min(lowlink.get(v)!, indices.get(w)!));
+          const vLow = lowlink.get(v);
+          const wIndex = indices.get(w);
+          if (vLow !== undefined && wIndex !== undefined) {
+            lowlink.set(v, Math.min(vLow, wIndex));
+          }
         }
       } else {
         // All neighbours explored; finalise this node.
@@ -72,7 +78,8 @@ export function findCycles(
         if (lowlink.get(v) === indices.get(v)) {
           const scc: string[] = [];
           while (true) {
-            const w = stack.pop()!;
+            const w = stack.pop();
+            if (w === undefined) break;
             onStack.delete(w);
             scc.push(w);
             if (w === v) break;
@@ -83,7 +90,11 @@ export function findCycles(
         // Propagate lowlink up to the parent frame.
         const parent = callStack[callStack.length - 1];
         if (parent) {
-          lowlink.set(parent.node, Math.min(lowlink.get(parent.node)!, lowlink.get(v)!));
+          const parentLow = lowlink.get(parent.node);
+          const vLow = lowlink.get(v);
+          if (parentLow !== undefined && vLow !== undefined) {
+            lowlink.set(parent.node, Math.min(parentLow, vLow));
+          }
         }
       }
     }

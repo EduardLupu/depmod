@@ -58,7 +58,8 @@ export function toCollapsedElements(graph: Graph): ElementDefinition[] {
         childIds: [],
       });
     }
-    const agg = clusters.get(clusterId)!;
+    const agg = clusters.get(clusterId);
+    if (!agg) continue;
     agg.fileCount += 1;
     agg.loc += node.loc;
     agg.childIds.push(node.id);

@@ -61,20 +61,22 @@ describe("toCollapsedElements", () => {
     );
     const nodes = asNodes(toCollapsedElements(g));
     expect(nodes.map((n) => n.id).sort()).toEqual(["apps/web", "packages/parser"]);
-    const appsWeb = nodes.find((n) => n.id === "apps/web")!;
-    expect(appsWeb.isCluster).toBe(true);
-    expect(appsWeb.fileCount).toBe(2);
-    expect(appsWeb.loc).toBe(50);
-    expect(appsWeb.label).toBe("web");
+    const appsWeb = nodes.find((n) => n.id === "apps/web");
+    expect(appsWeb).toBeDefined();
+    expect(appsWeb?.isCluster).toBe(true);
+    expect(appsWeb?.fileCount).toBe(2);
+    expect(appsWeb?.loc).toBe(50);
+    expect(appsWeb?.label).toBe("web");
   });
 
   it("passes repo-root files through as their own non-cluster nodes", () => {
     const g = graphOf([node("README.ts"), node("apps/web/page.tsx")], []);
     const nodes = asNodes(toCollapsedElements(g));
-    const readme = nodes.find((n) => n.id === "README.ts")!;
-    expect(readme.isCluster).toBe(false);
-    expect(readme.fileCount).toBe(1);
-    expect(readme.label).toBe("README.ts");
+    const readme = nodes.find((n) => n.id === "README.ts");
+    expect(readme).toBeDefined();
+    expect(readme?.isCluster).toBe(false);
+    expect(readme?.fileCount).toBe(1);
+    expect(readme?.label).toBe("README.ts");
   });
 
   it("aggregates inter-cluster edges with cumulative weight", () => {
@@ -117,7 +119,7 @@ describe("toCollapsedElements", () => {
     );
     const edges = asEdges(toCollapsedElements(g));
     expect(edges).toHaveLength(1);
-    expect(edges[0]!.weight).toBe(2);
+    expect(edges[0]?.weight).toBe(2);
   });
 
   it("produces deterministic output ordering", () => {
@@ -135,6 +137,6 @@ describe("toCollapsedElements", () => {
   it("captures every underlying child id in childIds", () => {
     const g = graphOf([node("apps/web/a.ts"), node("apps/web/b.ts"), node("apps/web/c.ts")], []);
     const nodes = asNodes(toCollapsedElements(g));
-    expect(nodes[0]!.childIds).toEqual(["apps/web/a.ts", "apps/web/b.ts", "apps/web/c.ts"]);
+    expect(nodes[0]?.childIds).toEqual(["apps/web/a.ts", "apps/web/b.ts", "apps/web/c.ts"]);
   });
 });

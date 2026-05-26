@@ -1,6 +1,6 @@
 "use client";
 
-import { loadGraphFromText, type LoadResult } from "@/lib/load-graph";
+import { type LoadResult, loadGraphFromText } from "@/lib/load-graph";
 import { type ParseProgressState, useParseProgress } from "@/lib/parse-progress";
 import { useGraphStore } from "@/lib/store";
 import { useEffect, useState } from "react";

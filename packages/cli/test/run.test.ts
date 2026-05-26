@@ -134,7 +134,8 @@ describe("runAnalyze(mini)", () => {
       noColor: true,
     });
     expect(captured).toHaveLength(1);
-    const parsed = JSON.parse(captured[0]!);
+    expect(captured[0]).toBeDefined();
+    const parsed = JSON.parse(captured[0] ?? "");
     expect(parsed.graphPath).toBe(join(tmp, "graph.json"));
     expect(parsed.metricsPath).toBe(join(tmp, "metrics.json"));
     expect(parsed.stats.nodes).toBeGreaterThan(0);

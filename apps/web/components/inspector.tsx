@@ -483,8 +483,11 @@ function SelectionPanel({
       {node.exports.length > 0 ? (
         <Section title={`Exports (${node.exports.length})`}>
           <ul className="space-y-1 text-xs">
-            {node.exports.map((e, i) => (
-              <li key={i} className="rounded border border-neutral-900 bg-neutral-925 p-2">
+            {node.exports.map((e) => (
+              <li
+                key={`${e.name}:${e.type}`}
+                className="rounded border border-neutral-900 bg-neutral-925 p-2"
+              >
                 <div className="font-mono text-neutral-200">{e.name}</div>
                 <div
                   className="mt-0.5 break-all font-mono text-[10px] text-neutral-500"

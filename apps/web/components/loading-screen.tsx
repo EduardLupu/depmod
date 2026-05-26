@@ -11,9 +11,8 @@ export function LoadingScreen({ progress }: LoadingScreenProps) {
   const barWidth = pct != null ? `${Math.min(100, Math.max(0, pct))}%` : undefined;
 
   return (
-    <div
+    <output
       className="fixed inset-0 z-[300] flex flex-col items-center justify-center bg-neutral-950 text-neutral-100"
-      role="status"
       aria-live="polite"
       aria-busy={progress.phase !== "ready"}
     >
@@ -39,6 +38,6 @@ export function LoadingScreen({ progress }: LoadingScreenProps) {
         )}
         {progress.error ? <p className="mt-4 text-sm text-red-400">{progress.error}</p> : null}
       </div>
-    </div>
+    </output>
   );
 }
