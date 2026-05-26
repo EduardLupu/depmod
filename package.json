@@ -8,6 +8,7 @@
   },
   "scripts": {
     "build": "pnpm --filter @depmod/types build && pnpm --filter @depmod/parser build && pnpm --filter web build && pnpm --filter depmod-ui build",
+    "build:internals": "pnpm --filter @depmod/types build && pnpm --filter @depmod/parser build",
     "test": "pnpm -r test",
     "lint": "biome check .",
     "format": "biome format --write .",

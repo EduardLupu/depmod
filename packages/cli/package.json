@@ -7,17 +7,12 @@
   "bin": {
     "depmod-ui": "./dist/index.js"
   },
-  "files": [
-    "dist",
-    "web",
-    "README.md",
-    "LICENSE"
-  ],
+  "files": ["dist", "web", "README.md", "LICENSE"],
   "scripts": {
     "build": "tsup",
     "prepare-package": "node scripts/prepare-package.mjs",
     "prepack": "pnpm run prepare-package",
-    "prepublishOnly": "pnpm -w run typecheck && pnpm -w run test && pnpm -w run build",
+    "prepublishOnly": "pnpm -w run build:internals && pnpm -w run typecheck && pnpm -w run test",
     "test": "vitest run --passWithNoTests"
   },
   "keywords": [
