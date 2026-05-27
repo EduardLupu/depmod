@@ -51,6 +51,9 @@ jobs:
       - name: Test
         run: pnpm test
 
+      - name: Watch pipeline tests
+        run: pnpm --filter depmod-ui test test/watch.integration.test.ts && pnpm --filter web test lib/server-graph-session.test.ts
+
       - name: Build
         run: pnpm build
 

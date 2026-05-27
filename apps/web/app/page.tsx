@@ -14,7 +14,6 @@ import { useCodeViewerAutoOpen } from "@/lib/use-code-viewer-auto-open";
 import { useCodeViewerShortcut } from "@/lib/use-code-viewer-shortcut";
 import { useFocusModeShortcuts } from "@/lib/use-focus-mode-shortcuts";
 import { useServerGraphBootstrap } from "@/lib/use-server-graph-bootstrap";
-import { useServerGraphReload } from "@/lib/use-server-graph-reload";
 import { useUrlStateSync } from "@/lib/use-url-state-sync";
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
@@ -43,7 +42,6 @@ export default function DashboardPage() {
   useFocusModeShortcuts();
   useCodeViewerShortcut();
   useCodeViewerAutoOpen();
-  useServerGraphReload();
   useUrlStateSync();
   const { showLoadingScreen, progress } = useServerGraphBootstrap();
   const graph = useGraphStore((s) => s.graph);

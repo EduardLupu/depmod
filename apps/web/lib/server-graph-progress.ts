@@ -1,4 +1,6 @@
-import { readFileSync, watch, writeFileSync } from "node:fs";
+import { type FSWatcher, readFileSync, watch } from "node:fs";
+import { basename, dirname } from "node:path";
+import { writeAtomicUtf8 } from "@/lib/atomic-write";
 
 export type ParsePhase = "starting" | "discovering" | "parsing" | "metrics" | "ready" | "error";
 
@@ -19,10 +21,9 @@ export function getProgressPath(): string | null {
 }
 
 export function writeParseProgress(progressPath: string, payload: ParseProgressPayload): void {
-  writeFileSync(
+  writeAtomicUtf8(
     progressPath,
     JSON.stringify({ ...payload, updatedAt: new Date().toISOString() }),
-    "utf8",
   );
 }
 
@@ -40,9 +41,33 @@ export function readParseProgress(): ParseProgressPayload | null {
 export function watchParseProgress(onChange: () => void): (() => void) | null {
   const path = getProgressPath();
   if (!path) return null;
+
+  const dir = dirname(path);
+  const fileName = basename(path);
+  let watcher: FSWatcher | null = null;
+  let debounce: ReturnType<typeof setTimeout> | null = null;
+
+  const schedule = () => {
+    if (debounce) clearTimeout(debounce);
+    debounce = setTimeout(() => {
+      debounce = null;
+      onChange();
+    }, 50);
+  };
+
   try {
-    const watcher = watch(path, () => onChange());
-    return () => watcher.close();
+    watcher = watch(dir, (event, name) => {
+      if (name == null) {
+        schedule();
+        return;
+      }
+      if (name === fileName) schedule();
+      if (String(name).endsWith(".tmp")) return;
+    });
+    return () => {
+      if (debounce) clearTimeout(debounce);
+      watcher?.close();
+    };
   } catch {
     return null;
   }

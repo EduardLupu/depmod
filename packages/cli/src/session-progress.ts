@@ -1,5 +1,5 @@
-import { writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
+import { writeAtomicUtf8 } from "./atomic-write.js";
 
 export const PROGRESS_FILENAME = "progress.json";
 
@@ -21,9 +21,8 @@ export function progressPathForSession(sessionPath: string): string {
 }
 
 export function writeParseProgress(progressPath: string, payload: ParseProgressPayload): void {
-  writeFileSync(
+  writeAtomicUtf8(
     progressPath,
     JSON.stringify({ ...payload, updatedAt: new Date().toISOString() }),
-    "utf8",
   );
 }

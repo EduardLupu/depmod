@@ -135,6 +135,7 @@ export async function runServeNext(
     progressPath,
     targetRoot: absPath,
     quiet: options.quiet === true,
+    watch: options.watch === true,
   });
   const nextBoot = { failed: null as Error | null };
   watchNextExit(nextProcess, port, nextBoot);
@@ -192,6 +193,8 @@ export async function runServeNext(
   if (options.watch) {
     watcherHandle = watchProject({
       root: absPath,
+      respectGitignore: options.respectGitignore !== false,
+      extraIgnored: options.exclude,
       onChange: async () => {
         try {
           writeParseProgress(progressPath, {
@@ -277,6 +280,7 @@ interface SpawnOpts {
   progressPath: string;
   targetRoot: string;
   quiet: boolean;
+  watch: boolean;
 }
 
 function spawnServer(server: ResolvedServer, opts: SpawnOpts): ChildProcess {
@@ -293,6 +297,7 @@ function spawnServer(server: ResolvedServer, opts: SpawnOpts): ChildProcess {
     DEPMOD_SESSION_PATH: opts.sessionPath,
     DEPMOD_PROGRESS_PATH: opts.progressPath,
     DEPMOD_TARGET_ROOT: opts.targetRoot,
+    DEPMOD_WATCH: opts.watch ? "1" : "",
     PORT: String(opts.port),
     HOSTNAME: opts.host,
   };

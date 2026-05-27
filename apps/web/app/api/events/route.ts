@@ -26,13 +26,18 @@ export async function GET(): Promise<Response> {
         if (progress) send("progress", progress);
       };
 
-      send("hello");
+      send("hello", { watch: process.env.DEPMOD_WATCH === "1" });
       pushProgress();
       unwatchGraph = watchGraphSession(() => {
         send("reanalyzed", {});
         pushProgress();
       });
-      unwatchProgress = watchParseProgress(() => pushProgress()) ?? (() => {});
+      unwatchProgress =
+        watchParseProgress(() => {
+          const progress = readParseProgress();
+          if (progress?.phase === "ready") send("reanalyzed", {});
+          pushProgress();
+        }) ?? (() => {});
     },
     cancel() {
       closed = true;

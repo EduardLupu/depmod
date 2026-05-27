@@ -28,18 +28,42 @@ export async function GET(): Promise<Response> {
       headers: { "content-type": "application/json; charset=utf-8", "cache-control": "no-store" },
     });
   }
+  let updatedAt = "";
+  try {
+    const envelope = JSON.parse(raw) as { updatedAt?: unknown };
+    if (typeof envelope.updatedAt === "string") updatedAt = envelope.updatedAt;
+  } catch {
+    // body already validated via extractGraphJson
+  }
+
   return new Response(body, {
     status: 200,
-    headers: { "content-type": "application/json; charset=utf-8", "cache-control": "no-store" },
+    headers: {
+      "content-type": "application/json; charset=utf-8",
+      "cache-control": "no-store",
+      ...(updatedAt ? { "x-depmod-updated-at": updatedAt } : {}),
+    },
   });
 }
 
 export async function HEAD(): Promise<Response> {
   const raw = readGraphSessionJson();
   const ok = raw !== null && extractGraphJson(raw) !== null;
+  let updatedAt = "";
+  if (raw) {
+    try {
+      const envelope = JSON.parse(raw) as { updatedAt?: unknown };
+      if (typeof envelope.updatedAt === "string") updatedAt = envelope.updatedAt;
+    } catch {
+      // ignore
+    }
+  }
   return new Response(null, {
     status: ok ? 200 : 404,
-    headers: { "cache-control": "no-store" },
+    headers: {
+      "cache-control": "no-store",
+      ...(updatedAt ? { "x-depmod-updated-at": updatedAt } : {}),
+    },
   });
 }
 

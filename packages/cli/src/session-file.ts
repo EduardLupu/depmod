@@ -1,7 +1,8 @@
-import { mkdirSync, mkdtempSync, writeFileSync } from "node:fs";
+import { mkdirSync, mkdtempSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import type { Graph } from "@depmod/types";
+import { writeAtomicUtf8 } from "./atomic-write.js";
 
 export const SESSION_FILENAME = "session.json";
 
@@ -22,5 +23,5 @@ export function writeGraphSession(sessionPath: string, graph: Graph): void {
     updatedAt: new Date().toISOString(),
   };
   mkdirSync(dirname(sessionPath), { recursive: true });
-  writeFileSync(sessionPath, JSON.stringify(payload), "utf8");
+  writeAtomicUtf8(sessionPath, JSON.stringify(payload));
 }
