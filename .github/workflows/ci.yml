@@ -68,7 +68,8 @@ jobs:
         run: |
           set -euo pipefail
           TARBALL=$(ls packages/cli/depmod-ui-*.tgz | head -n 1)
-          tar -tzf "$TARBALL" | grep -q 'package/dist/index.js'
+          # List members directly; avoid `tar | grep -q` (SIGPIPE + pipefail → exit 2).
+          tar -tzf "$TARBALL" package/dist/index.js
 
   # Cross-platform tarball smoke test. Proves the *published* artifact
   # actually installs and the bin shim runs on every supported OS — not just
@@ -117,8 +118,8 @@ jobs:
         run: |
           set -euo pipefail
           TARBALL=$(ls packages/cli/depmod-ui-*.tgz | head -n 1)
-          tar -tzf "$TARBALL" | grep -q 'package/dist/index.js'
-          tar -tzf "$TARBALL" | grep -q 'package/web/apps/web/server.js'
+          tar -tzf "$TARBALL" package/dist/index.js
+          tar -tzf "$TARBALL" package/web/apps/web/server.js
 
       # Two-tier install test — local + global. The local test catches
       # tarball extraction and bin shim creation bugs. The global test
