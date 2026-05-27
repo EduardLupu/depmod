@@ -1,5 +1,11 @@
 # depmod-ui
 
+## 0.4.2
+
+### Patch Changes
+
+- [`c0f8f33`](https://github.com/EduardLupu/depmod/commit/c0f8f33500cf310b815b84d11fcdfd277d959ccf) Thanks [@EduardLupu](https://github.com/EduardLupu)! - Fix `--watch` live reload: atomic session/progress writes so the dashboard's file watcher fires, directory-based `fs.watch`, tighter chokidar source globs, SSE + poll fallback for graph updates, and CI integration tests for the watch pipeline.
+
 ## 0.4.1
 
 ### Patch Changes
