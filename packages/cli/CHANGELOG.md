@@ -1,5 +1,11 @@
 # depmod-ui
 
+## 0.4.1
+
+### Patch Changes
+
+- [`ebb2ec8`](https://github.com/EduardLupu/depmod/commit/ebb2ec823550c46f579eb0a81f7ddda4cab28f88) Thanks [@EduardLupu](https://github.com/EduardLupu)! - Fix npm installs: the published tarball was missing `dist/index.js` because `prepack` did not run the CLI build (`tsup`) before packing. `prepack` now runs `build` then `prepare-package`, and `prepublishOnly` runs the full monorepo build.
+
 ## 0.4.0
 
 ### Minor Changes
