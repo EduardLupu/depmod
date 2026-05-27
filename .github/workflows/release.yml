@@ -33,6 +33,11 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      # `prepack` also builds, but an explicit build here guarantees the
+      # publish job never ships a tarball missing `dist/index.js` (v0.4.0 did).
+      - name: Build publishable artifacts
+        run: pnpm build
+
       - name: Create Release Pull Request or Publish
         id: changesets
         uses: changesets/action@v1

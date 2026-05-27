@@ -11,8 +11,8 @@
   "scripts": {
     "build": "tsup",
     "prepare-package": "node scripts/prepare-package.mjs",
-    "prepack": "pnpm run prepare-package",
-    "prepublishOnly": "pnpm -w run build:internals && pnpm -w run typecheck && pnpm -w run test",
+    "prepack": "pnpm run build && pnpm run prepare-package",
+    "prepublishOnly": "pnpm -w run build && pnpm -w run typecheck && pnpm -w run test",
     "test": "vitest run --passWithNoTests"
   },
   "keywords": [

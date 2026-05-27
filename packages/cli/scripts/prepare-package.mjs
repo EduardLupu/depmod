@@ -152,8 +152,17 @@ for (const f of ["README.md", "LICENSE"]) {
   log(`Copied ${f}`);
 }
 
-// ── 5. Summary ──────────────────────────────────────────────────────────
+// ── 5. Verify the CLI bundle exists (must run before this script) ───────
+const cliEntry = join(cliRoot, "dist", "index.js");
+if (!existsSync(cliEntry)) {
+  fail(
+    "dist/index.js is missing. `prepack` must run `pnpm run build` (tsup) before prepare-package — without it the published tarball has no bin entry.",
+  );
+}
+
+// ── 6. Summary ──────────────────────────────────────────────────────────
 const { bytes, files } = dirSize(targetWeb);
 const mb = (bytes / 1024 / 1024).toFixed(1);
 log(`web/ contains ${files} files (${mb} MB on disk)`);
+log(`CLI entry present at dist/index.js (${statSync(cliEntry).size} bytes)`);
 log("Ready to pack.");

@@ -63,6 +63,13 @@ jobs:
           DEPMOD_SKIP_WEB_BUILD: "1"
         run: pnpm --filter depmod-ui pack --pack-destination ./packages/cli
 
+      - name: Assert tarball contains CLI bundle
+        shell: bash
+        run: |
+          set -euo pipefail
+          TARBALL=$(ls packages/cli/depmod-ui-*.tgz | head -n 1)
+          tar -tzf "$TARBALL" | grep -q 'package/dist/index.js'
+
   # Cross-platform tarball smoke test. Proves the *published* artifact
   # actually installs and the bin shim runs on every supported OS — not just
   # the build machine. This is the test that would have caught the
@@ -104,6 +111,14 @@ jobs:
         env:
           DEPMOD_SKIP_WEB_BUILD: "1"
         run: pnpm --filter depmod-ui pack --pack-destination ./packages/cli
+
+      - name: Assert tarball contains CLI bundle
+        shell: bash
+        run: |
+          set -euo pipefail
+          TARBALL=$(ls packages/cli/depmod-ui-*.tgz | head -n 1)
+          tar -tzf "$TARBALL" | grep -q 'package/dist/index.js'
+          tar -tzf "$TARBALL" | grep -q 'package/web/apps/web/server.js'
 
       # Two-tier install test — local + global. The local test catches
       # tarball extraction and bin shim creation bugs. The global test
