@@ -50,12 +50,12 @@ if (existsSync(apiDir)) {
 const env = {
   ...process.env,
   DEPMOD_STATIC: "1",
-  DEPMOD_BASE_PATH: "/depmod",
+  DEPMOD_BASE_PATH: "",
   NEXT_PUBLIC_DEPMOD_STATIC: "1",
-  NEXT_PUBLIC_DEPMOD_BASE_PATH: "/depmod",
+  NEXT_PUBLIC_DEPMOD_BASE_PATH: "",
 };
 
-console.log("[build-static] running next build (static export, basePath=/depmod)…");
+console.log("[build-static] running next build (static export, custom domain root)…");
 const result = spawnSync("pnpm", ["exec", "next", "build"], {
   cwd: webRoot,
   env,

@@ -12,7 +12,7 @@
   [![Node](https://img.shields.io/badge/node-%E2%89%A520.18-4f7fdf)](https://nodejs.org)
 
   <p>
-    <a href="https://eduardlupu.github.io/depmod/">Live demo</a> ·
+    <a href="https://depmod.eduardlupu.com/">Live demo</a> ·
     <a href="#quickstart">Quickstart</a> ·
     <a href="#features">Features</a> ·
     <a href="#commands">CLI</a> ·
@@ -30,7 +30,7 @@ depmod is a small CLI that reads your TypeScript or JavaScript project, builds a
 
 (Not the Linux `depmod` command, and not Depeche Mode, though I do love them :D)
 
-Try the **[live demo](https://eduardlupu.github.io/depmod/)** — the dashboard exploring depmod's own dependency graph, updated on every release.
+Try the **[live demo](https://depmod.eduardlupu.com/)** — the dashboard exploring depmod's own dependency graph, updated on every release.
 
 It is meant for the moment you land in a repo and need answers quickly:
 
@@ -154,10 +154,10 @@ Build the static export locally (same pipeline as release deploy):
 ```sh
 pnpm build:pages
 npx serve apps/web/out -p 3000
-# open http://localhost:3000/depmod/
+# open http://localhost:3000/
 ```
 
-Deploy to [the live demo](https://eduardlupu.github.io/depmod/) manually from **Actions → Deploy Pages → Run workflow** (uses whatever is on `main`). It also runs automatically after each npm release.
+Deploy to [the live demo](https://depmod.eduardlupu.com/) manually from **Actions → Deploy Pages → Run workflow** (uses whatever is on `main`). It also runs automatically after each npm release.
 
 ### Workspace layout
 

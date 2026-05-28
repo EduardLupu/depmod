@@ -1,7 +1,7 @@
 /** True when built for GitHub Pages static export (no CLI server session). */
 export const isStaticDemo = process.env.NEXT_PUBLIC_DEPMOD_STATIC === "1";
 
-/** Base path prefix for GitHub Pages project sites (e.g. `/depmod`). */
+/** Base path prefix when the static demo is not served from domain root (usually empty). */
 export function staticBasePath(): string {
   return process.env.NEXT_PUBLIC_DEPMOD_BASE_PATH ?? "";
 }
