@@ -1,5 +1,11 @@
 # depmod-ui
 
+## 0.4.3
+
+### Patch Changes
+
+- [`d6d5435`](https://github.com/EduardLupu/depmod/commit/d6d5435b98bce75781351abe90eeadb8c816f379) Thanks [@EduardLupu](https://github.com/EduardLupu)! - Fix keyboard shortcut hints on Windows: show Ctrl instead of the Mac ⌘ symbol in the search box and legend panel.
+
 ## 0.4.2
 
 ### Patch Changes
