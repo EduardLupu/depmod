@@ -157,6 +157,8 @@ npx serve apps/web/out -p 3000
 # open http://localhost:3000/depmod/
 ```
 
+Deploy to [the live demo](https://eduardlupu.github.io/depmod/) manually from **Actions → Deploy Pages → Run workflow** (uses whatever is on `main`). It also runs automatically after each npm release.
+
 ### Workspace layout
 
 | Path | Role | Published? |
