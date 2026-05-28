@@ -12,6 +12,7 @@
   [![Node](https://img.shields.io/badge/node-%E2%89%A520.18-4f7fdf)](https://nodejs.org)
 
   <p>
+    <a href="https://eduardlupu.github.io/depmod/">Live demo</a> ·
     <a href="#quickstart">Quickstart</a> ·
     <a href="#features">Features</a> ·
     <a href="#commands">CLI</a> ·
@@ -28,6 +29,8 @@
 depmod is a small CLI that reads your TypeScript or JavaScript project, builds an import graph, and opens an interactive dashboard in your browser. It works on single apps, monorepos, and most setups that [ts-morph](https://ts-morph.com) can parse. Nothing is uploaded anywhere; parsing and the UI stay on your machine.
 
 (Not the Linux `depmod` command, and not Depeche Mode, though I do love them :D)
+
+Try the **[live demo](https://eduardlupu.github.io/depmod/)** — the dashboard exploring depmod's own dependency graph, updated on every release.
 
 It is meant for the moment you land in a repo and need answers quickly:
 
@@ -142,6 +145,16 @@ pnpm typecheck
 pnpm lint
 pnpm format
 pnpm --filter web dev
+```
+
+### GitHub Pages static demo
+
+Build the static export locally (same pipeline as release deploy):
+
+```sh
+pnpm build:pages
+npx serve apps/web/out -p 3000
+# open http://localhost:3000/depmod/
 ```
 
 ### Workspace layout

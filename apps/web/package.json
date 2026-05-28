@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build && node scripts/finalize-standalone.mjs",
+    "build:static": "node scripts/build-static.mjs",
     "start": "next start",
     "test": "vitest run --passWithNoTests"
   },

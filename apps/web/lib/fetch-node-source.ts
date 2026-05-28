@@ -1,5 +1,7 @@
 "use client";
 
+import { isStaticDemo, staticDemoSourceUrl } from "@/lib/static-mode";
+
 export interface NodeSourceFile {
   nodeId: string;
   path: string;
@@ -12,6 +14,7 @@ export type FetchNodeSourceResult =
   | { ok: false; error: string; status: number };
 
 export function nodeFileApiUrl(nodeId: string): string {
+  if (isStaticDemo) return staticDemoSourceUrl(nodeId);
   const segments = nodeId.replace(/\\/g, "/").split("/").filter(Boolean);
   return `/api/file/${segments.map((s) => encodeURIComponent(s)).join("/")}`;
 }

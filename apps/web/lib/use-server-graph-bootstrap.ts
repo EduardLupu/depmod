@@ -1,7 +1,8 @@
 "use client";
 
-import { type LoadResult, loadGraphFromText } from "@/lib/load-graph";
+import { type LoadResult, loadGraphFromText, loadGraphFromUrl } from "@/lib/load-graph";
 import { type ParseProgressState, useParseProgress } from "@/lib/parse-progress";
+import { isStaticDemo, staticDemoGraphUrl } from "@/lib/static-mode";
 import { useGraphStore } from "@/lib/store";
 import { useEffect, useState } from "react";
 
@@ -64,6 +65,16 @@ export function useServerGraphBootstrap(): ServerGraphBootstrapState {
     let cancelled = false;
 
     (async () => {
+      if (isStaticDemo) {
+        const result = await loadGraphFromUrl(staticDemoGraphUrl());
+        if (cancelled) return;
+        if (result?.ok) {
+          setGraph(result.graph, { kind: "sample", label: "depmod" });
+        }
+        setProbing(false);
+        return;
+      }
+
       const hasServe = await probeServer();
       if (cancelled) return;
 
