@@ -1,7 +1,9 @@
 "use client";
 
 import { GLOSSARY_GROUPS, type GlossaryEntry } from "@/lib/glossary";
+import { formatModShortcut } from "@/lib/mod-key";
 import { useGraphStore } from "@/lib/store";
+import { useIsMac } from "@/lib/use-mod-key";
 import * as Dialog from "@radix-ui/react-dialog";
 
 /**
@@ -71,8 +73,10 @@ export function LegendPanel() {
   );
 }
 
+type ShortcutKey = string | { mod: true; key: string };
+
 interface Shortcut {
-  keys: string[];
+  keys: ShortcutKey[];
   description: string;
 }
 
@@ -86,7 +90,7 @@ const SHORTCUTS: ReadonlyArray<{ title: string; items: Shortcut[] }> = [
   {
     title: "Navigation",
     items: [
-      { keys: ["⌘K", "Ctrl+K"], description: "Focus the node search" },
+      { keys: [{ mod: true, key: "K" }], description: "Focus the node search" },
       { keys: ["↑", "↓"], description: "Move highlight in search results" },
       { keys: ["Enter"], description: "Select the highlighted result" },
       { keys: ["Esc"], description: "Close popovers, clear search, blur input" },
@@ -108,7 +112,13 @@ const SHORTCUTS: ReadonlyArray<{ title: string; items: Shortcut[] }> = [
   },
 ];
 
+function formatShortcutKey(key: ShortcutKey, isMac: boolean): string {
+  return typeof key === "string" ? key : formatModShortcut(key.key, isMac);
+}
+
 function ShortcutsSection() {
+  const isMac = useIsMac();
+
   return (
     <section>
       <h3 className="mb-2 text-xs font-semibold uppercase tracking-wider text-neutral-500">
@@ -128,14 +138,17 @@ function ShortcutsSection() {
                 >
                   <span className="text-xs text-neutral-300">{s.description}</span>
                   <span className="flex shrink-0 items-center gap-1">
-                    {s.keys.map((k, j) => (
-                      <span key={k} className="flex items-center gap-1">
-                        {j > 0 ? <span className="text-[10px] text-neutral-600">/</span> : null}
-                        <kbd className="rounded bg-neutral-900 px-1.5 py-0.5 font-mono text-[10px] text-neutral-300">
-                          {k}
-                        </kbd>
-                      </span>
-                    ))}
+                    {s.keys.map((k, j) => {
+                      const label = formatShortcutKey(k, isMac);
+                      return (
+                        <span key={label} className="flex items-center gap-1">
+                          {j > 0 ? <span className="text-[10px] text-neutral-600">/</span> : null}
+                          <kbd className="rounded bg-neutral-900 px-1.5 py-0.5 font-mono text-[10px] text-neutral-300">
+                            {label}
+                          </kbd>
+                        </span>
+                      );
+                    })}
                   </span>
                 </li>
               ))}

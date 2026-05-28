@@ -4,6 +4,7 @@ import { ClassificationSwatch } from "@/components/classification-swatch";
 import { CLASSIFICATION_COLORS } from "@/lib/colors";
 import { type SearchResult, buildSearchIndex, searchIndex } from "@/lib/node-search";
 import { useGraphStore } from "@/lib/store";
+import { useModKeyParts } from "@/lib/use-mod-key";
 import type { Graph } from "@depmod/types";
 import { useCallback, useEffect, useId, useMemo, useRef, useState } from "react";
 
@@ -27,6 +28,7 @@ export function NodeSearch({ graph }: NodeSearchProps) {
 
   const index = useMemo(() => buildSearchIndex(graph), [graph]);
   const results = useMemo<SearchResult[]>(() => searchIndex(index, query), [index, query]);
+  const modKey = useModKeyParts("K");
 
   // Cmd/Ctrl + K focuses the search from anywhere (and selects existing text
   // so the user can immediately type over it). Avoids fighting browser shortcuts
@@ -119,7 +121,18 @@ export function NodeSearch({ graph }: NodeSearchProps) {
         className="w-56 rounded-md border border-neutral-800 bg-neutral-900 py-1.5 pl-7 pr-12 text-sm text-neutral-200 placeholder:text-neutral-600 focus:border-neutral-600 focus:outline-none"
       />
       <kbd className="pointer-events-none absolute right-2 inline-flex items-center gap-[2px] rounded border border-neutral-800 bg-neutral-950 px-1.5 py-0.5 text-[10px] text-neutral-500">
-        <span className="text-[13px] leading-none">⌘</span>K
+        {modKey.joiner ? (
+          <>
+            {modKey.mod}
+            {modKey.joiner}
+            {modKey.key}
+          </>
+        ) : (
+          <>
+            <span className="text-[13px] leading-none">{modKey.mod}</span>
+            {modKey.key}
+          </>
+        )}
       </kbd>
 
       {open && query.length > 0 ? (
