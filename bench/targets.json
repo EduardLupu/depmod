@@ -1,60 +1,151 @@
 {
   "targets": [
     {
+      "name": "create-t3-app",
+      "repo": "https://github.com/t3-oss/create-t3-app.git",
+      "ref": null,
+      "tier": "primary",
+      "description": "Create T3 App — single Next.js starter (~100 files)"
+    },
+    {
+      "name": "create-t3-turbo",
+      "repo": "https://github.com/t3-oss/create-t3-turbo.git",
+      "ref": null,
+      "tier": "primary",
+      "description": "T3 + Turborepo template (small monorepo, ~75 files)"
+    },
+    {
+      "name": "hono",
+      "repo": "https://github.com/honojs/hono.git",
+      "ref": null,
+      "tier": "primary",
+      "description": "Hono web framework (compact TypeScript core)"
+    },
+    {
+      "name": "music.eduardlupu.com",
+      "repo": "https://github.com/EduardLupu/spotify-artists.git",
+      "ref": null,
+      "tier": "primary",
+      "description": "Personal Next.js app (~40 files)"
+    },
+    {
+      "name": "tailwind-nextjs-starter-blog",
+      "repo": "https://github.com/timlrx/tailwind-nextjs-starter-blog.git",
+      "ref": null,
+      "tier": "primary",
+      "description": "Popular Next.js + Tailwind blog starter"
+    },
+    {
       "name": "vercel-commerce",
       "repo": "https://github.com/vercel/commerce.git",
       "ref": null,
       "tier": "primary",
-      "description": "Vercel Next.js commerce starter (small, single app)"
+      "description": "Vercel Next.js commerce starter (~65 files)"
+    },
+    {
+      "name": "zustand",
+      "repo": "https://github.com/pmndrs/zustand.git",
+      "ref": null,
+      "tier": "primary",
+      "description": "Zustand state library (tiny TS package)"
+    },
+    {
+      "name": "cap",
+      "repo": "https://github.com/CapSoftware/Cap.git",
+      "ref": null,
+      "tier": "medium",
+      "description": "Cap — open-source Loom alternative (Turborepo)"
+    },
+    {
+      "name": "chakra-ui",
+      "repo": "https://github.com/chakra-ui/chakra-ui.git",
+      "ref": null,
+      "tier": "medium",
+      "description": "Chakra UI component system monorepo"
+    },
+    {
+      "name": "depmod",
+      "repo": "https://github.com/EduardLupu/depmod.git",
+      "ref": null,
+      "tier": "medium",
+      "description": "depmod (this project, ~180 files)"
+    },
+    {
+      "name": "drizzle-orm",
+      "repo": "https://github.com/drizzle-team/drizzle-orm.git",
+      "ref": null,
+      "tier": "medium",
+      "description": "Drizzle ORM TypeScript toolkit"
+    },
+    {
+      "name": "langfuse",
+      "repo": "https://github.com/langfuse/langfuse.git",
+      "ref": null,
+      "tier": "medium",
+      "description": "Langfuse LLM observability platform"
+    },
+    {
+      "name": "mastra",
+      "repo": "https://github.com/mastra-ai/mastra.git",
+      "ref": null,
+      "tier": "medium",
+      "description": "Mastra AI agent framework monorepo"
+    },
+    {
+      "name": "next-auth",
+      "repo": "https://github.com/nextauthjs/next-auth.git",
+      "ref": null,
+      "tier": "medium",
+      "description": "Auth.js / NextAuth.js"
+    },
+    {
+      "name": "openstatus",
+      "repo": "https://github.com/openstatusHQ/openstatus.git",
+      "ref": null,
+      "tier": "medium",
+      "description": "OpenStatus uptime monitoring (Turborepo)"
+    },
+    {
+      "name": "radix-primitives",
+      "repo": "https://github.com/radix-ui/primitives.git",
+      "ref": null,
+      "tier": "medium",
+      "description": "Radix UI primitives monorepo"
     },
     {
       "name": "shadcn-taxonomy",
       "repo": "https://github.com/shadcn-ui/taxonomy.git",
       "ref": null,
       "tier": "medium",
-      "description": "shadcn/ui taxonomy demo app"
+      "description": "shadcn/ui taxonomy demo (~130 files)"
     },
     {
-      "name": "create-t3-turbo",
-      "repo": "https://github.com/t3-oss/create-t3-turbo.git",
+      "name": "shadcn-ui",
+      "repo": "https://github.com/shadcn-ui/ui.git",
       "ref": null,
       "tier": "medium",
-      "description": "T3 + Turborepo monorepo template"
+      "description": "shadcn/ui CLI + registry monorepo"
     },
     {
-      "name": "unkey",
-      "repo": "https://github.com/unkeyed/unkey.git",
+      "name": "tanstack-query",
+      "repo": "https://github.com/TanStack/query.git",
       "ref": null,
       "tier": "medium",
-      "description": "API key platform (Turborepo, multiple apps)"
+      "description": "TanStack Query (React Query) monorepo"
     },
     {
-      "name": "react-email",
-      "repo": "https://github.com/resend/react-email.git",
+      "name": "trpc",
+      "repo": "https://github.com/trpc/trpc.git",
       "ref": null,
       "tier": "medium",
-      "description": "React Email component monorepo"
+      "description": "tRPC end-to-end typesafe APIs"
     },
     {
-      "name": "documenso",
-      "repo": "https://github.com/documenso/documenso.git",
+      "name": "uploadthing",
+      "repo": "https://github.com/pingdotgg/uploadthing.git",
       "ref": null,
-      "tier": "stress",
-      "description": "Document signing platform (large Turborepo)"
-    },
-    {
-      "name": "dub",
-      "repo": "https://github.com/dubinc/dub.git",
-      "ref": null,
-      "tier": "stress",
-      "description": "Link management platform (large Turborepo)"
-    },
-    {
-      "name": "cal.com",
-      "repo": "https://github.com/calcom/cal.com.git",
-      "ref": null,
-      "tier": "stretch",
-      "description": "Scheduling monorepo (full repo; very large)"
+      "tier": "medium",
+      "description": "UploadThing file uploads for Next.js"
     },
     {
       "name": "cal-web",
@@ -63,14 +154,329 @@
       "tier": "stress",
       "cacheName": "cal.com",
       "subdir": "apps/web",
-      "description": "Cal.com web app only (reuses cal.com clone, analyzes apps/web)"
+      "description": "Cal.com web app only (~1k files; shared cal.com clone)"
     },
     {
-      "name": "music.eduardlupu.com",
-      "repo": "https://github.com/EduardLupu/spotify-artists.git",
+      "name": "documenso",
+      "repo": "https://github.com/documenso/documenso.git",
+      "ref": null,
+      "tier": "stress",
+      "description": "Documenso e-signing platform (~1.9k files)"
+    },
+    {
+      "name": "dub",
+      "repo": "https://github.com/dubinc/dub.git",
+      "ref": null,
+      "tier": "stress",
+      "description": "Dub.co link management (~3.9k files)"
+    },
+    {
+      "name": "formbricks",
+      "repo": "https://github.com/formbricks/formbricks.git",
+      "ref": null,
+      "tier": "stress",
+      "description": "Formbricks experience management"
+    },
+    {
+      "name": "hoppscotch",
+      "repo": "https://github.com/hoppscotch/hoppscotch.git",
+      "ref": null,
+      "tier": "stress",
+      "description": "Hoppscotch API client monorepo"
+    },
+    {
+      "name": "infisical",
+      "repo": "https://github.com/Infisical/infisical.git",
+      "ref": null,
+      "tier": "stress",
+      "description": "Infisical secrets management"
+    },
+    {
+      "name": "novu",
+      "repo": "https://github.com/novuhq/novu.git",
+      "ref": null,
+      "tier": "stress",
+      "description": "Novu notification infrastructure"
+    },
+    {
+      "name": "payload",
+      "repo": "https://github.com/payloadcms/payload.git",
+      "ref": null,
+      "tier": "stress",
+      "description": "Payload CMS 3.x monorepo"
+    },
+    {
+      "name": "plane-web",
+      "repo": "https://github.com/makeplane/plane.git",
+      "ref": null,
+      "tier": "stress",
+      "cacheName": "plane",
+      "subdir": "apps/web",
+      "description": "Plane project management — web app only"
+    },
+    {
+      "name": "react-email",
+      "repo": "https://github.com/resend/react-email.git",
+      "ref": null,
+      "tier": "stress",
+      "description": "React Email (~1.1k files)"
+    },
+    {
+      "name": "refine",
+      "repo": "https://github.com/refinedev/refine.git",
+      "ref": null,
+      "tier": "stress",
+      "description": "Refine React admin framework monorepo"
+    },
+    {
+      "name": "trigger.dev",
+      "repo": "https://github.com/triggerdotdev/trigger.dev.git",
+      "ref": null,
+      "tier": "stress",
+      "description": "Trigger.dev background jobs platform"
+    },
+    {
+      "name": "twenty",
+      "repo": "https://github.com/twentyhq/twenty.git",
+      "ref": null,
+      "tier": "stress",
+      "description": "Twenty CRM (large Turborepo)"
+    },
+    {
+      "name": "unkey",
+      "repo": "https://github.com/unkeyed/unkey.git",
+      "ref": null,
+      "tier": "stress",
+      "description": "Unkey API keys (~1.9k files)"
+    },
+    {
+      "name": "vite",
+      "repo": "https://github.com/vitejs/vite.git",
+      "ref": null,
+      "tier": "stress",
+      "description": "Vite build tool monorepo"
+    },
+    {
+      "name": "appsmith",
+      "repo": "https://github.com/appsmithorg/appsmith.git",
       "ref": null,
       "tier": "stretch",
-      "description": "Personal Next.js app (small real-world sample)"
+      "description": "Appsmith low-code platform (very large)"
+    },
+    {
+      "name": "astro",
+      "repo": "https://github.com/withastro/astro.git",
+      "ref": null,
+      "tier": "stretch",
+      "description": "Astro framework monorepo"
+    },
+    {
+      "name": "cal.com",
+      "repo": "https://github.com/calcom/cal.com.git",
+      "ref": null,
+      "tier": "stretch",
+      "description": "Cal.com full monorepo (~5k files)"
+    },
+    {
+      "name": "expo",
+      "repo": "https://github.com/expo/expo.git",
+      "ref": null,
+      "tier": "stretch",
+      "description": "Expo SDK monorepo (React Native)"
+    },
+    {
+      "name": "nuxt",
+      "repo": "https://github.com/nuxt/nuxt.git",
+      "ref": null,
+      "tier": "stretch",
+      "description": "Nuxt framework monorepo"
+    },
+    {
+      "name": "nx",
+      "repo": "https://github.com/nrwl/nx.git",
+      "ref": null,
+      "tier": "stretch",
+      "description": "Nx build system monorepo"
+    },
+    {
+      "name": "plane",
+      "repo": "https://github.com/makeplane/plane.git",
+      "ref": null,
+      "tier": "stretch",
+      "cacheName": "plane",
+      "description": "Plane full monorepo (shared plane clone)"
+    },
+    {
+      "name": "react-router",
+      "repo": "https://github.com/remix-run/react-router.git",
+      "ref": null,
+      "tier": "stretch",
+      "description": "React Router / Remix packages monorepo"
+    },
+    {
+      "name": "sanity",
+      "repo": "https://github.com/sanity-io/sanity.git",
+      "ref": null,
+      "tier": "stretch",
+      "description": "Sanity Studio + packages monorepo"
+    },
+    {
+      "name": "supabase",
+      "repo": "https://github.com/supabase/supabase.git",
+      "ref": null,
+      "tier": "stretch",
+      "description": "Supabase platform monorepo"
+    },
+    {
+      "name": "turborepo",
+      "repo": "https://github.com/vercel/turborepo.git",
+      "ref": null,
+      "tier": "stretch",
+      "description": "Turborepo build system monorepo"
+    },
+    {
+      "name": "vercel-monorepo",
+      "repo": "https://github.com/vercel/vercel.git",
+      "ref": null,
+      "tier": "stretch",
+      "description": "Vercel CLI + packages (~5k+ files)"
+    },
+    {
+      "name": "medusa",
+      "repo": "https://github.com/medusajs/medusa.git",
+      "ref": null,
+      "tier": "stretch",
+      "description": "Medusa commerce engine monorepo"
+    },
+    {
+      "name": "typeorm",
+      "repo": "https://github.com/typeorm/typeorm.git",
+      "ref": null,
+      "tier": "medium",
+      "description": "TypeORM — classic TypeScript ORM"
+    },
+    {
+      "name": "prisma",
+      "repo": "https://github.com/prisma/prisma.git",
+      "ref": null,
+      "tier": "stretch",
+      "description": "Prisma ORM monorepo"
+    },
+    {
+      "name": "storybook",
+      "repo": "https://github.com/storybookjs/storybook.git",
+      "ref": null,
+      "tier": "stretch",
+      "description": "Storybook UI workshop monorepo"
+    },
+    {
+      "name": "jest",
+      "repo": "https://github.com/jestjs/jest.git",
+      "ref": null,
+      "tier": "stress",
+      "description": "Jest test runner monorepo"
+    },
+    {
+      "name": "pnpm",
+      "repo": "https://github.com/pnpm/pnpm.git",
+      "ref": null,
+      "tier": "stretch",
+      "description": "pnpm package manager monorepo"
+    },
+    {
+      "name": "typescript",
+      "repo": "https://github.com/microsoft/TypeScript.git",
+      "ref": null,
+      "tier": "stretch",
+      "description": "TypeScript compiler source (extreme stress test)"
+    },
+    {
+      "name": "backstage",
+      "repo": "https://github.com/backstage/backstage.git",
+      "ref": null,
+      "tier": "stretch",
+      "description": "Spotify Backstage developer portal"
+    },
+    {
+      "name": "gitkraken",
+      "repo": "https://github.com/gitkraken/vscode-gitlens.git",
+      "ref": null,
+      "tier": "medium",
+      "description": "GitLens VS Code extension (real-world extension graph)"
+    },
+    {
+      "name": "tabler",
+      "repo": "https://github.com/tabler/tabler.git",
+      "ref": null,
+      "tier": "medium",
+      "description": "Tabler dashboard UI kit"
+    },
+    {
+      "name": "immich",
+      "repo": "https://github.com/immich-app/immich.git",
+      "ref": null,
+      "tier": "stress",
+      "description": "Immich self-hosted photo backup (Nx monorepo)"
+    },
+    {
+      "name": "appwrite",
+      "repo": "https://github.com/appwrite/appwrite.git",
+      "ref": null,
+      "tier": "stress",
+      "description": "Appwrite BaaS (mixed stack; TS console + functions)"
+    },
+    {
+      "name": "directus",
+      "repo": "https://github.com/directus/directus.git",
+      "ref": null,
+      "tier": "stress",
+      "description": "Directus headless CMS"
+    },
+    {
+      "name": "keystone",
+      "repo": "https://github.com/keystonejs/keystone.git",
+      "ref": null,
+      "tier": "medium",
+      "description": "KeystoneJS headless CMS"
+    },
+    {
+      "name": "umami",
+      "repo": "https://github.com/umami-software/umami.git",
+      "ref": null,
+      "tier": "medium",
+      "description": "Umami privacy-focused analytics"
+    },
+    {
+      "name": "posthog",
+      "repo": "https://github.com/PostHog/posthog.git",
+      "ref": null,
+      "tier": "stretch",
+      "description": "PostHog product analytics platform"
+    },
+    {
+      "name": "outline",
+      "repo": "https://github.com/outline/outline.git",
+      "ref": null,
+      "tier": "stress",
+      "description": "Outline team wiki / knowledge base"
+    },
+    {
+      "name": "calcom-api",
+      "repo": "https://github.com/calcom/cal.com.git",
+      "ref": null,
+      "tier": "stress",
+      "cacheName": "cal.com",
+      "subdir": "apps/api",
+      "description": "Cal.com API app (shared cal.com clone)"
+    },
+    {
+      "name": "supabase-studio",
+      "repo": "https://github.com/supabase/supabase.git",
+      "ref": null,
+      "tier": "stress",
+      "cacheName": "supabase",
+      "subdir": "apps/studio",
+      "description": "Supabase Studio dashboard (shared supabase clone)"
     }
   ]
 }

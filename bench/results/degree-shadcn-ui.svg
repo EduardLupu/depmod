@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 440" width="720" height="440" font-family="ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif">
+<rect width="720" height="440" fill="#0f0f0f"/>
+<text x="360" y="18" fill="#d4d4d4" font-size="13" font-weight="600" text-anchor="middle">Node-degree distribution · shadcn-ui</text>
+<line x1="64" y1="384" x2="696" y2="384" stroke="#3a3a3a" stroke-width="1"/>
+<line x1="64" y1="28" x2="64" y2="384" stroke="#3a3a3a" stroke-width="1"/>
+<line x1="60" y1="384" x2="64" y2="384" stroke="#3a3a3a"/>
+<text x="56" y="388" fill="#8a8a8a" font-size="10" text-anchor="end">0</text>
+<line x1="64" y1="384" x2="696" y2="384" stroke="#3a3a3a" stroke-opacity="0.3"/>
+<line x1="60" y1="312.8" x2="64" y2="312.8" stroke="#3a3a3a"/>
+<text x="56" y="316.8" fill="#8a8a8a" font-size="10" text-anchor="end">400</text>
+<line x1="64" y1="312.8" x2="696" y2="312.8" stroke="#3a3a3a" stroke-opacity="0.3"/>
+<line x1="60" y1="241.6" x2="64" y2="241.6" stroke="#3a3a3a"/>
+<text x="56" y="245.6" fill="#8a8a8a" font-size="10" text-anchor="end">800</text>
+<line x1="64" y1="241.6" x2="696" y2="241.6" stroke="#3a3a3a" stroke-opacity="0.3"/>
+<line x1="60" y1="170.4" x2="64" y2="170.4" stroke="#3a3a3a"/>
+<text x="56" y="174.4" fill="#8a8a8a" font-size="10" text-anchor="end">1200</text>
+<line x1="64" y1="170.4" x2="696" y2="170.4" stroke="#3a3a3a" stroke-opacity="0.3"/>
+<line x1="60" y1="99.19999999999999" x2="64" y2="99.19999999999999" stroke="#3a3a3a"/>
+<text x="56" y="103.19999999999999" fill="#8a8a8a" font-size="10" text-anchor="end">1600</text>
+<line x1="64" y1="99.19999999999999" x2="696" y2="99.19999999999999" stroke="#3a3a3a" stroke-opacity="0.3"/>
+<line x1="60" y1="28" x2="64" y2="28" stroke="#3a3a3a"/>
+<text x="56" y="32" fill="#8a8a8a" font-size="10" text-anchor="end">2000</text>
+<line x1="64" y1="28" x2="696" y2="28" stroke="#3a3a3a" stroke-opacity="0.3"/>
+<rect x="65" y="353.384" width="50.666666666666664" height="30.615999999999985" fill="#5cb573" fill-opacity="0.85"/>
+<text x="90.33333333333333" y="349.384" fill="#8a8a8a" font-size="9" text-anchor="middle">172</text>
+<rect x="117.66666666666666" y="345.908" width="50.666666666666664" height="38.091999999999985" fill="#5cb573" fill-opacity="0.85"/>
+<text x="143" y="341.908" fill="#8a8a8a" font-size="9" text-anchor="middle">214</text>
+<rect x="170.33333333333331" y="80.50999999999999" width="50.666666666666664" height="303.49" fill="#5cb573" fill-opacity="0.85"/>
+<text x="195.66666666666666" y="76.50999999999999" fill="#8a8a8a" font-size="9" text-anchor="middle">1705</text>
+<rect x="223" y="180.724" width="50.666666666666664" height="203.276" fill="#5cb573" fill-opacity="0.85"/>
+<text x="248.33333333333334" y="176.724" fill="#8a8a8a" font-size="9" text-anchor="middle">1142</text>
+<rect x="275.66666666666663" y="327.574" width="50.666666666666664" height="56.42599999999999" fill="#5cb573" fill-opacity="0.85"/>
+<text x="300.99999999999994" y="323.574" fill="#8a8a8a" font-size="9" text-anchor="middle">317</text>
+<rect x="328.3333333333333" y="369.582" width="50.666666666666664" height="14.418000000000006" fill="#5cb573" fill-opacity="0.85"/>
+<text x="353.66666666666663" y="365.582" fill="#8a8a8a" font-size="9" text-anchor="middle">81</text>
+<rect x="381" y="377.592" width="50.666666666666664" height="6.4080000000000155" fill="#5cb573" fill-opacity="0.85"/>
+<text x="406.3333333333333" y="373.592" fill="#8a8a8a" font-size="9" text-anchor="middle">36</text>
+<rect x="433.66666666666663" y="381.686" width="50.666666666666664" height="2.3140000000000214" fill="#5cb573" fill-opacity="0.85"/>
+<text x="458.99999999999994" y="377.686" fill="#8a8a8a" font-size="9" text-anchor="middle">13</text>
+<rect x="486.3333333333333" y="383.11" width="50.666666666666664" height="0.8899999999999864" fill="#5cb573" fill-opacity="0.85"/>
+<text x="511.66666666666663" y="379.11" fill="#8a8a8a" font-size="9" text-anchor="middle">5</text>
+<rect x="539" y="383.644" width="50.666666666666664" height="0.35599999999999454" fill="#5cb573" fill-opacity="0.85"/>
+<text x="564.3333333333334" y="379.644" fill="#8a8a8a" font-size="9" text-anchor="middle">2</text>
+<rect x="591.6666666666666" y="383.822" width="50.666666666666664" height="0.17799999999999727" fill="#5cb573" fill-opacity="0.85"/>
+<text x="617" y="379.822" fill="#8a8a8a" font-size="9" text-anchor="middle">1</text>
+<rect x="644.3333333333333" y="383.644" width="50.666666666666664" height="0.35599999999999454" fill="#5cb573" fill-opacity="0.85"/>
+<text x="669.6666666666666" y="379.644" fill="#8a8a8a" font-size="9" text-anchor="middle">2</text>
+<text x="90.33333333333333" y="398" fill="#8a8a8a" font-size="10" text-anchor="middle">0</text>
+<text x="143" y="398" fill="#8a8a8a" font-size="10" text-anchor="middle">1</text>
+<text x="195.66666666666666" y="398" fill="#8a8a8a" font-size="10" text-anchor="middle">2-3</text>
+<text x="248.33333333333334" y="398" fill="#8a8a8a" font-size="10" text-anchor="middle">4-7</text>
+<text x="300.99999999999994" y="398" fill="#8a8a8a" font-size="10" text-anchor="middle">8-15</text>
+<text x="353.66666666666663" y="398" fill="#8a8a8a" font-size="10" text-anchor="middle">16-31</text>
+<text x="406.3333333333333" y="398" fill="#8a8a8a" font-size="10" text-anchor="middle">32-63</text>
+<text x="458.99999999999994" y="398" fill="#8a8a8a" font-size="10" text-anchor="middle">64-127</text>
+<text x="511.66666666666663" y="398" fill="#8a8a8a" font-size="10" text-anchor="middle">128-255</text>
+<text x="564.3333333333334" y="398" fill="#8a8a8a" font-size="10" text-anchor="middle">256-511</text>
+<text x="617" y="398" fill="#8a8a8a" font-size="10" text-anchor="middle">512-1023</text>
+<text x="669.6666666666666" y="398" fill="#8a8a8a" font-size="10" text-anchor="middle">1024-2047</text>
+<text x="380" y="426" fill="#8a8a8a" font-size="11" text-anchor="middle" >degree (Ca + Ce)</text>
+<text x="-206" y="16" fill="#8a8a8a" font-size="11" text-anchor="middle" transform="rotate(-90)">module count</text>
+</svg>

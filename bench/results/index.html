@@ -19,7 +19,7 @@
 </head>
 <body>
 <h1>depmod · benchmark results</h1>
-<p>10 targets · parser 0.3.0 · generated 2026-05-26T19:03:06.468Z. Open <code>results.json</code> for classification breakdowns and per-run timings.</p>
+<p>66 targets · parser 0.3.0 · generated 2026-06-01T15:50:25.477Z. Open <code>results.json</code> for classification breakdowns and per-run timings.</p>
 
 <h2>Summary</h2>
 <table>
@@ -31,6 +31,91 @@
 </tr></thead>
 <tbody>
       <tr>
+        <td>create-t3-app</td>
+        <td>primary</td>
+        <td><code>4709861f</code></td>
+        <td class="num">170</td>
+        <td class="num">170</td>
+        <td class="num">31</td>
+        <td class="num">0</td>
+        <td class="num">11,031</td>
+        <td class="num">496 ms</td>
+        <td class="num">481 ms</td>
+        <td class="num">39</td>
+        <td class="num">105</td>
+        <td class="num">2</td>
+        <td class="num">1.000</td>
+      </tr>
+
+      <tr>
+        <td>create-t3-turbo</td>
+        <td>primary</td>
+        <td><code>8f945b7b</code></td>
+        <td class="num">74</td>
+        <td class="num">74</td>
+        <td class="num">62</td>
+        <td class="num">1</td>
+        <td class="num">3,370</td>
+        <td class="num">310 ms</td>
+        <td class="num">302 ms</td>
+        <td class="num">48</td>
+        <td class="num">22</td>
+        <td class="num">5</td>
+        <td class="num">1.000</td>
+      </tr>
+
+      <tr>
+        <td>hono</td>
+        <td>primary</td>
+        <td><code>8e2cccc2</code></td>
+        <td class="num">360</td>
+        <td class="num">360</td>
+        <td class="num">987</td>
+        <td class="num">5</td>
+        <td class="num">78,034</td>
+        <td class="num">934 ms</td>
+        <td class="num">923 ms</td>
+        <td class="num">25</td>
+        <td class="num">45</td>
+        <td class="num">13</td>
+        <td class="num">1.000</td>
+      </tr>
+
+      <tr>
+        <td>music.eduardlupu.com</td>
+        <td>primary</td>
+        <td><code>4c0c7b84</code></td>
+        <td class="num">41</td>
+        <td class="num">41</td>
+        <td class="num">77</td>
+        <td class="num">0</td>
+        <td class="num">7,677</td>
+        <td class="num">1175 ms</td>
+        <td class="num">1012 ms</td>
+        <td class="num">6</td>
+        <td class="num">4</td>
+        <td class="num">10</td>
+        <td class="num">1.000</td>
+      </tr>
+
+      <tr>
+        <td>tailwind-nextjs-starter-blog</td>
+        <td>primary</td>
+        <td><code>b45bef66</code></td>
+        <td class="num">48</td>
+        <td class="num">48</td>
+        <td class="num">89</td>
+        <td class="num">0</td>
+        <td class="num">2,689</td>
+        <td class="num">251 ms</td>
+        <td class="num">248 ms</td>
+        <td class="num">22</td>
+        <td class="num">5</td>
+        <td class="num">9</td>
+        <td class="num">1.000</td>
+      </tr>
+
+      <tr>
         <td>vercel-commerce</td>
         <td>primary</td>
         <td><code>1df2cf6f</code></td>
@@ -39,11 +124,181 @@
         <td class="num">120</td>
         <td class="num">1</td>
         <td class="num">3,896</td>
-        <td class="num">407 ms</td>
-        <td class="num">400 ms</td>
+        <td class="num">276 ms</td>
+        <td class="num">270 ms</td>
         <td class="num">3</td>
         <td class="num">5</td>
         <td class="num">9</td>
+        <td class="num">1.000</td>
+      </tr>
+
+      <tr>
+        <td>zustand</td>
+        <td>primary</td>
+        <td><code>04a8487a</code></td>
+        <td class="num">46</td>
+        <td class="num">46</td>
+        <td class="num">61</td>
+        <td class="num">0</td>
+        <td class="num">9,470</td>
+        <td class="num">382 ms</td>
+        <td class="num">378 ms</td>
+        <td class="num">22</td>
+        <td class="num">15</td>
+        <td class="num">13</td>
+        <td class="num">1.000</td>
+      </tr>
+
+      <tr>
+        <td>cap</td>
+        <td>medium</td>
+        <td><code>8cd264a6</code></td>
+        <td class="num">1190</td>
+        <td class="num">1190</td>
+        <td class="num">2205</td>
+        <td class="num">8</td>
+        <td class="num">230,554</td>
+        <td class="num">1940 ms</td>
+        <td class="num">1838 ms</td>
+        <td class="num">150</td>
+        <td class="num">109</td>
+        <td class="num">11</td>
+        <td class="num">1.000</td>
+      </tr>
+
+      <tr>
+        <td>chakra-ui</td>
+        <td>medium</td>
+        <td><code>4a8728ea</code></td>
+        <td class="num">2677</td>
+        <td class="num">2677</td>
+        <td class="num">3861</td>
+        <td class="num">1</td>
+        <td class="num">188,870</td>
+        <td class="num">3381 ms</td>
+        <td class="num">3330 ms</td>
+        <td class="num">85</td>
+        <td class="num">327</td>
+        <td class="num">8</td>
+        <td class="num">1.000</td>
+      </tr>
+
+      <tr>
+        <td>depmod</td>
+        <td>medium</td>
+        <td><code>f16e44e0</code></td>
+        <td class="num">180</td>
+        <td class="num">180</td>
+        <td class="num">267</td>
+        <td class="num">4</td>
+        <td class="num">19,072</td>
+        <td class="num">536 ms</td>
+        <td class="num">529 ms</td>
+        <td class="num">12</td>
+        <td class="num">6</td>
+        <td class="num">10</td>
+        <td class="num">1.000</td>
+      </tr>
+
+      <tr>
+        <td>drizzle-orm</td>
+        <td>medium</td>
+        <td><code>48e54060</code></td>
+        <td class="num">943</td>
+        <td class="num">943</td>
+        <td class="num">4309</td>
+        <td class="num">11</td>
+        <td class="num">446,968</td>
+        <td class="num">2506 ms</td>
+        <td class="num">2478 ms</td>
+        <td class="num">65</td>
+        <td class="num">195</td>
+        <td class="num">29</td>
+        <td class="num">1.000</td>
+      </tr>
+
+      <tr>
+        <td>langfuse</td>
+        <td>medium</td>
+        <td><code>8c6d09b9</code></td>
+        <td class="num">2447</td>
+        <td class="num">2447</td>
+        <td class="num">8491</td>
+        <td class="num">14</td>
+        <td class="num">559,369</td>
+        <td class="num">5363 ms</td>
+        <td class="num">5235 ms</td>
+        <td class="num">68</td>
+        <td class="num">164</td>
+        <td class="num">22</td>
+        <td class="num">1.000</td>
+      </tr>
+
+      <tr>
+        <td>mastra</td>
+        <td>medium</td>
+        <td><code>91313ff2</code></td>
+        <td class="num">6897</td>
+        <td class="num">6897</td>
+        <td class="num">15691</td>
+        <td class="num">41</td>
+        <td class="num">1,679,221</td>
+        <td class="num">15192 ms</td>
+        <td class="num">14822 ms</td>
+        <td class="num">670</td>
+        <td class="num">762</td>
+        <td class="num">12</td>
+        <td class="num">1.000</td>
+      </tr>
+
+      <tr>
+        <td>next-auth</td>
+        <td>medium</td>
+        <td><code>dab3cfb1</code></td>
+        <td class="num">540</td>
+        <td class="num">540</td>
+        <td class="num">588</td>
+        <td class="num">4</td>
+        <td class="num">53,275</td>
+        <td class="num">1456 ms</td>
+        <td class="num">1343 ms</td>
+        <td class="num">82</td>
+        <td class="num">176</td>
+        <td class="num">7</td>
+        <td class="num">1.000</td>
+      </tr>
+
+      <tr>
+        <td>openstatus</td>
+        <td>medium</td>
+        <td><code>def2e1f4</code></td>
+        <td class="num">1774</td>
+        <td class="num">1774</td>
+        <td class="num">3820</td>
+        <td class="num">10</td>
+        <td class="num">216,497</td>
+        <td class="num">2102 ms</td>
+        <td class="num">2102 ms</td>
+        <td class="num">0</td>
+        <td class="num">240</td>
+        <td class="num">11</td>
+        <td class="num">1.000</td>
+      </tr>
+
+      <tr>
+        <td>radix-primitives</td>
+        <td>medium</td>
+        <td><code>e5c660d0</code></td>
+        <td class="num">248</td>
+        <td class="num">248</td>
+        <td class="num">143</td>
+        <td class="num">0</td>
+        <td class="num">46,083</td>
+        <td class="num">874 ms</td>
+        <td class="num">851 ms</td>
+        <td class="num">161</td>
+        <td class="num">68</td>
+        <td class="num">2</td>
         <td class="num">1.000</td>
       </tr>
 
@@ -56,8 +311,8 @@
         <td class="num">247</td>
         <td class="num">0</td>
         <td class="num">7,730</td>
-        <td class="num">350 ms</td>
-        <td class="num">341 ms</td>
+        <td class="num">342 ms</td>
+        <td class="num">335 ms</td>
         <td class="num">27</td>
         <td class="num">25</td>
         <td class="num">9</td>
@@ -65,104 +320,70 @@
       </tr>
 
       <tr>
-        <td>create-t3-turbo</td>
+        <td>shadcn-ui</td>
         <td>medium</td>
-        <td><code>8f945b7b</code></td>
-        <td class="num">74</td>
-        <td class="num">74</td>
-        <td class="num">62</td>
-        <td class="num">1</td>
-        <td class="num">3,370</td>
-        <td class="num">331 ms</td>
-        <td class="num">321 ms</td>
-        <td class="num">48</td>
-        <td class="num">22</td>
-        <td class="num">5</td>
+        <td><code>adac7cae</code></td>
+        <td class="num">3690</td>
+        <td class="num">3690</td>
+        <td class="num">11094</td>
+        <td class="num">9</td>
+        <td class="num">489,948</td>
+        <td class="num">3382 ms</td>
+        <td class="num">3297 ms</td>
+        <td class="num">223</td>
+        <td class="num">84</td>
+        <td class="num">13</td>
         <td class="num">1.000</td>
       </tr>
 
       <tr>
-        <td>unkey</td>
+        <td>tanstack-query</td>
         <td>medium</td>
-        <td><code>377402df</code></td>
-        <td class="num">1921</td>
-        <td class="num">1921</td>
-        <td class="num">2914</td>
-        <td class="num">10</td>
-        <td class="num">180,304</td>
-        <td class="num">2699 ms</td>
-        <td class="num">2632 ms</td>
-        <td class="num">68</td>
-        <td class="num">320</td>
-        <td class="num">7</td>
-        <td class="num">1.000</td>
-      </tr>
-
-      <tr>
-        <td>react-email</td>
-        <td>medium</td>
-        <td><code>ba993652</code></td>
-        <td class="num">1089</td>
-        <td class="num">1089</td>
-        <td class="num">1785</td>
-        <td class="num">7</td>
-        <td class="num">200,826</td>
-        <td class="num">1639 ms</td>
-        <td class="num">1598 ms</td>
-        <td class="num">95</td>
-        <td class="num">325</td>
+        <td><code>13480954</code></td>
+        <td class="num">1031</td>
+        <td class="num">1031</td>
+        <td class="num">1497</td>
+        <td class="num">3</td>
+        <td class="num">169,734</td>
+        <td class="num">2390 ms</td>
+        <td class="num">2312 ms</td>
+        <td class="num">268</td>
+        <td class="num">161</td>
         <td class="num">9</td>
         <td class="num">1.000</td>
       </tr>
 
       <tr>
-        <td>documenso</td>
-        <td>stress</td>
-        <td><code>3cef238f</code></td>
-        <td class="num">1855</td>
-        <td class="num">1855</td>
-        <td class="num">3540</td>
-        <td class="num">25</td>
-        <td class="num">233,359</td>
-        <td class="num">2881 ms</td>
-        <td class="num">2837 ms</td>
-        <td class="num">84</td>
-        <td class="num">569</td>
+        <td>trpc</td>
+        <td>medium</td>
+        <td><code>c7360d4e</code></td>
+        <td class="num">895</td>
+        <td class="num">895</td>
+        <td class="num">2264</td>
+        <td class="num">12</td>
+        <td class="num">116,336</td>
+        <td class="num">2396 ms</td>
+        <td class="num">2341 ms</td>
+        <td class="num">332</td>
+        <td class="num">108</td>
         <td class="num">11</td>
         <td class="num">1.000</td>
       </tr>
 
       <tr>
-        <td>dub</td>
-        <td>stress</td>
-        <td><code>93e3d8bc</code></td>
-        <td class="num">3913</td>
-        <td class="num">3913</td>
-        <td class="num">10897</td>
-        <td class="num">19</td>
-        <td class="num">435,857</td>
-        <td class="num">4727 ms</td>
-        <td class="num">4670 ms</td>
-        <td class="num">49</td>
-        <td class="num">278</td>
-        <td class="num">14</td>
-        <td class="num">1.000</td>
-      </tr>
-
-      <tr>
-        <td>cal.com</td>
-        <td>stretch</td>
-        <td><code>180ede28</code></td>
-        <td class="num">4999</td>
-        <td class="num">4999</td>
-        <td class="num">9157</td>
-        <td class="num">24</td>
-        <td class="num">546,207</td>
-        <td class="num">7143 ms</td>
-        <td class="num">6917 ms</td>
-        <td class="num">343</td>
-        <td class="num">1194</td>
-        <td class="num">12</td>
+        <td>uploadthing</td>
+        <td>medium</td>
+        <td><code>720849fa</code></td>
+        <td class="num">441</td>
+        <td class="num">441</td>
+        <td class="num">546</td>
+        <td class="num">2</td>
+        <td class="num">39,120</td>
+        <td class="num">1157 ms</td>
+        <td class="num">1109 ms</td>
+        <td class="num">111</td>
+        <td class="num">79</td>
+        <td class="num">7</td>
         <td class="num">1.000</td>
       </tr>
 
@@ -175,8 +396,8 @@
         <td class="num">1287</td>
         <td class="num">9</td>
         <td class="num">126,331</td>
-        <td class="num">1594 ms</td>
-        <td class="num">1551 ms</td>
+        <td class="num">2071 ms</td>
+        <td class="num">2020 ms</td>
         <td class="num">64</td>
         <td class="num">162</td>
         <td class="num">6</td>
@@ -184,19 +405,750 @@
       </tr>
 
       <tr>
-        <td>music.eduardlupu.com</td>
-        <td>stretch</td>
-        <td><code>6fc26414</code></td>
-        <td class="num">41</td>
-        <td class="num">41</td>
-        <td class="num">77</td>
+        <td>documenso</td>
+        <td>stress</td>
+        <td><code>c50a01d0</code></td>
+        <td class="num">1889</td>
+        <td class="num">1889</td>
+        <td class="num">3611</td>
+        <td class="num">25</td>
+        <td class="num">238,181</td>
+        <td class="num">3603 ms</td>
+        <td class="num">3532 ms</td>
+        <td class="num">84</td>
+        <td class="num">575</td>
+        <td class="num">11</td>
+        <td class="num">1.000</td>
+      </tr>
+
+      <tr>
+        <td>dub</td>
+        <td>stress</td>
+        <td><code>6af085f4</code></td>
+        <td class="num">3927</td>
+        <td class="num">3927</td>
+        <td class="num">10929</td>
+        <td class="num">19</td>
+        <td class="num">437,499</td>
+        <td class="num">5822 ms</td>
+        <td class="num">5751 ms</td>
+        <td class="num">49</td>
+        <td class="num">280</td>
+        <td class="num">14</td>
+        <td class="num">1.000</td>
+      </tr>
+
+      <tr>
+        <td>formbricks</td>
+        <td>stress</td>
+        <td><code>6dc57403</code></td>
+        <td class="num">2535</td>
+        <td class="num">2535</td>
+        <td class="num">6165</td>
+        <td class="num">7</td>
+        <td class="num">389,973</td>
+        <td class="num">4863 ms</td>
+        <td class="num">4750 ms</td>
+        <td class="num">94</td>
+        <td class="num">246</td>
+        <td class="num">14</td>
+        <td class="num">1.000</td>
+      </tr>
+
+      <tr>
+        <td>hoppscotch</td>
+        <td>stress</td>
+        <td><code>e067ee0b</code></td>
+        <td class="num">1058</td>
+        <td class="num">1058</td>
+        <td class="num">2072</td>
+        <td class="num">18</td>
+        <td class="num">214,156</td>
+        <td class="num">1920 ms</td>
+        <td class="num">1871 ms</td>
+        <td class="num">215</td>
+        <td class="num">203</td>
+        <td class="num">13</td>
+        <td class="num">1.000</td>
+      </tr>
+
+      <tr>
+        <td>infisical</td>
+        <td>stress</td>
+        <td><code>15d65e20</code></td>
+        <td class="num">6939</td>
+        <td class="num">6939</td>
+        <td class="num">11568</td>
+        <td class="num">2</td>
+        <td class="num">956,047</td>
+        <td class="num">11891 ms</td>
+        <td class="num">11722 ms</td>
+        <td class="num">37</td>
+        <td class="num">1254</td>
+        <td class="num">8</td>
+        <td class="num">1.000</td>
+      </tr>
+
+      <tr>
+        <td>novu</td>
+        <td>stress</td>
+        <td><code>cf6aabe6</code></td>
+        <td class="num">7048</td>
+        <td class="num">7048</td>
+        <td class="num">24695</td>
+        <td class="num">42</td>
+        <td class="num">757,885</td>
+        <td class="num">8467 ms</td>
+        <td class="num">8194 ms</td>
+        <td class="num">439</td>
+        <td class="num">536</td>
+        <td class="num">19</td>
+        <td class="num">1.000</td>
+      </tr>
+
+      <tr>
+        <td>payload</td>
+        <td>stress</td>
+        <td><code>82862242</code></td>
+        <td class="num">6305</td>
+        <td class="num">6305</td>
+        <td class="num">14911</td>
+        <td class="num">56</td>
+        <td class="num">754,344</td>
+        <td class="num">12854 ms</td>
+        <td class="num">12636 ms</td>
+        <td class="num">471</td>
+        <td class="num">874</td>
+        <td class="num">14</td>
+        <td class="num">1.000</td>
+      </tr>
+
+      <tr>
+        <td>plane-web</td>
+        <td>stress</td>
+        <td><code>b1c78fe4</code></td>
+        <td class="num">2049</td>
+        <td class="num">2049</td>
+        <td class="num">5569</td>
+        <td class="num">33</td>
+        <td class="num">181,970</td>
+        <td class="num">1707 ms</td>
+        <td class="num">1665 ms</td>
+        <td class="num">12</td>
+        <td class="num">104</td>
+        <td class="num">13</td>
+        <td class="num">1.000</td>
+      </tr>
+
+      <tr>
+        <td>react-email</td>
+        <td>stress</td>
+        <td><code>4d505bbb</code></td>
+        <td class="num">1092</td>
+        <td class="num">1092</td>
+        <td class="num">1791</td>
+        <td class="num">7</td>
+        <td class="num">201,110</td>
+        <td class="num">1989 ms</td>
+        <td class="num">1933 ms</td>
+        <td class="num">95</td>
+        <td class="num">325</td>
+        <td class="num">9</td>
+        <td class="num">1.000</td>
+      </tr>
+
+      <tr>
+        <td>refine</td>
+        <td>stress</td>
+        <td><code>7a8aec22</code></td>
+        <td class="num">6376</td>
+        <td class="num">6376</td>
+        <td class="num">6636</td>
+        <td class="num">19</td>
+        <td class="num">581,297</td>
+        <td class="num">7971 ms</td>
+        <td class="num">7971 ms</td>
         <td class="num">0</td>
-        <td class="num">7,677</td>
-        <td class="num">1334 ms</td>
-        <td class="num">1142 ms</td>
+        <td class="num">1410</td>
         <td class="num">6</td>
-        <td class="num">4</td>
+        <td class="num">1.000</td>
+      </tr>
+
+      <tr>
+        <td>trigger.dev</td>
+        <td>stress</td>
+        <td><code>e1950778</code></td>
+        <td class="num">2526</td>
+        <td class="num">2526</td>
+        <td class="num">9040</td>
+        <td class="num">21</td>
+        <td class="num">574,931</td>
+        <td class="num">6134 ms</td>
+        <td class="num">5963 ms</td>
+        <td class="num">247</td>
+        <td class="num">492</td>
+        <td class="num">23</td>
+        <td class="num">1.000</td>
+      </tr>
+
+      <tr>
+        <td>twenty</td>
+        <td>stress</td>
+        <td><code>ba493e5a</code></td>
+        <td class="num">18156</td>
+        <td class="num">18156</td>
+        <td class="num">65478</td>
+        <td class="num">64</td>
+        <td class="num">1,527,941</td>
+        <td class="num">20684 ms</td>
+        <td class="num">20421 ms</td>
+        <td class="num">233</td>
+        <td class="num">2334</td>
+        <td class="num">21</td>
+        <td class="num">1.000</td>
+      </tr>
+
+      <tr>
+        <td>unkey</td>
+        <td>stress</td>
+        <td><code>f6960494</code></td>
+        <td class="num">1934</td>
+        <td class="num">1934</td>
+        <td class="num">2931</td>
         <td class="num">10</td>
+        <td class="num">182,080</td>
+        <td class="num">2403 ms</td>
+        <td class="num">2350 ms</td>
+        <td class="num">68</td>
+        <td class="num">326</td>
+        <td class="num">7</td>
+        <td class="num">1.000</td>
+      </tr>
+
+      <tr>
+        <td>vite</td>
+        <td>stress</td>
+        <td><code>f94df87f</code></td>
+        <td class="num">1387</td>
+        <td class="num">1387</td>
+        <td class="num">1674</td>
+        <td class="num">28</td>
+        <td class="num">92,608</td>
+        <td class="num">1741 ms</td>
+        <td class="num">1615 ms</td>
+        <td class="num">144</td>
+        <td class="num">665</td>
+        <td class="num">10</td>
+        <td class="num">1.000</td>
+      </tr>
+
+      <tr>
+        <td>appsmith</td>
+        <td>stretch</td>
+        <td><code>a0620d91</code></td>
+        <td class="num">6551</td>
+        <td class="num">6551</td>
+        <td class="num">9344</td>
+        <td class="num">59</td>
+        <td class="num">945,546</td>
+        <td class="num">12996 ms</td>
+        <td class="num">12847 ms</td>
+        <td class="num">155</td>
+        <td class="num">1517</td>
+        <td class="num">7</td>
+        <td class="num">1.000</td>
+      </tr>
+
+      <tr>
+        <td>astro</td>
+        <td>stretch</td>
+        <td><code>fa7a2641</code></td>
+        <td class="num">2329</td>
+        <td class="num">2329</td>
+        <td class="num">3420</td>
+        <td class="num">16</td>
+        <td class="num">221,208</td>
+        <td class="num">3756 ms</td>
+        <td class="num">3443 ms</td>
+        <td class="num">977</td>
+        <td class="num">237</td>
+        <td class="num">12</td>
+        <td class="num">1.000</td>
+      </tr>
+
+      <tr>
+        <td>cal.com</td>
+        <td>stretch</td>
+        <td><code>180ede28</code></td>
+        <td class="num">4999</td>
+        <td class="num">4999</td>
+        <td class="num">9157</td>
+        <td class="num">24</td>
+        <td class="num">546,207</td>
+        <td class="num">9382 ms</td>
+        <td class="num">9058 ms</td>
+        <td class="num">343</td>
+        <td class="num">1194</td>
+        <td class="num">12</td>
+        <td class="num">1.000</td>
+      </tr>
+
+      <tr>
+        <td>expo</td>
+        <td>stretch</td>
+        <td><code>a6b8b0b7</code></td>
+        <td class="num">7080</td>
+        <td class="num">7080</td>
+        <td class="num">12023</td>
+        <td class="num">47</td>
+        <td class="num">814,797</td>
+        <td class="num">31292 ms</td>
+        <td class="num">30716 ms</td>
+        <td class="num">807</td>
+        <td class="num">2133</td>
+        <td class="num">11</td>
+        <td class="num">1.000</td>
+      </tr>
+
+      <tr>
+        <td>nuxt</td>
+        <td>stretch</td>
+        <td><code>60ecbc1b</code></td>
+        <td class="num">639</td>
+        <td class="num">639</td>
+        <td class="num">886</td>
+        <td class="num">6</td>
+        <td class="num">73,047</td>
+        <td class="num">1441 ms</td>
+        <td class="num">1398 ms</td>
+        <td class="num">126</td>
+        <td class="num">91</td>
+        <td class="num">9</td>
+        <td class="num">1.000</td>
+      </tr>
+
+      <tr>
+        <td>nx</td>
+        <td>stretch</td>
+        <td><code>412a37a1</code></td>
+        <td class="num">4434</td>
+        <td class="num">4434</td>
+        <td class="num">8161</td>
+        <td class="num">21</td>
+        <td class="num">890,522</td>
+        <td class="num">5946 ms</td>
+        <td class="num">5594 ms</td>
+        <td class="num">449</td>
+        <td class="num">598</td>
+        <td class="num">12</td>
+        <td class="num">1.000</td>
+      </tr>
+
+      <tr>
+        <td>plane</td>
+        <td>stretch</td>
+        <td><code>b1c78fe4</code></td>
+        <td class="num">3476</td>
+        <td class="num">3476</td>
+        <td class="num">7496</td>
+        <td class="num">39</td>
+        <td class="num">297,502</td>
+        <td class="num">5442 ms</td>
+        <td class="num">5253 ms</td>
+        <td class="num">78</td>
+        <td class="num">324</td>
+        <td class="num">10</td>
+        <td class="num">1.000</td>
+      </tr>
+
+      <tr>
+        <td>react-router</td>
+        <td>stretch</td>
+        <td><code>508d6674</code></td>
+        <td class="num">786</td>
+        <td class="num">786</td>
+        <td class="num">1327</td>
+        <td class="num">5</td>
+        <td class="num">194,816</td>
+        <td class="num">1711 ms</td>
+        <td class="num">1673 ms</td>
+        <td class="num">219</td>
+        <td class="num">166</td>
+        <td class="num">10</td>
+        <td class="num">1.000</td>
+      </tr>
+
+      <tr>
+        <td>sanity</td>
+        <td>stretch</td>
+        <td><code>054950f5</code></td>
+        <td class="num">4419</td>
+        <td class="num">4419</td>
+        <td class="num">9005</td>
+        <td class="num">45</td>
+        <td class="num">449,178</td>
+        <td class="num">4614 ms</td>
+        <td class="num">4469 ms</td>
+        <td class="num">178</td>
+        <td class="num">578</td>
+        <td class="num">12</td>
+        <td class="num">1.000</td>
+      </tr>
+
+      <tr>
+        <td>supabase</td>
+        <td>stretch</td>
+        <td><code>cd16e85d</code></td>
+        <td class="num">6791</td>
+        <td class="num">6791</td>
+        <td class="num">17863</td>
+        <td class="num">41</td>
+        <td class="num">852,682</td>
+        <td class="num">12492 ms</td>
+        <td class="num">12492 ms</td>
+        <td class="num">0</td>
+        <td class="num">805</td>
+        <td class="num">16</td>
+        <td class="num">1.000</td>
+      </tr>
+
+      <tr>
+        <td>turborepo</td>
+        <td>stretch</td>
+        <td><code>a0c4666d</code></td>
+        <td class="num">1047</td>
+        <td class="num">1047</td>
+        <td class="num">921</td>
+        <td class="num">4</td>
+        <td class="num">71,218</td>
+        <td class="num">2113 ms</td>
+        <td class="num">1872 ms</td>
+        <td class="num">1861</td>
+        <td class="num">321</td>
+        <td class="num">6</td>
+        <td class="num">1.000</td>
+      </tr>
+
+      <tr>
+        <td>vercel-monorepo</td>
+        <td>stretch</td>
+        <td><code>97fdbbe6</code></td>
+        <td class="num">5269</td>
+        <td class="num">5269</td>
+        <td class="num">8127</td>
+        <td class="num">21</td>
+        <td class="num">510,764</td>
+        <td class="num">9543 ms</td>
+        <td class="num">8862 ms</td>
+        <td class="num">1414</td>
+        <td class="num">351</td>
+        <td class="num">13</td>
+        <td class="num">1.000</td>
+      </tr>
+
+      <tr>
+        <td>medusa</td>
+        <td>stretch</td>
+        <td><code>08d7f0e9</code></td>
+        <td class="num">10697</td>
+        <td class="num">10697</td>
+        <td class="num">16172</td>
+        <td class="num">58</td>
+        <td class="num">1,057,552</td>
+        <td class="num">15517 ms</td>
+        <td class="num">15080 ms</td>
+        <td class="num">356</td>
+        <td class="num">2650</td>
+        <td class="num">9</td>
+        <td class="num">1.000</td>
+      </tr>
+
+      <tr>
+        <td>typeorm</td>
+        <td>medium</td>
+        <td><code>d513f227</code></td>
+        <td class="num">3550</td>
+        <td class="num">3550</td>
+        <td class="num">11610</td>
+        <td class="num">216</td>
+        <td class="num">300,404</td>
+        <td class="num">4136 ms</td>
+        <td class="num">3947 ms</td>
+        <td class="num">47</td>
+        <td class="num">186</td>
+        <td class="num">11</td>
+        <td class="num">1.000</td>
+      </tr>
+
+      <tr>
+        <td>prisma</td>
+        <td>stretch</td>
+        <td><code>42f91027</code></td>
+        <td class="num">2749</td>
+        <td class="num">2749</td>
+        <td class="num">5037</td>
+        <td class="num">17</td>
+        <td class="num">224,004</td>
+        <td class="num">6357 ms</td>
+        <td class="num">6221 ms</td>
+        <td class="num">469</td>
+        <td class="num">187</td>
+        <td class="num">10</td>
+        <td class="num">1.000</td>
+      </tr>
+
+      <tr>
+        <td>storybook</td>
+        <td>stretch</td>
+        <td><code>c4f53de9</code></td>
+        <td class="num">3410</td>
+        <td class="num">3410</td>
+        <td class="num">5237</td>
+        <td class="num">29</td>
+        <td class="num">422,832</td>
+        <td class="num">5304 ms</td>
+        <td class="num">5198 ms</td>
+        <td class="num">251</td>
+        <td class="num">541</td>
+        <td class="num">9</td>
+        <td class="num">1.000</td>
+      </tr>
+
+      <tr>
+        <td>jest</td>
+        <td>stress</td>
+        <td><code>4c3091b4</code></td>
+        <td class="num">1889</td>
+        <td class="num">1889</td>
+        <td class="num">1363</td>
+        <td class="num">9</td>
+        <td class="num">170,505</td>
+        <td class="num">2044 ms</td>
+        <td class="num">1897 ms</td>
+        <td class="num">229</td>
+        <td class="num">110</td>
+        <td class="num">5</td>
+        <td class="num">1.000</td>
+      </tr>
+
+      <tr>
+        <td>pnpm</td>
+        <td>stretch</td>
+        <td><code>71eea4d7</code></td>
+        <td class="num">1439</td>
+        <td class="num">1439</td>
+        <td class="num">1317</td>
+        <td class="num">17</td>
+        <td class="num">223,095</td>
+        <td class="num">3249 ms</td>
+        <td class="num">2918 ms</td>
+        <td class="num">1043</td>
+        <td class="num">217</td>
+        <td class="num">6</td>
+        <td class="num">1.000</td>
+      </tr>
+
+      <tr>
+        <td>backstage</td>
+        <td>stretch</td>
+        <td><code>1f709a38</code></td>
+        <td class="num">7147</td>
+        <td class="num">7147</td>
+        <td class="num">12099</td>
+        <td class="num">35</td>
+        <td class="num">917,984</td>
+        <td class="num">7672 ms</td>
+        <td class="num">7139 ms</td>
+        <td class="num">719</td>
+        <td class="num">741</td>
+        <td class="num">8</td>
+        <td class="num">1.000</td>
+      </tr>
+
+      <tr>
+        <td>gitkraken</td>
+        <td>medium</td>
+        <td><code>cd68d37b</code></td>
+        <td class="num">1455</td>
+        <td class="num">1455</td>
+        <td class="num">8502</td>
+        <td class="num">12</td>
+        <td class="num">393,318</td>
+        <td class="num">3240 ms</td>
+        <td class="num">3179 ms</td>
+        <td class="num">80</td>
+        <td class="num">232</td>
+        <td class="num">32</td>
+        <td class="num">1.000</td>
+      </tr>
+
+      <tr>
+        <td>tabler</td>
+        <td>medium</td>
+        <td><code>d8bbb1e5</code></td>
+        <td class="num">70</td>
+        <td class="num">70</td>
+        <td class="num">175</td>
+        <td class="num">0</td>
+        <td class="num">16,290</td>
+        <td class="num">550 ms</td>
+        <td class="num">470 ms</td>
+        <td class="num">59</td>
+        <td class="num">14</td>
+        <td class="num">18</td>
+        <td class="num">1.000</td>
+      </tr>
+
+      <tr>
+        <td>immich</td>
+        <td>stress</td>
+        <td><code>69b19464</code></td>
+        <td class="num">985</td>
+        <td class="num">985</td>
+        <td class="num">3228</td>
+        <td class="num">7</td>
+        <td class="num">148,893</td>
+        <td class="num">2094 ms</td>
+        <td class="num">2031 ms</td>
+        <td class="num">81</td>
+        <td class="num">313</td>
+        <td class="num">23</td>
+        <td class="num">1.000</td>
+      </tr>
+
+      <tr>
+        <td>appwrite</td>
+        <td>stress</td>
+        <td><code>fa4de8e7</code></td>
+        <td class="num">86</td>
+        <td class="num">86</td>
+        <td class="num">144</td>
+        <td class="num">3</td>
+        <td class="num">18,914</td>
+        <td class="num">603 ms</td>
+        <td class="num">551 ms</td>
+        <td class="num">6</td>
+        <td class="num">14</td>
+        <td class="num">12</td>
+        <td class="num">1.000</td>
+      </tr>
+
+      <tr>
+        <td>directus</td>
+        <td>stress</td>
+        <td><code>4290f6e1</code></td>
+        <td class="num">2986</td>
+        <td class="num">2986</td>
+        <td class="num">6652</td>
+        <td class="num">18</td>
+        <td class="num">368,184</td>
+        <td class="num">5991 ms</td>
+        <td class="num">5875 ms</td>
+        <td class="num">167</td>
+        <td class="num">431</td>
+        <td class="num">13</td>
+        <td class="num">1.000</td>
+      </tr>
+
+      <tr>
+        <td>keystone</td>
+        <td>medium</td>
+        <td><code>033d0652</code></td>
+        <td class="num">910</td>
+        <td class="num">910</td>
+        <td class="num">1776</td>
+        <td class="num">16</td>
+        <td class="num">106,734</td>
+        <td class="num">1742 ms</td>
+        <td class="num">1678 ms</td>
+        <td class="num">250</td>
+        <td class="num">133</td>
+        <td class="num">13</td>
+        <td class="num">1.000</td>
+      </tr>
+
+      <tr>
+        <td>umami</td>
+        <td>medium</td>
+        <td><code>c0ea3aef</code></td>
+        <td class="num">834</td>
+        <td class="num">834</td>
+        <td class="num">2920</td>
+        <td class="num">4</td>
+        <td class="num">50,449</td>
+        <td class="num">1011 ms</td>
+        <td class="num">987 ms</td>
+        <td class="num">30</td>
+        <td class="num">44</td>
+        <td class="num">15</td>
+        <td class="num">1.000</td>
+      </tr>
+
+      <tr>
+        <td>posthog</td>
+        <td>stretch</td>
+        <td><code>17d5505e</code></td>
+        <td class="num">8398</td>
+        <td class="num">8398</td>
+        <td class="num">43016</td>
+        <td class="num">29</td>
+        <td class="num">1,741,720</td>
+        <td class="num">29175 ms</td>
+        <td class="num">29175 ms</td>
+        <td class="num">0</td>
+        <td class="num">536</td>
+        <td class="num">25</td>
+        <td class="num">1.000</td>
+      </tr>
+
+      <tr>
+        <td>outline</td>
+        <td>stress</td>
+        <td><code>b2309df7</code></td>
+        <td class="num">2244</td>
+        <td class="num">2244</td>
+        <td class="num">10333</td>
+        <td class="num">8</td>
+        <td class="num">285,621</td>
+        <td class="num">3094 ms</td>
+        <td class="num">3051 ms</td>
+        <td class="num">33</td>
+        <td class="num">445</td>
+        <td class="num">26</td>
+        <td class="num">1.000</td>
+      </tr>
+
+      <tr>
+        <td>calcom-api</td>
+        <td>stress</td>
+        <td><code>180ede28</code></td>
+        <td class="num">625</td>
+        <td class="num">625</td>
+        <td class="num">122</td>
+        <td class="num">0</td>
+        <td class="num">70,940</td>
+        <td class="num">1268 ms</td>
+        <td class="num">1245 ms</td>
+        <td class="num">19</td>
+        <td class="num">458</td>
+        <td class="num">2</td>
+        <td class="num">1.000</td>
+      </tr>
+
+      <tr>
+        <td>supabase-studio</td>
+        <td>stress</td>
+        <td><code>cd16e85d</code></td>
+        <td class="num">3700</td>
+        <td class="num">3700</td>
+        <td class="num">14539</td>
+        <td class="num">29</td>
+        <td class="num">529,757</td>
+        <td class="num">9079 ms</td>
+        <td class="num">8993 ms</td>
+        <td class="num">21</td>
+        <td class="num">197</td>
+        <td class="num">20</td>
         <td class="num">1.000</td>
       </tr></tbody>
 </table>
@@ -205,15 +1157,71 @@
 <object type="image/svg+xml" data="./parser-perf.svg"></object>
 
 <h2>Node-degree distribution (per repo)</h2>
-<ul><li><a href="./degree-vercel-commerce.svg">degree-vercel-commerce.svg</a></li>
-<li><a href="./degree-shadcn-taxonomy.svg">degree-shadcn-taxonomy.svg</a></li>
+<ul><li><a href="./degree-create-t3-app.svg">degree-create-t3-app.svg</a></li>
 <li><a href="./degree-create-t3-turbo.svg">degree-create-t3-turbo.svg</a></li>
-<li><a href="./degree-unkey.svg">degree-unkey.svg</a></li>
-<li><a href="./degree-react-email.svg">degree-react-email.svg</a></li>
+<li><a href="./degree-hono.svg">degree-hono.svg</a></li>
+<li><a href="./degree-music.eduardlupu.com.svg">degree-music.eduardlupu.com.svg</a></li>
+<li><a href="./degree-tailwind-nextjs-starter-blog.svg">degree-tailwind-nextjs-starter-blog.svg</a></li>
+<li><a href="./degree-vercel-commerce.svg">degree-vercel-commerce.svg</a></li>
+<li><a href="./degree-zustand.svg">degree-zustand.svg</a></li>
+<li><a href="./degree-cap.svg">degree-cap.svg</a></li>
+<li><a href="./degree-chakra-ui.svg">degree-chakra-ui.svg</a></li>
+<li><a href="./degree-depmod.svg">degree-depmod.svg</a></li>
+<li><a href="./degree-drizzle-orm.svg">degree-drizzle-orm.svg</a></li>
+<li><a href="./degree-langfuse.svg">degree-langfuse.svg</a></li>
+<li><a href="./degree-mastra.svg">degree-mastra.svg</a></li>
+<li><a href="./degree-next-auth.svg">degree-next-auth.svg</a></li>
+<li><a href="./degree-openstatus.svg">degree-openstatus.svg</a></li>
+<li><a href="./degree-radix-primitives.svg">degree-radix-primitives.svg</a></li>
+<li><a href="./degree-shadcn-taxonomy.svg">degree-shadcn-taxonomy.svg</a></li>
+<li><a href="./degree-shadcn-ui.svg">degree-shadcn-ui.svg</a></li>
+<li><a href="./degree-tanstack-query.svg">degree-tanstack-query.svg</a></li>
+<li><a href="./degree-trpc.svg">degree-trpc.svg</a></li>
+<li><a href="./degree-uploadthing.svg">degree-uploadthing.svg</a></li>
+<li><a href="./degree-cal-web.svg">degree-cal-web.svg</a></li>
 <li><a href="./degree-documenso.svg">degree-documenso.svg</a></li>
 <li><a href="./degree-dub.svg">degree-dub.svg</a></li>
+<li><a href="./degree-formbricks.svg">degree-formbricks.svg</a></li>
+<li><a href="./degree-hoppscotch.svg">degree-hoppscotch.svg</a></li>
+<li><a href="./degree-infisical.svg">degree-infisical.svg</a></li>
+<li><a href="./degree-novu.svg">degree-novu.svg</a></li>
+<li><a href="./degree-payload.svg">degree-payload.svg</a></li>
+<li><a href="./degree-plane-web.svg">degree-plane-web.svg</a></li>
+<li><a href="./degree-react-email.svg">degree-react-email.svg</a></li>
+<li><a href="./degree-refine.svg">degree-refine.svg</a></li>
+<li><a href="./degree-trigger.dev.svg">degree-trigger.dev.svg</a></li>
+<li><a href="./degree-twenty.svg">degree-twenty.svg</a></li>
+<li><a href="./degree-unkey.svg">degree-unkey.svg</a></li>
+<li><a href="./degree-vite.svg">degree-vite.svg</a></li>
+<li><a href="./degree-appsmith.svg">degree-appsmith.svg</a></li>
+<li><a href="./degree-astro.svg">degree-astro.svg</a></li>
 <li><a href="./degree-cal.com.svg">degree-cal.com.svg</a></li>
-<li><a href="./degree-cal-web.svg">degree-cal-web.svg</a></li>
-<li><a href="./degree-music.eduardlupu.com.svg">degree-music.eduardlupu.com.svg</a></li></ul>
+<li><a href="./degree-expo.svg">degree-expo.svg</a></li>
+<li><a href="./degree-nuxt.svg">degree-nuxt.svg</a></li>
+<li><a href="./degree-nx.svg">degree-nx.svg</a></li>
+<li><a href="./degree-plane.svg">degree-plane.svg</a></li>
+<li><a href="./degree-react-router.svg">degree-react-router.svg</a></li>
+<li><a href="./degree-sanity.svg">degree-sanity.svg</a></li>
+<li><a href="./degree-supabase.svg">degree-supabase.svg</a></li>
+<li><a href="./degree-turborepo.svg">degree-turborepo.svg</a></li>
+<li><a href="./degree-vercel-monorepo.svg">degree-vercel-monorepo.svg</a></li>
+<li><a href="./degree-medusa.svg">degree-medusa.svg</a></li>
+<li><a href="./degree-typeorm.svg">degree-typeorm.svg</a></li>
+<li><a href="./degree-prisma.svg">degree-prisma.svg</a></li>
+<li><a href="./degree-storybook.svg">degree-storybook.svg</a></li>
+<li><a href="./degree-jest.svg">degree-jest.svg</a></li>
+<li><a href="./degree-pnpm.svg">degree-pnpm.svg</a></li>
+<li><a href="./degree-backstage.svg">degree-backstage.svg</a></li>
+<li><a href="./degree-gitkraken.svg">degree-gitkraken.svg</a></li>
+<li><a href="./degree-tabler.svg">degree-tabler.svg</a></li>
+<li><a href="./degree-immich.svg">degree-immich.svg</a></li>
+<li><a href="./degree-appwrite.svg">degree-appwrite.svg</a></li>
+<li><a href="./degree-directus.svg">degree-directus.svg</a></li>
+<li><a href="./degree-keystone.svg">degree-keystone.svg</a></li>
+<li><a href="./degree-umami.svg">degree-umami.svg</a></li>
+<li><a href="./degree-posthog.svg">degree-posthog.svg</a></li>
+<li><a href="./degree-outline.svg">degree-outline.svg</a></li>
+<li><a href="./degree-calcom-api.svg">degree-calcom-api.svg</a></li>
+<li><a href="./degree-supabase-studio.svg">degree-supabase-studio.svg</a></li></ul>
 </body>
 </html>

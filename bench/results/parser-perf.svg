@@ -1,1 +1,178 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="720" height="440" font-family="ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif" viewBox="0 0 720 440"><rect width="720" height="440" fill="#0f0f0f"/><text x="360" y="18" fill="#d4d4d4" font-size="13" font-weight="600" text-anchor="middle">Parser wall-clock vs codebase size</text><line x1="64" x2="696" y1="384" y2="384" stroke="#3a3a3a" stroke-width="1"/><line x1="64" x2="64" y1="28" y2="384" stroke="#3a3a3a" stroke-width="1"/><line x1="64" x2="64" y1="384" y2="388" stroke="#3a3a3a"/><text x="64" y="402" fill="#8a8a8a" font-size="10" text-anchor="middle">0</text><line x1="190.4" x2="190.4" y1="384" y2="388" stroke="#3a3a3a"/><text x="190.4" y="402" fill="#8a8a8a" font-size="10" text-anchor="middle">120k</text><line x1="316.8" x2="316.8" y1="384" y2="388" stroke="#3a3a3a"/><text x="316.8" y="402" fill="#8a8a8a" font-size="10" text-anchor="middle">240k</text><line x1="443.2" x2="443.2" y1="384" y2="388" stroke="#3a3a3a"/><text x="443.2" y="402" fill="#8a8a8a" font-size="10" text-anchor="middle">360k</text><line x1="569.6" x2="569.6" y1="384" y2="388" stroke="#3a3a3a"/><text x="569.6" y="402" fill="#8a8a8a" font-size="10" text-anchor="middle">480k</text><line x1="696" x2="696" y1="384" y2="388" stroke="#3a3a3a"/><text x="696" y="402" fill="#8a8a8a" font-size="10" text-anchor="middle">600k</text><line x1="60" x2="64" y1="384" y2="384" stroke="#3a3a3a"/><text x="56" y="388" fill="#8a8a8a" font-size="10" text-anchor="end">0ms</text><line x1="64" x2="696" y1="384" y2="384" stroke="#3a3a3a" stroke-opacity=".3"/><line x1="60" x2="64" y1="312.8" y2="312.8" stroke="#3a3a3a"/><text x="56" y="316.8" fill="#8a8a8a" font-size="10" text-anchor="end">1.6s</text><line x1="64" x2="696" y1="312.8" y2="312.8" stroke="#3a3a3a" stroke-opacity=".3"/><line x1="60" x2="64" y1="241.6" y2="241.6" stroke="#3a3a3a"/><text x="56" y="245.6" fill="#8a8a8a" font-size="10" text-anchor="end">3.2s</text><line x1="64" x2="696" y1="241.6" y2="241.6" stroke="#3a3a3a" stroke-opacity=".3"/><line x1="60" x2="64" y1="170.4" y2="170.4" stroke="#3a3a3a"/><text x="56" y="174.4" fill="#8a8a8a" font-size="10" text-anchor="end">4.8s</text><line x1="64" x2="696" y1="170.4" y2="170.4" stroke="#3a3a3a" stroke-opacity=".3"/><line x1="60" x2="64" y1="99.2" y2="99.2" stroke="#3a3a3a"/><text x="56" y="103.2" fill="#8a8a8a" font-size="10" text-anchor="end">6.4s</text><line x1="64" x2="696" y1="99.2" y2="99.2" stroke="#3a3a3a" stroke-opacity=".3"/><line x1="60" x2="64" y1="28" y2="28" stroke="#3a3a3a"/><text x="56" y="32" fill="#8a8a8a" font-size="10" text-anchor="end">8.0s</text><line x1="64" x2="696" y1="28" y2="28" stroke="#3a3a3a" stroke-opacity=".3"/><text x="380" y="426" fill="#8a8a8a" font-size="11" text-anchor="middle">total LOC</text><text x="-206" y="16" fill="#8a8a8a" font-size="11" text-anchor="middle" transform="rotate(-90)">parse time (ms)</text><circle cx="68.104" cy="365.889" r="6" fill="#4f7fdf" stroke="#0f0f0f" stroke-width="1.5"/><text x="78.104" y="369.889" fill="#d4d4d4" font-size="11">vercel-commerce</text><circle cx="72.142" cy="368.425" r="6" fill="#5cb573" stroke="#0f0f0f" stroke-width="1.5"/><text x="82.142" y="372.425" fill="#d4d4d4" font-size="11">shadcn-taxonomy</text><circle cx="67.55" cy="369.271" r="6" fill="#5cb573" stroke="#0f0f0f" stroke-width="1.5"/><text x="77.55" y="373.271" fill="#d4d4d4" font-size="11">create-t3-turbo</text><circle cx="253.92" cy="263.894" r="6" fill="#5cb573" stroke="#0f0f0f" stroke-width="1.5"/><text x="263.92" y="267.894" fill="#d4d4d4" font-size="11">unkey</text><circle cx="275.537" cy="311.065" r="6" fill="#5cb573" stroke="#0f0f0f" stroke-width="1.5"/><text x="285.537" y="315.065" fill="#d4d4d4" font-size="11">react-email</text><circle cx="309.805" cy="255.796" r="6" fill="#e0a955" stroke="#0f0f0f" stroke-width="1.5"/><text x="319.805" y="259.796" fill="#d4d4d4" font-size="11">documenso</text><circle cx="523.103" cy="173.649" r="6" fill="#e0a955" stroke="#0f0f0f" stroke-width="1.5"/><text x="533.103" y="177.649" fill="#d4d4d4" font-size="11">dub</text><circle cx="639.338" cy="66.137" r="6" fill="#dc6555" stroke="#0f0f0f" stroke-width="1.5"/><text x="649.338" y="70.137" fill="#d4d4d4" font-size="11">cal.com</text><circle cx="197.069" cy="313.067" r="6" fill="#e0a955" stroke="#0f0f0f" stroke-width="1.5"/><text x="207.069" y="317.067" fill="#d4d4d4" font-size="11">cal-web</text><circle cx="72.086" cy="324.637" r="6" fill="#dc6555" stroke="#0f0f0f" stroke-width="1.5"/><text x="82.086" y="328.637" fill="#d4d4d4" font-size="11">music.eduardlupu.com</text><circle cx="80" cy="40" r="4" fill="#4f7fdf"/><text x="90" y="44" fill="#8a8a8a" font-size="10">primary</text><circle cx="80" cy="54" r="4" fill="#5cb573"/><text x="90" y="58" fill="#8a8a8a" font-size="10">medium</text><circle cx="80" cy="68" r="4" fill="#e0a955"/><text x="90" y="72" fill="#8a8a8a" font-size="10">stress</text><circle cx="80" cy="82" r="4" fill="#dc6555"/><text x="90" y="86" fill="#8a8a8a" font-size="10">stretch</text></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 440" width="720" height="440" font-family="ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif">
+<rect width="720" height="440" fill="#0f0f0f"/>
+<text x="360" y="18" fill="#d4d4d4" font-size="13" font-weight="600" text-anchor="middle">Parser wall-clock vs codebase size</text>
+<line x1="64" y1="384" x2="696" y2="384" stroke="#3a3a3a" stroke-width="1"/>
+<line x1="64" y1="28" x2="64" y2="384" stroke="#3a3a3a" stroke-width="1"/>
+<line x1="64" y1="384" x2="64" y2="388" stroke="#3a3a3a"/>
+<text x="64" y="402" fill="#8a8a8a" font-size="10" text-anchor="middle">0</text>
+<line x1="190.4" y1="384" x2="190.4" y2="388" stroke="#3a3a3a"/>
+<text x="190.4" y="402" fill="#8a8a8a" font-size="10" text-anchor="middle">400k</text>
+<line x1="316.8" y1="384" x2="316.8" y2="388" stroke="#3a3a3a"/>
+<text x="316.8" y="402" fill="#8a8a8a" font-size="10" text-anchor="middle">800k</text>
+<line x1="443.2" y1="384" x2="443.2" y2="388" stroke="#3a3a3a"/>
+<text x="443.2" y="402" fill="#8a8a8a" font-size="10" text-anchor="middle">1200k</text>
+<line x1="569.6" y1="384" x2="569.6" y2="388" stroke="#3a3a3a"/>
+<text x="569.6" y="402" fill="#8a8a8a" font-size="10" text-anchor="middle">1600k</text>
+<line x1="696" y1="384" x2="696" y2="388" stroke="#3a3a3a"/>
+<text x="696" y="402" fill="#8a8a8a" font-size="10" text-anchor="middle">2000k</text>
+<line x1="60" y1="384" x2="64" y2="384" stroke="#3a3a3a"/>
+<text x="56" y="388" fill="#8a8a8a" font-size="10" text-anchor="end">0ms</text>
+<line x1="64" y1="384" x2="696" y2="384" stroke="#3a3a3a" stroke-opacity="0.3"/>
+<line x1="60" y1="312.8" x2="64" y2="312.8" stroke="#3a3a3a"/>
+<text x="56" y="316.8" fill="#8a8a8a" font-size="10" text-anchor="end">8.0s</text>
+<line x1="64" y1="312.8" x2="696" y2="312.8" stroke="#3a3a3a" stroke-opacity="0.3"/>
+<line x1="60" y1="241.6" x2="64" y2="241.6" stroke="#3a3a3a"/>
+<text x="56" y="245.6" fill="#8a8a8a" font-size="10" text-anchor="end">16.0s</text>
+<line x1="64" y1="241.6" x2="696" y2="241.6" stroke="#3a3a3a" stroke-opacity="0.3"/>
+<line x1="60" y1="170.4" x2="64" y2="170.4" stroke="#3a3a3a"/>
+<text x="56" y="174.4" fill="#8a8a8a" font-size="10" text-anchor="end">24.0s</text>
+<line x1="64" y1="170.4" x2="696" y2="170.4" stroke="#3a3a3a" stroke-opacity="0.3"/>
+<line x1="60" y1="99.19999999999999" x2="64" y2="99.19999999999999" stroke="#3a3a3a"/>
+<text x="56" y="103.19999999999999" fill="#8a8a8a" font-size="10" text-anchor="end">32.0s</text>
+<line x1="64" y1="99.19999999999999" x2="696" y2="99.19999999999999" stroke="#3a3a3a" stroke-opacity="0.3"/>
+<line x1="60" y1="28" x2="64" y2="28" stroke="#3a3a3a"/>
+<text x="56" y="32" fill="#8a8a8a" font-size="10" text-anchor="end">40.0s</text>
+<line x1="64" y1="28" x2="696" y2="28" stroke="#3a3a3a" stroke-opacity="0.3"/>
+<text x="380" y="426" fill="#8a8a8a" font-size="11" text-anchor="middle" >total LOC</text>
+<text x="-206" y="16" fill="#8a8a8a" font-size="11" text-anchor="middle" transform="rotate(-90)">parse time (ms)</text>
+<circle cx="67.485796" cy="379.5856" r="6" fill="#4f7fdf" stroke="#0f0f0f" stroke-width="1.5"/>
+<text x="77.485796" y="383.5856" fill="#d4d4d4" font-size="11">create-t3-app</text>
+<circle cx="65.06492" cy="381.241" r="6" fill="#4f7fdf" stroke="#0f0f0f" stroke-width="1.5"/>
+<text x="75.06492" y="385.241" fill="#d4d4d4" font-size="11">create-t3-turbo</text>
+<circle cx="88.658744" cy="375.6874" r="6" fill="#4f7fdf" stroke="#0f0f0f" stroke-width="1.5"/>
+<text x="98.658744" y="379.6874" fill="#d4d4d4" font-size="11">hono</text>
+<circle cx="66.425932" cy="373.5425" r="6" fill="#4f7fdf" stroke="#0f0f0f" stroke-width="1.5"/>
+<text x="76.425932" y="377.5425" fill="#d4d4d4" font-size="11">music.eduardlupu.com</text>
+<circle cx="64.849724" cy="381.7661" r="6" fill="#4f7fdf" stroke="#0f0f0f" stroke-width="1.5"/>
+<text x="74.849724" y="385.7661" fill="#d4d4d4" font-size="11">tailwind-nextjs-starter-blog</text>
+<circle cx="65.231136" cy="381.5436" r="6" fill="#4f7fdf" stroke="#0f0f0f" stroke-width="1.5"/>
+<text x="75.231136" y="385.5436" fill="#d4d4d4" font-size="11">vercel-commerce</text>
+<circle cx="66.99252" cy="380.6002" r="6" fill="#4f7fdf" stroke="#0f0f0f" stroke-width="1.5"/>
+<text x="76.99252" y="384.6002" fill="#d4d4d4" font-size="11">zustand</text>
+<circle cx="136.855064" cy="366.734" r="6" fill="#5cb573" stroke="#0f0f0f" stroke-width="1.5"/>
+<text x="146.855064" y="370.734" fill="#d4d4d4" font-size="11">cap</text>
+<circle cx="123.68292" cy="353.9091" r="6" fill="#5cb573" stroke="#0f0f0f" stroke-width="1.5"/>
+<text x="133.68292" y="357.9091" fill="#d4d4d4" font-size="11">chakra-ui</text>
+<circle cx="70.026752" cy="379.2296" r="6" fill="#5cb573" stroke="#0f0f0f" stroke-width="1.5"/>
+<text x="80.026752" y="383.2296" fill="#d4d4d4" font-size="11">depmod</text>
+<circle cx="205.241888" cy="361.6966" r="6" fill="#5cb573" stroke="#0f0f0f" stroke-width="1.5"/>
+<text x="215.241888" y="365.6966" fill="#d4d4d4" font-size="11">drizzle-orm</text>
+<circle cx="240.760604" cy="336.2693" r="6" fill="#5cb573" stroke="#0f0f0f" stroke-width="1.5"/>
+<text x="250.760604" y="340.2693" fill="#d4d4d4" font-size="11">langfuse</text>
+<circle cx="594.633836" cy="248.7912" r="6" fill="#5cb573" stroke="#0f0f0f" stroke-width="1.5"/>
+<text x="604.633836" y="252.7912" fill="#d4d4d4" font-size="11">mastra</text>
+<circle cx="80.8349" cy="371.0416" r="6" fill="#5cb573" stroke="#0f0f0f" stroke-width="1.5"/>
+<text x="90.8349" y="375.0416" fill="#d4d4d4" font-size="11">next-auth</text>
+<circle cx="132.413052" cy="365.2922" r="6" fill="#5cb573" stroke="#0f0f0f" stroke-width="1.5"/>
+<text x="142.413052" y="369.2922" fill="#d4d4d4" font-size="11">openstatus</text>
+<circle cx="78.562228" cy="376.2214" r="6" fill="#5cb573" stroke="#0f0f0f" stroke-width="1.5"/>
+<text x="88.562228" y="380.2214" fill="#d4d4d4" font-size="11">radix-primitives</text>
+<circle cx="66.44268" cy="380.9562" r="6" fill="#5cb573" stroke="#0f0f0f" stroke-width="1.5"/>
+<text x="76.44268" y="384.9562" fill="#d4d4d4" font-size="11">shadcn-taxonomy</text>
+<circle cx="218.823568" cy="353.9002" r="6" fill="#5cb573" stroke="#0f0f0f" stroke-width="1.5"/>
+<text x="228.823568" y="357.9002" fill="#d4d4d4" font-size="11">shadcn-ui</text>
+<circle cx="117.635944" cy="362.729" r="6" fill="#5cb573" stroke="#0f0f0f" stroke-width="1.5"/>
+<text x="127.635944" y="366.729" fill="#d4d4d4" font-size="11">tanstack-query</text>
+<circle cx="100.762176" cy="362.6756" r="6" fill="#5cb573" stroke="#0f0f0f" stroke-width="1.5"/>
+<text x="110.762176" y="366.6756" fill="#d4d4d4" font-size="11">trpc</text>
+<circle cx="76.36192" cy="373.7027" r="6" fill="#5cb573" stroke="#0f0f0f" stroke-width="1.5"/>
+<text x="86.36192" y="377.7027" fill="#d4d4d4" font-size="11">uploadthing</text>
+<circle cx="103.920596" cy="365.5681" r="6" fill="#e0a955" stroke="#0f0f0f" stroke-width="1.5"/>
+<text x="113.920596" y="369.5681" fill="#d4d4d4" font-size="11">cal-web</text>
+<circle cx="139.265196" cy="351.93330000000003" r="6" fill="#e0a955" stroke="#0f0f0f" stroke-width="1.5"/>
+<text x="149.265196" y="355.93330000000003" fill="#d4d4d4" font-size="11">documenso</text>
+<circle cx="202.249684" cy="332.1842" r="6" fill="#e0a955" stroke="#0f0f0f" stroke-width="1.5"/>
+<text x="212.249684" y="336.1842" fill="#d4d4d4" font-size="11">dub</text>
+<circle cx="187.231468" cy="340.7193" r="6" fill="#e0a955" stroke="#0f0f0f" stroke-width="1.5"/>
+<text x="197.231468" y="344.7193" fill="#d4d4d4" font-size="11">formbricks</text>
+<circle cx="131.673296" cy="366.912" r="6" fill="#e0a955" stroke="#0f0f0f" stroke-width="1.5"/>
+<text x="141.673296" y="370.912" fill="#d4d4d4" font-size="11">hoppscotch</text>
+<circle cx="366.110852" cy="278.1701" r="6" fill="#e0a955" stroke="#0f0f0f" stroke-width="1.5"/>
+<text x="376.110852" y="282.1701" fill="#d4d4d4" font-size="11">infisical</text>
+<circle cx="303.49166" cy="308.64369999999997" r="6" fill="#e0a955" stroke="#0f0f0f" stroke-width="1.5"/>
+<text x="313.49166" y="312.64369999999997" fill="#d4d4d4" font-size="11">novu</text>
+<circle cx="302.372704" cy="269.5994" r="6" fill="#e0a955" stroke="#0f0f0f" stroke-width="1.5"/>
+<text x="312.372704" y="273.5994" fill="#d4d4d4" font-size="11">payload</text>
+<circle cx="121.50252" cy="368.8077" r="6" fill="#e0a955" stroke="#0f0f0f" stroke-width="1.5"/>
+<text x="131.50252" y="372.8077" fill="#d4d4d4" font-size="11">plane-web</text>
+<circle cx="127.55076" cy="366.2979" r="6" fill="#e0a955" stroke="#0f0f0f" stroke-width="1.5"/>
+<text x="137.55076" y="370.2979" fill="#d4d4d4" font-size="11">react-email</text>
+<circle cx="247.689852" cy="313.05809999999997" r="6" fill="#e0a955" stroke="#0f0f0f" stroke-width="1.5"/>
+<text x="257.689852" y="317.05809999999997" fill="#d4d4d4" font-size="11">refine</text>
+<circle cx="245.678196" cy="329.4074" r="6" fill="#e0a955" stroke="#0f0f0f" stroke-width="1.5"/>
+<text x="255.678196" y="333.4074" fill="#d4d4d4" font-size="11">trigger.dev</text>
+<circle cx="546.829356" cy="199.9124" r="6" fill="#e0a955" stroke="#0f0f0f" stroke-width="1.5"/>
+<text x="556.829356" y="203.9124" fill="#d4d4d4" font-size="11">twenty</text>
+<circle cx="121.53728000000001" cy="362.6133" r="6" fill="#e0a955" stroke="#0f0f0f" stroke-width="1.5"/>
+<text x="131.53728" y="366.6133" fill="#d4d4d4" font-size="11">unkey</text>
+<circle cx="93.264128" cy="368.5051" r="6" fill="#e0a955" stroke="#0f0f0f" stroke-width="1.5"/>
+<text x="103.264128" y="372.5051" fill="#d4d4d4" font-size="11">vite</text>
+<circle cx="362.792536" cy="268.3356" r="6" fill="#dc6555" stroke="#0f0f0f" stroke-width="1.5"/>
+<text x="372.792536" y="272.3356" fill="#d4d4d4" font-size="11">appsmith</text>
+<circle cx="133.901728" cy="350.5716" r="6" fill="#dc6555" stroke="#0f0f0f" stroke-width="1.5"/>
+<text x="143.901728" y="354.5716" fill="#d4d4d4" font-size="11">astro</text>
+<circle cx="236.601412" cy="300.5002" r="6" fill="#dc6555" stroke="#0f0f0f" stroke-width="1.5"/>
+<text x="246.601412" y="304.5002" fill="#d4d4d4" font-size="11">cal.com</text>
+<circle cx="321.475852" cy="105.50119999999998" r="6" fill="#dc6555" stroke="#0f0f0f" stroke-width="1.5"/>
+<text x="331.475852" y="109.50119999999998" fill="#d4d4d4" font-size="11">expo</text>
+<circle cx="87.082852" cy="371.1751" r="6" fill="#dc6555" stroke="#0f0f0f" stroke-width="1.5"/>
+<text x="97.082852" y="375.1751" fill="#d4d4d4" font-size="11">nuxt</text>
+<circle cx="345.404952" cy="331.0806" r="6" fill="#dc6555" stroke="#0f0f0f" stroke-width="1.5"/>
+<text x="355.404952" y="335.0806" fill="#d4d4d4" font-size="11">nx</text>
+<circle cx="158.010632" cy="335.5662" r="6" fill="#dc6555" stroke="#0f0f0f" stroke-width="1.5"/>
+<text x="168.010632" y="339.5662" fill="#d4d4d4" font-size="11">plane</text>
+<circle cx="125.561856" cy="368.7721" r="6" fill="#dc6555" stroke="#0f0f0f" stroke-width="1.5"/>
+<text x="135.561856" y="372.7721" fill="#d4d4d4" font-size="11">react-router</text>
+<circle cx="205.940248" cy="342.9354" r="6" fill="#dc6555" stroke="#0f0f0f" stroke-width="1.5"/>
+<text x="215.940248" y="346.9354" fill="#d4d4d4" font-size="11">sanity</text>
+<circle cx="333.447512" cy="272.8212" r="6" fill="#dc6555" stroke="#0f0f0f" stroke-width="1.5"/>
+<text x="343.447512" y="276.8212" fill="#d4d4d4" font-size="11">supabase</text>
+<circle cx="86.504888" cy="365.1943" r="6" fill="#dc6555" stroke="#0f0f0f" stroke-width="1.5"/>
+<text x="96.504888" y="369.1943" fill="#d4d4d4" font-size="11">turborepo</text>
+<circle cx="225.401424" cy="299.0673" r="6" fill="#dc6555" stroke="#0f0f0f" stroke-width="1.5"/>
+<text x="235.401424" y="303.0673" fill="#d4d4d4" font-size="11">vercel-monorepo</text>
+<circle cx="398.186432" cy="245.8987" r="6" fill="#dc6555" stroke="#0f0f0f" stroke-width="1.5"/>
+<text x="408.186432" y="249.8987" fill="#d4d4d4" font-size="11">medusa</text>
+<circle cx="158.927664" cy="347.1896" r="6" fill="#5cb573" stroke="#0f0f0f" stroke-width="1.5"/>
+<text x="168.927664" y="351.1896" fill="#d4d4d4" font-size="11">typeorm</text>
+<circle cx="134.78526399999998" cy="327.4227" r="6" fill="#dc6555" stroke="#0f0f0f" stroke-width="1.5"/>
+<text x="144.78526399999998" y="331.4227" fill="#d4d4d4" font-size="11">prisma</text>
+<circle cx="197.614912" cy="336.7944" r="6" fill="#dc6555" stroke="#0f0f0f" stroke-width="1.5"/>
+<text x="207.614912" y="340.7944" fill="#d4d4d4" font-size="11">storybook</text>
+<circle cx="117.87958" cy="365.8084" r="6" fill="#e0a955" stroke="#0f0f0f" stroke-width="1.5"/>
+<text x="127.87958" y="369.8084" fill="#d4d4d4" font-size="11">jest</text>
+<circle cx="134.49802" cy="355.08389999999997" r="6" fill="#dc6555" stroke="#0f0f0f" stroke-width="1.5"/>
+<text x="144.49802" y="359.08389999999997" fill="#d4d4d4" font-size="11">pnpm</text>
+<circle cx="354.082944" cy="315.7192" r="6" fill="#dc6555" stroke="#0f0f0f" stroke-width="1.5"/>
+<text x="364.082944" y="319.7192" fill="#d4d4d4" font-size="11">backstage</text>
+<circle cx="188.288488" cy="355.164" r="6" fill="#5cb573" stroke="#0f0f0f" stroke-width="1.5"/>
+<text x="198.288488" y="359.164" fill="#d4d4d4" font-size="11">gitkraken</text>
+<circle cx="69.14764" cy="379.105" r="6" fill="#5cb573" stroke="#0f0f0f" stroke-width="1.5"/>
+<text x="79.14764" y="383.105" fill="#d4d4d4" font-size="11">tabler</text>
+<circle cx="111.05018799999999" cy="365.3634" r="6" fill="#e0a955" stroke="#0f0f0f" stroke-width="1.5"/>
+<text x="121.05018799999999" y="369.3634" fill="#d4d4d4" font-size="11">immich</text>
+<circle cx="69.976824" cy="378.6333" r="6" fill="#e0a955" stroke="#0f0f0f" stroke-width="1.5"/>
+<text x="79.976824" y="382.6333" fill="#d4d4d4" font-size="11">appwrite</text>
+<circle cx="180.34614399999998" cy="330.6801" r="6" fill="#e0a955" stroke="#0f0f0f" stroke-width="1.5"/>
+<text x="190.34614399999998" y="334.6801" fill="#d4d4d4" font-size="11">directus</text>
+<circle cx="97.72794400000001" cy="368.4962" r="6" fill="#5cb573" stroke="#0f0f0f" stroke-width="1.5"/>
+<text x="107.72794400000001" y="372.4962" fill="#d4d4d4" font-size="11">keystone</text>
+<circle cx="79.941884" cy="375.0021" r="6" fill="#5cb573" stroke="#0f0f0f" stroke-width="1.5"/>
+<text x="89.941884" y="379.0021" fill="#d4d4d4" font-size="11">umami</text>
+<circle cx="614.38352" cy="124.34249999999997" r="6" fill="#dc6555" stroke="#0f0f0f" stroke-width="1.5"/>
+<text x="624.38352" y="128.34249999999997" fill="#d4d4d4" font-size="11">posthog</text>
+<circle cx="154.256236" cy="356.4634" r="6" fill="#e0a955" stroke="#0f0f0f" stroke-width="1.5"/>
+<text x="164.256236" y="360.4634" fill="#d4d4d4" font-size="11">outline</text>
+<circle cx="86.41704" cy="372.7148" r="6" fill="#e0a955" stroke="#0f0f0f" stroke-width="1.5"/>
+<text x="96.41704" y="376.7148" fill="#d4d4d4" font-size="11">calcom-api</text>
+<circle cx="231.403212" cy="303.1969" r="6" fill="#e0a955" stroke="#0f0f0f" stroke-width="1.5"/>
+<text x="241.403212" y="307.1969" fill="#d4d4d4" font-size="11">supabase-studio</text>
+<circle cx="80" cy="40" r="4" fill="#4f7fdf"/>
+<text x="90" y="44" fill="#8a8a8a" font-size="10">primary</text>
+<circle cx="80" cy="54" r="4" fill="#5cb573"/>
+<text x="90" y="58" fill="#8a8a8a" font-size="10">medium</text>
+<circle cx="80" cy="68" r="4" fill="#e0a955"/>
+<text x="90" y="72" fill="#8a8a8a" font-size="10">stress</text>
+<circle cx="80" cy="82" r="4" fill="#dc6555"/>
+<text x="90" y="86" fill="#8a8a8a" font-size="10">stretch</text>
+</svg>

@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 440" width="720" height="440" font-family="ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif">
+<rect width="720" height="440" fill="#0f0f0f"/>
+<text x="360" y="18" fill="#d4d4d4" font-size="13" font-weight="600" text-anchor="middle">Node-degree distribution · tanstack-query</text>
+<line x1="64" y1="384" x2="696" y2="384" stroke="#3a3a3a" stroke-width="1"/>
+<line x1="64" y1="28" x2="64" y2="384" stroke="#3a3a3a" stroke-width="1"/>
+<line x1="60" y1="384" x2="64" y2="384" stroke="#3a3a3a"/>
+<text x="56" y="388" fill="#8a8a8a" font-size="10" text-anchor="end">0</text>
+<line x1="64" y1="384" x2="696" y2="384" stroke="#3a3a3a" stroke-opacity="0.3"/>
+<line x1="60" y1="312.8" x2="64" y2="312.8" stroke="#3a3a3a"/>
+<text x="56" y="316.8" fill="#8a8a8a" font-size="10" text-anchor="end">60</text>
+<line x1="64" y1="312.8" x2="696" y2="312.8" stroke="#3a3a3a" stroke-opacity="0.3"/>
+<line x1="60" y1="241.6" x2="64" y2="241.6" stroke="#3a3a3a"/>
+<text x="56" y="245.6" fill="#8a8a8a" font-size="10" text-anchor="end">120</text>
+<line x1="64" y1="241.6" x2="696" y2="241.6" stroke="#3a3a3a" stroke-opacity="0.3"/>
+<line x1="60" y1="170.4" x2="64" y2="170.4" stroke="#3a3a3a"/>
+<text x="56" y="174.4" fill="#8a8a8a" font-size="10" text-anchor="end">180</text>
+<line x1="64" y1="170.4" x2="696" y2="170.4" stroke="#3a3a3a" stroke-opacity="0.3"/>
+<line x1="60" y1="99.19999999999999" x2="64" y2="99.19999999999999" stroke="#3a3a3a"/>
+<text x="56" y="103.19999999999999" fill="#8a8a8a" font-size="10" text-anchor="end">240</text>
+<line x1="64" y1="99.19999999999999" x2="696" y2="99.19999999999999" stroke="#3a3a3a" stroke-opacity="0.3"/>
+<line x1="60" y1="28" x2="64" y2="28" stroke="#3a3a3a"/>
+<text x="56" y="32" fill="#8a8a8a" font-size="10" text-anchor="end">300</text>
+<line x1="64" y1="28" x2="696" y2="28" stroke="#3a3a3a" stroke-opacity="0.3"/>
+<rect x="65" y="102.75999999999999" width="88.28571428571429" height="281.24" fill="#5cb573" fill-opacity="0.85"/>
+<text x="109.14285714285714" y="98.75999999999999" fill="#8a8a8a" font-size="9" text-anchor="middle">237</text>
+<rect x="155.28571428571428" y="49.360000000000014" width="88.28571428571429" height="334.64" fill="#5cb573" fill-opacity="0.85"/>
+<text x="199.42857142857142" y="45.360000000000014" fill="#8a8a8a" font-size="9" text-anchor="middle">282</text>
+<rect x="245.57142857142858" y="28" width="88.28571428571429" height="356" fill="#5cb573" fill-opacity="0.85"/>
+<text x="289.7142857142857" y="24" fill="#8a8a8a" font-size="9" text-anchor="middle">300</text>
+<rect x="335.8571428571429" y="214.30666666666667" width="88.28571428571429" height="169.69333333333333" fill="#5cb573" fill-opacity="0.85"/>
+<text x="380.00000000000006" y="210.30666666666667" fill="#8a8a8a" font-size="9" text-anchor="middle">143</text>
+<rect x="426.14285714285717" y="325.85333333333335" width="88.28571428571429" height="58.14666666666665" fill="#5cb573" fill-opacity="0.85"/>
+<text x="470.28571428571433" y="321.85333333333335" fill="#8a8a8a" font-size="9" text-anchor="middle">49</text>
+<rect x="516.4285714285714" y="363.82666666666665" width="88.28571428571429" height="20.173333333333346" fill="#5cb573" fill-opacity="0.85"/>
+<text x="560.5714285714286" y="359.82666666666665" fill="#8a8a8a" font-size="9" text-anchor="middle">17</text>
+<rect x="606.7142857142858" y="380.44" width="88.28571428571429" height="3.5600000000000023" fill="#5cb573" fill-opacity="0.85"/>
+<text x="650.8571428571429" y="376.44" fill="#8a8a8a" font-size="9" text-anchor="middle">3</text>
+<text x="109.14285714285714" y="398" fill="#8a8a8a" font-size="10" text-anchor="middle">0</text>
+<text x="199.42857142857142" y="398" fill="#8a8a8a" font-size="10" text-anchor="middle">1</text>
+<text x="289.7142857142857" y="398" fill="#8a8a8a" font-size="10" text-anchor="middle">2-3</text>
+<text x="380.00000000000006" y="398" fill="#8a8a8a" font-size="10" text-anchor="middle">4-7</text>
+<text x="470.28571428571433" y="398" fill="#8a8a8a" font-size="10" text-anchor="middle">8-15</text>
+<text x="560.5714285714286" y="398" fill="#8a8a8a" font-size="10" text-anchor="middle">16-31</text>
+<text x="650.8571428571429" y="398" fill="#8a8a8a" font-size="10" text-anchor="middle">32-63</text>
+<text x="380" y="426" fill="#8a8a8a" font-size="11" text-anchor="middle" >degree (Ca + Ce)</text>
+<text x="-206" y="16" fill="#8a8a8a" font-size="11" text-anchor="middle" transform="rotate(-90)">module count</text>
+</svg>

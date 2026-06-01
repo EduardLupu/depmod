@@ -3,7 +3,8 @@
   "vcs": { "enabled": true, "clientKind": "git", "useIgnoreFile": true },
   "files": {
     "ignoreUnknown": true,
-    "ignore": ["**/dist", "**/.next", "**/node_modules", "**/coverage"]
+    "ignore": ["**/dist", "**/.next", "**/node_modules", "**/coverage"],
+    "maxSize": 5000000
   },
   "formatter": {
     "enabled": true,
