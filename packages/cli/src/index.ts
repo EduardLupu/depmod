@@ -34,7 +34,7 @@ export interface ProgramDeps {
  * `analyze` is the opt-in CI/CD path that writes JSON to disk.
  *
  * `--include`, `--exclude`, `--no-gitignore` file-selection controls are
- * available on the default action, `serve`, and `analyze`.
+ * available on the default action, `serve`, `analyze`, and `check`.
  */
 export function buildProgram(deps: ProgramDeps = {}): Command {
   const runAnalyze = deps.runAnalyze ?? defaultRunAnalyze;
@@ -82,35 +82,37 @@ export function buildProgram(deps: ProgramDeps = {}): Command {
     await invokeServe(runServe, onError, onSignal, path, opts);
   });
 
-  program
-    .command("check")
-    .description(
-      "Run architectural-fitness checks (cycles, dead code, unused deps, instability). Exits non-zero on failure.",
-    )
-    .argument("<path>", "Path to the project root")
-    .option(
-      "--fail-on <rules>",
-      "Comma-separated rules: cycles,dead-code,unused-deps,instability[:>N]",
-    )
-    .option("--json", "Emit a single JSON line with the report instead of the human summary")
-    .option("--no-cache", "Bypass the incremental .depmod-cache slice cache for this run")
-    .option("--no-color", "Disable ANSI colours")
-    .action(async (path: string, opts: CheckFlags) => {
-      try {
-        const { rules, thresholds } = parseFailOn(opts.failOn);
-        const { failed } = await runCheck({
-          path,
-          failOn: rules,
-          thresholds,
-          json: opts.json,
-          noColor: opts.color === false,
-          noCache: opts.cache === false,
-        });
-        if (failed) process.exitCode = 1;
-      } catch (err) {
-        onError(err);
-      }
-    });
+  attachFilterFlags(
+    program
+      .command("check")
+      .description(
+        "Run architectural-fitness checks (cycles, dead code, unused deps, instability). Exits non-zero on failure.",
+      )
+      .argument("<path>", "Path to the project root")
+      .option(
+        "--fail-on <rules>",
+        "Comma-separated rules: cycles,dead-code,unused-deps,instability[:>N]",
+      )
+      .option("--json", "Emit a single JSON line with the report instead of the human summary")
+      .option("--no-cache", "Bypass the incremental .depmod-cache slice cache for this run")
+      .option("--no-color", "Disable ANSI colours"),
+  ).action(async (path: string, opts: CheckFlags) => {
+    try {
+      const { rules, thresholds } = parseFailOn(opts.failOn);
+      const { failed } = await runCheck({
+        path,
+        failOn: rules,
+        thresholds,
+        json: opts.json,
+        noColor: opts.color === false,
+        noCache: opts.cache === false,
+        ...filterFlagsFromOpts(opts),
+      });
+      if (failed) process.exitCode = 1;
+    } catch (err) {
+      onError(err);
+    }
+  });
 
   attachFilterFlags(
     program
@@ -221,7 +223,7 @@ interface AnalyzeFlags extends FilterFlags {
   cache?: boolean;
 }
 
-interface CheckFlags {
+interface CheckFlags extends FilterFlags {
   failOn?: string;
   json?: boolean;
   /** commander's `--no-color` flips this to false. */

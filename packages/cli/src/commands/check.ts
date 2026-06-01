@@ -34,6 +34,14 @@ export interface RunCheckOptions {
   stderr?: (line: string) => void;
   /** Bypass the incremental slice cache for this run. */
   noCache?: boolean;
+  /** Allow-list of POSIX globs anchored at `path`. Empty = include all. */
+  include?: string[];
+  /** Exclude globs (applied after .gitignore). */
+  exclude?: string[];
+  /** When false, ignore `.gitignore` files. Defaults to true. */
+  respectGitignore?: boolean;
+  /** When true, omit test/spec files from the graph. */
+  excludeTests?: boolean;
 }
 
 export interface CheckReport {
@@ -65,7 +73,15 @@ export async function runCheck(options: RunCheckOptions): Promise<RunCheckResult
   }
 
   const failOnSet = new Set(options.failOn);
-  const graph = await analyze(absPath, options.noCache ? { cache: false } : undefined);
+  const graph = await analyze(absPath, {
+    ...(options.noCache ? { cache: false } : {}),
+    ...(options.include ? { include: options.include } : {}),
+    ...(options.exclude ? { exclude: options.exclude } : {}),
+    ...(options.respectGitignore !== undefined
+      ? { respectGitignore: options.respectGitignore }
+      : {}),
+    ...(options.excludeTests === true ? { excludeTests: true } : {}),
+  });
 
   const deadModules = findDeadCode(graph);
   const unusedDeps = findUnusedDependencies(graph);

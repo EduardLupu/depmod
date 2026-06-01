@@ -24,6 +24,7 @@ apps/web/out/
 # Local / IDE
 .idea/
 .depmod-cache/
+.depmod/
 
 # CLI publish artifacts (built by `prepack` / `pnpm pack`)
 packages/cli/web/

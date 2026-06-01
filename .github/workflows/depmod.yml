@@ -1,0 +1,59 @@
+name: depmod
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: depmod-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  depmod:
+    name: Architecture (depmod)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build CLI
+        run: pnpm --filter @depmod/types --filter @depmod/parser --filter depmod-ui build
+
+      - name: Architectural checks
+        # Informational until known cycles/deps debt is addressed; consumers
+        # should drop continue-on-error — see docs/ci.md and examples/github-actions/.
+        continue-on-error: true
+        env:
+          NO_UPDATE_NOTIFIER: "1"
+        run: |
+          pnpm exec depmod-ui check . \
+            --exclude "bench/**,apps/web/out/**,apps/web/public/demo/**,packages/cli/web/**" \
+            --fail-on cycles,dead-code,unused-deps
+
+      - name: Analyze dependency graph
+        env:
+          NO_UPDATE_NOTIFIER: "1"
+        run: |
+          mkdir -p .depmod
+          pnpm exec depmod-ui analyze . \
+            --exclude "bench/**,apps/web/out/**,apps/web/public/demo/**,packages/cli/web/**" \
+            -o .depmod/graph.json \
+            --metrics-out .depmod/metrics.json
+
+      - name: Upload graph artifacts
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        uses: actions/upload-artifact@v4
+        with:
+          name: depmod-graph-${{ github.sha }}
+          path: .depmod/
+          retention-days: 30

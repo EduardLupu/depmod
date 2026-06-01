@@ -1,0 +1,53 @@
+# Example GitHub Actions workflow for depmod-ui.
+#
+# Copy to your repo as `.github/workflows/depmod.yml` and adjust branches,
+# --fail-on rules, and excludes for your project.
+#
+# Docs: https://github.com/EduardLupu/depmod/blob/main/docs/ci.md
+
+name: depmod
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+
+concurrency:
+  group: depmod-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  architecture:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install depmod
+        run: npm install -g depmod-ui@latest
+
+      - name: Architectural checks
+        env:
+          NO_UPDATE_NOTIFIER: "1"
+        run: |
+          depmod-ui check . \
+            --fail-on cycles,unused-deps,instability:>0.7
+
+      - name: Analyze dependency graph
+        run: |
+          mkdir -p .depmod
+          depmod-ui analyze . \
+            -o .depmod/graph.json \
+            --metrics-out .depmod/metrics.json \
+            --exclude-tests
+
+      - name: Upload graph artifacts
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        uses: actions/upload-artifact@v4
+        with:
+          name: depmod-graph-${{ github.sha }}
+          path: .depmod/
+          retention-days: 30

@@ -58,6 +58,8 @@ Before opening the PR:
 
 CI runs the same checks on each PR; if it goes red, push a follow-up commit rather than force-pushing — easier to review.
 
+The **depmod** workflow (`.github/workflows/depmod.yml`) runs architectural analysis on this monorepo. Consumer-facing copy-paste examples live in [`docs/ci.md`](docs/ci.md) and [`examples/github-actions/depmod.yml`](examples/github-actions/depmod.yml).
+
 ## Reporting bugs and proposing features
 
 Use the issue templates. Bug reports need a repro and the depmod-ui + Node version; feature requests need a problem statement before a proposed solution.

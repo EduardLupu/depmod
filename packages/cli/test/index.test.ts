@@ -14,6 +14,7 @@ import { buildProgram } from "../src/index.js";
 interface CallCapture {
   runServe: ReturnType<typeof vi.fn>;
   runAnalyze: ReturnType<typeof vi.fn>;
+  runCheck: ReturnType<typeof vi.fn>;
   errors: unknown[];
 }
 
@@ -30,17 +31,19 @@ function makeProgram(): CallCapture & { program: ReturnType<typeof buildProgram>
     graphBytes: 0,
     metricsBytes: 0,
   }));
+  const runCheck = vi.fn(async () => ({ report: {}, failed: false }));
   const errors: unknown[] = [];
   const program = buildProgram({
     runServe,
     runAnalyze,
+    runCheck,
     onError: (err) => errors.push(err),
     onSignal: () => {},
   });
   // Make commander throw instead of exiting on parse errors so we can assert.
   program.exitOverride();
   for (const c of program.commands) c.exitOverride();
-  return { program, runServe, runAnalyze, errors };
+  return { program, runServe, runAnalyze, runCheck, errors };
 }
 
 async function parse(cap: ReturnType<typeof makeProgram>, argv: string[]): Promise<void> {
@@ -202,6 +205,12 @@ describe("buildProgram; Track B.1 file-selection flags", () => {
       include: ["src/**"],
       respectGitignore: false,
     });
+  });
+
+  it("`depmod-ui check <p> --exclude X` forwards to runCheck", async () => {
+    const cap = makeProgram();
+    await parse(cap, ["check", ".", "--exclude", "bench/**"]);
+    expect(firstArg(cap.runCheck)).toMatchObject({ exclude: ["bench/**"] });
   });
 });
 

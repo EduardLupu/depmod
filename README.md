@@ -102,6 +102,8 @@ By default the dashboard listens on `http://127.0.0.1:45455`. If that port is bu
 | `depmod-ui analyze <path>` | Write `graph.json` and `metrics.json` to disk |
 | `depmod-ui check <path> --fail-on <rules>` | Exit non-zero when rules fail (CI-friendly) |
 
+**CI / GitHub Actions:** copy [`examples/github-actions/depmod.yml`](examples/github-actions/depmod.yml) or follow [`docs/ci.md`](docs/ci.md) for check gates, JSON artifacts, and branch protection.
+
 ### Useful flags
 
 ```sh
@@ -118,6 +120,7 @@ depmod-ui /repo --no-cache
 depmod-ui check .
 depmod-ui check . --fail-on cycles,unused-deps
 depmod-ui check . --fail-on instability:>0.7
+depmod-ui check . --exclude "bench/**" --exclude-tests
 ```
 
 ## Development
@@ -195,22 +198,15 @@ More design notes: [`docs/specs/`](docs/specs).
 
 ## Benchmark snapshot
 
-Cold `analyze()` on real OSS repos (parser **0.3.0**, incremental cache off). Wall-clock parse time; full metrics in [`bench/results/`](bench/results/).
+**67** open-source targets in [`bench/targets.json`](bench/targets.json) (tiers: **primary** → **stretch**). Cold `analyze()`, cache off.
 
-| Target | Tier | Files | Edges | Cycles | LOC | Parse |
-| --- | --- | ---: | ---: | ---: | ---: | ---: |
-| `vercel-commerce` | primary | 65 | 120 | 1 | 3,896 | 407 ms |
-| `shadcn-taxonomy` | medium | 127 | 247 | 0 | 7,730 | 350 ms |
-| `create-t3-turbo` | medium | 74 | 62 | 1 | 3,370 | 331 ms |
-| `unkey` | medium | 1,921 | 2,914 | 10 | 180,304 | 2.7 s |
-| `react-email` | medium | 1,089 | 1,785 | 7 | 200,826 | 1.6 s |
-| `documenso` | stress | 1,855 | 3,540 | 25 | 233,359 | 2.9 s |
-| `dub` | stress | 3,913 | 10,897 | 19 | 435,857 | 4.7 s |
-| `cal-web` | stress | 988 | 1,287 | 9 | 126,331 | 1.6 s |
-| `cal.com` | stretch | 4,999 | 9,157 | 24 | 546,207 | 7.1 s |
-| `music.eduardlupu.com` | stretch | 41 | 77 | 0 | 7,677 | 1.3 s |
+```bash
+pnpm bench:list          # all targets
+pnpm bench:quick         # primary tier smoke (~7 repos)
+pnpm bench -- --tier stress
+```
 
-`cal-web` analyzes only `apps/web` from the Cal.com monorepo (shared clone). Re-run with `pnpm bench` or smoke-test with `pnpm bench:quick`; see [`bench/README.md`](bench/README.md).
+Committed numbers in [`bench/results/`](bench/results/) may lag the target list — run `pnpm bench` locally to refresh. Tier definitions and the full inventory: [`bench/README.md`](bench/README.md).
 
 ## Contributing
 
