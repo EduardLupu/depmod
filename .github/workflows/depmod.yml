@@ -36,7 +36,9 @@ jobs:
         env:
           NO_UPDATE_NOTIFIER: "1"
         run: |
-          pnpm exec depmod-ui check . \
+          # Invoke the built CLI directly — `pnpm exec depmod-ui` is not always on
+          # PATH in workspace CI (ERR_PNPM_RECURSIVE_EXEC_FIRST_FAIL).
+          node packages/cli/dist/index.js check . \
             --exclude "bench/**,apps/web/out/**,apps/web/public/demo/**,packages/cli/web/**" \
             --fail-on cycles,dead-code,unused-deps
 
@@ -45,7 +47,7 @@ jobs:
           NO_UPDATE_NOTIFIER: "1"
         run: |
           mkdir -p .depmod
-          pnpm exec depmod-ui analyze . \
+          node packages/cli/dist/index.js analyze . \
             --exclude "bench/**,apps/web/out/**,apps/web/public/demo/**,packages/cli/web/**" \
             -o .depmod/graph.json \
             --metrics-out .depmod/metrics.json
