@@ -1,5 +1,11 @@
 # depmod-ui
 
+## 0.4.4
+
+### Patch Changes
+
+- [`7caef5a`](https://github.com/EduardLupu/depmod/commit/7caef5a9e13e6c8b4b97400177f1cd5771b609f9) Thanks [@EduardLupu](https://github.com/EduardLupu)! - Add `--include`, `--exclude`, `--no-gitignore`, and `--exclude-tests` to `depmod-ui check` (same as `analyze` / `serve`) for scoped CI gates in monorepos. Document GitHub Actions setup in `docs/ci.md` with a copy-paste workflow under `examples/github-actions/`.
+
 ## 0.4.3
 
 ### Patch Changes
