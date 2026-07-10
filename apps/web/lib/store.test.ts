@@ -112,6 +112,25 @@ describe("useGraphStore", () => {
     expect(useGraphStore.getState().blastRadiusFor).toBeNull();
   });
 
+  it("clearing selection resets detail view and overlays", () => {
+    const store = useGraphStore.getState();
+    store.setSelection("lib/utils.ts");
+    store.setViewMode("detail");
+    store.setFocusModeRoot("lib/utils.ts");
+    store.setCodeViewerOpen(true);
+    store.setFocusedCycle(0);
+
+    store.setSelection(null);
+
+    const next = useGraphStore.getState();
+    expect(next.selectedNodeId).toBeNull();
+    expect(next.viewMode).toBe("2d");
+    expect(next.focusModeRoot).toBeNull();
+    expect(next.blastRadiusFor).toBeNull();
+    expect(next.codeViewerOpen).toBe(false);
+    expect(next.focusedCycle).toBeNull();
+  });
+
   it("toggleBlastRadiusForSelection is a no-op when no selection is set", () => {
     expect(useGraphStore.getState().selectedNodeId).toBeNull();
     useGraphStore.getState().toggleBlastRadiusForSelection();

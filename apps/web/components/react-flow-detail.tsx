@@ -3,7 +3,6 @@
 import {
   Background,
   Controls,
-  MiniMap,
   type Edge as RFEdge,
   type Node as RFNode,
   ReactFlow,
@@ -12,17 +11,10 @@ import {
 import "@xyflow/react/dist/style.css";
 import { MODULE_NODE_TYPE, ModuleNode, type ModuleNodeData } from "@/components/module-node";
 import { computeBlastRadius } from "@/lib/blast-radius";
-import {
-  BLAST_BORDER,
-  BLAST_COLOR,
-  CANVAS_BG,
-  CLASSIFICATION_COLORS,
-  CYCLE_COLOR,
-  NEUTRAL_EDGE,
-} from "@/lib/colors";
+import { BLAST_BORDER, BLAST_COLOR, CANVAS_BG, CYCLE_COLOR, NEUTRAL_EDGE } from "@/lib/colors";
 import { layoutHierarchical } from "@/lib/react-flow-layout";
 import { useGraphStore } from "@/lib/store";
-import { extractSubtree } from "@/lib/subtree";
+import { DEFAULT_DETAIL_DEPTH, extractSubtree } from "@/lib/subtree";
 import type { Graph } from "@depmod/types";
 import { useMemo } from "react";
 
@@ -143,24 +135,12 @@ export function ReactFlowDetail({ graph, rootId }: ReactFlowDetailProps) {
             const data = node.data as ModuleNodeData;
             setSelection(data.fullPath);
           }}
-          onPaneClick={() => setSelection(null)}
         >
           <Background color="#222" gap={20} />
           <Controls
             position="bottom-left"
             showInteractive={false}
-            style={{ background: "#0f0f0f", border: "1px solid #262626" }}
-          />
-          <MiniMap
-            position="bottom-right"
-            pannable
-            zoomable
-            maskColor="rgba(15,15,15,0.85)"
-            style={{ background: "#0f0f0f", border: "1px solid #262626" }}
-            nodeColor={(node) => {
-              const data = node.data as ModuleNodeData;
-              return CLASSIFICATION_COLORS[data.classification];
-            }}
+            className="depmod-flow-controls"
           />
         </ReactFlow>
 
@@ -171,7 +151,7 @@ export function ReactFlowDetail({ graph, rootId }: ReactFlowDetailProps) {
           <span className="font-mono text-neutral-200">{rootId}</span>
           <span className="ml-2 text-neutral-500">
             · {subtreeSize} module{subtreeSize === 1 ? "" : "s"} in subtree
-            {truncated ? " (truncated at depth 4)" : ""}
+            {truncated ? ` (truncated at depth ${DEFAULT_DETAIL_DEPTH})` : ""}
           </span>
           {blastRadiusFor ? (
             <span className="ml-2" style={{ color: BLAST_COLOR }}>

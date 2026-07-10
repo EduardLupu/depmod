@@ -130,7 +130,9 @@ export function Toolbar() {
       <div className="flex items-center gap-1">
         {/* 2D ↔ 3D toggle. Cytoscape is the default; switching to 3D
            dynamically loads three.js so the bundle stays small for users who
-           never use the 3D view. */}
+           never use the 3D view. The per-node "Detail" subtree view is
+           triggered from the Inspector button — it requires a selected node
+           and shouldn't pretend to be a global renderer mode. */}
         <div
           aria-label="Renderer"
           className="mr-1 flex items-center overflow-hidden rounded border border-neutral-800 text-[10px] font-medium uppercase tracking-wider"
@@ -174,14 +176,14 @@ export function Toolbar() {
             type="button"
             onClick={() => setCollapseDirectories(!collapseDirectories)}
             aria-pressed={collapseDirectories}
-            disabled={viewMode === "3d"}
+            disabled={viewMode !== "2d"}
             title={
-              viewMode === "3d"
+              viewMode !== "2d"
                 ? "Cluster-collapse is a 2D-only feature — switch to 2D to use it."
                 : undefined
             }
             className={`rounded px-2 py-1 text-xs transition-colors ${
-              viewMode === "3d"
+              viewMode !== "2d"
                 ? "cursor-not-allowed text-neutral-600"
                 : `cursor-pointer ${
                     collapseDirectories
@@ -197,14 +199,14 @@ export function Toolbar() {
           <button
             type="button"
             onClick={requestLayout}
-            disabled={viewMode === "3d"}
+            disabled={viewMode !== "2d"}
             title={
-              viewMode === "3d"
-                ? "Re-layout runs the 2D Cytoscape layout. The 3D scene uses a live d3-force simulation that's always converging."
+              viewMode !== "2d"
+                ? "Re-layout runs the 2D Cytoscape layout. Other renderers manage their own layout."
                 : undefined
             }
             className={`rounded px-2 py-1 text-xs transition-colors ${
-              viewMode === "3d"
+              viewMode !== "2d"
                 ? "cursor-not-allowed text-neutral-600"
                 : "cursor-pointer text-neutral-400 hover:bg-neutral-900 hover:text-neutral-200"
             }`}

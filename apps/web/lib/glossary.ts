@@ -127,18 +127,20 @@ const EDGE_KIND_ENTRIES: Record<EdgeKind, GlossaryEntry> = {
   import: {
     id: "edge.import",
     term: "import",
-    short: "A static value import that executes at runtime.",
+    short: "A static value import that executes at runtime. Drawn as a solid line.",
   },
   "type-only": {
     id: "edge.type-only",
     term: "type-only",
-    short: "A TypeScript `import type` declaration; erased at compile time, no runtime dependency.",
+    short:
+      "A TypeScript `import type` declaration — erased at compile time, no runtime dependency. Drawn as a dashed line.",
     long: "Filtered out of the runtime-only metrics view by default. Toggle the toolbar checkbox to include them.",
   },
   dynamic: {
     id: "edge.dynamic",
     term: "dynamic",
-    short: "A runtime `import('...')` expression. Loaded on demand, but still a real dependency.",
+    short:
+      "A runtime `import('...')` expression. Loaded on demand, but still a real dependency. Drawn as a dotted line.",
   },
 };
 
@@ -185,6 +187,12 @@ const ACTION_ENTRIES = {
     term: "Code viewer",
     short: "Read-only source for the selected module (Monaco). Requires depmod-ui.",
     long: "Press C to toggle the pane. Selecting a node opens it automatically when serve mode has access to the project files on disk.",
+  },
+  subtreeView: {
+    id: "action.subtree-view",
+    term: "Subtree view",
+    short: "Hierarchical diagram of everything this module pulls in via outgoing imports (BFS).",
+    long: "Replaces the 2D canvas with a React Flow tree rooted at the selected module. Follows import, type-only, and dynamic edges up to 12 hops deep. Press T to toggle.",
   },
 } satisfies Record<string, GlossaryEntry>;
 

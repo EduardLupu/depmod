@@ -16,6 +16,7 @@
     "format": "biome format --write .",
     "typecheck": "pnpm -r exec tsc --noEmit",
     "depmod-ui": "depmod-ui",
+    "dev:local": "node scripts/run-local.mjs",
     "bench": "pnpm --filter @depmod/bench bench",
     "bench:quick": "pnpm --filter @depmod/bench bench:quick",
     "bench:list": "pnpm --filter @depmod/bench bench:list",

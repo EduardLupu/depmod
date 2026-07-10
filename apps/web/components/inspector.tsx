@@ -51,6 +51,8 @@ export function Inspector({ graph }: InspectorProps) {
   const bumpFocusDepth = useGraphStore((s) => s.bumpFocusModeDepth);
   const toggleCodeViewer = useGraphStore((s) => s.toggleCodeViewer);
   const codeViewerOpen = useGraphStore((s) => s.codeViewerOpen);
+  const viewMode = useGraphStore((s) => s.viewMode);
+  const toggleDetailView = useGraphStore((s) => s.toggleDetailViewForSelection);
 
   const selectedNode = useMemo(
     () => (selectedId ? graph.nodes.find((n) => n.id === selectedId) : undefined),
@@ -131,6 +133,8 @@ export function Inspector({ graph }: InspectorProps) {
           bundle={selectedBundle}
           cycleIndices={selectedCycles}
           onIsolateCycle={setFocusedCycle}
+          detailActive={viewMode === "detail"}
+          onToggleDetail={toggleDetailView}
         />
       ) : (
         <OverviewPanel graph={graph} counts={counts} health={health} onSelect={setSelection} />
@@ -269,6 +273,8 @@ function SelectionPanel({
   bundle,
   cycleIndices,
   onIsolateCycle,
+  detailActive,
+  onToggleDetail,
 }: {
   node: GraphNode;
   deadKinds: readonly DeadKind[] | undefined;
@@ -289,6 +295,10 @@ function SelectionPanel({
   bundle: BundleEstimate | null;
   cycleIndices: readonly number[];
   onIsolateCycle: (idx: number | null) => void;
+  /** True when the global viewMode is currently `"detail"` rooted on this node. */
+  detailActive: boolean;
+  /** Toggle between detail mode (rooted here) and 2D. */
+  onToggleDetail: () => void;
 }) {
   const metrics = pickMetrics(node, runtimeOnlyMetrics);
   const showsRuntimeBadge = runtimeOnlyMetrics && node.metricsRuntimeOnly !== undefined;
@@ -400,7 +410,10 @@ function SelectionPanel({
                   : { borderColor: "#262626", color: "#e5e5e5" }
               }
             >
-              <span>{blastActive ? "Hide blast" : "Show blast"}</span>
+              <span className="inline-flex items-center gap-2">
+                <BlastIcon />
+                {blastActive ? "Hide blast" : "Show blast"}
+              </span>
               <kbd className="rounded bg-neutral-900 px-1.5 py-0.5 text-[10px] text-neutral-500">
                 B
               </kbd>
@@ -417,7 +430,10 @@ function SelectionPanel({
                   : "border-neutral-800 text-neutral-200 hover:bg-neutral-900"
               }`}
             >
-              <span>{codeViewerOpen ? "Hide source" : "View source"}</span>
+              <span className="inline-flex items-center gap-2">
+                <CodeIcon />
+                {codeViewerOpen ? "Hide source" : "View source"}
+              </span>
               <kbd className="rounded bg-neutral-900 px-1.5 py-0.5 text-[10px] text-neutral-500">
                 C
               </kbd>
@@ -425,31 +441,68 @@ function SelectionPanel({
           </InfoTooltip>
 
           <InfoTooltip term="action.focus-mode" side="bottom" align="end">
-            <button
-              type="button"
-              onClick={onToggleFocus}
-              className="flex w-full items-center justify-between rounded-md border px-3 py-1.5 text-xs font-medium transition-colors"
-              style={
-                focusActive
-                  ? {
-                      background: "rgba(251, 191, 36, 0.15)",
-                      borderColor: "#fbbf24",
-                      color: "#fbbf24",
-                    }
-                  : { borderColor: "#262626", color: "#e5e5e5" }
-              }
-            >
-              <span>{focusActive ? `Hide focus · ${focusDepth}` : "Focus"}</span>
-              <kbd className="rounded bg-neutral-900 px-1.5 py-0.5 text-[10px] text-neutral-500">
-                F
-              </kbd>
-            </button>
+            <span className="inline-flex w-full">
+              <button
+                type="button"
+                onClick={onToggleFocus}
+                disabled={detailActive}
+                title={detailActive ? "Focus mode is unavailable in subtree view" : undefined}
+                className={`flex w-full items-center justify-between rounded-md border px-3 py-1.5 text-xs font-medium transition-colors ${
+                  detailActive ? "cursor-not-allowed opacity-50" : ""
+                }`}
+                style={
+                  focusActive
+                    ? {
+                        background: "rgba(251, 191, 36, 0.15)",
+                        borderColor: "#fbbf24",
+                        color: "#fbbf24",
+                      }
+                    : { borderColor: "#262626", color: "#e5e5e5" }
+                }
+              >
+                <span className="inline-flex items-center gap-2">
+                  <FocusIcon />
+                  {focusActive ? `Hide focus · ${focusDepth}` : "Focus"}
+                </span>
+                <kbd className="rounded bg-neutral-900 px-1.5 py-0.5 text-[10px] text-neutral-500">
+                  F
+                </kbd>
+              </button>
+            </span>
           </InfoTooltip>
 
           <CopyPathButton path={node.id} />
+
+          <div className="col-span-2">
+            <InfoTooltip term="action.subtree-view" side="bottom" align="end" block>
+              <button
+                type="button"
+                onClick={onToggleDetail}
+                aria-pressed={detailActive}
+                className="flex w-full cursor-pointer items-center justify-between rounded-md border px-3 py-1.5 text-xs font-medium transition-colors"
+                style={
+                  detailActive
+                    ? {
+                        background: "rgba(76, 29, 149, 0.35)",
+                        borderColor: "#6d28d9",
+                        color: "#ddd6fe",
+                      }
+                    : { borderColor: "#262626", color: "#e5e5e5" }
+                }
+              >
+                <span className="inline-flex items-center gap-2">
+                  <SubtreeIcon />
+                  {detailActive ? "Exit subtree view" : "View subtree"}
+                </span>
+                <kbd className="rounded bg-neutral-900 px-1.5 py-0.5 text-[10px] text-neutral-500">
+                  T
+                </kbd>
+              </button>
+            </InfoTooltip>
+          </div>
         </div>
 
-        {focusActive ? (
+        {focusActive && !detailActive ? (
           <div className="mt-2 flex items-center justify-between text-[11px] text-neutral-500">
             <span>Depth</span>
             <div className="flex items-center gap-1">
@@ -512,7 +565,6 @@ function SelectionPanel({
         ids={dependencies}
         onSelect={onSelect}
         emptyHint="This module has no internal dependencies."
-        className="min-h-0 flex-1"
       />
     </>
   );
@@ -576,7 +628,7 @@ function NodeList({
       {ids.length === 0 ? (
         <div className="text-xs text-neutral-600">{emptyHint}</div>
       ) : (
-        <ul className="-mr-1 max-h-full space-y-1 overflow-y-auto pr-1 text-xs">
+        <ul className="space-y-1 text-xs">
           {ids.map((id) => (
             <li key={id}>
               <PathTooltip path={id}>
@@ -878,7 +930,10 @@ function CopyPathButton({ path }: { path: string }) {
           : "border-neutral-800 text-neutral-200 hover:bg-neutral-900"
       }`}
     >
-      <span>{label}</span>
+      <span className="inline-flex items-center gap-2">
+        <CopyIcon />
+        {label}
+      </span>
       <kbd className="rounded bg-neutral-900 px-1.5 py-0.5 text-[10px] text-neutral-500">Y</kbd>
     </button>
   );
@@ -993,5 +1048,110 @@ function HealthHelp() {
     >
       ?
     </span>
+  );
+}
+
+/** Tiny "root → branches" glyph that visually conveys "open subtree view". */
+function SubtreeIcon() {
+  return (
+    <svg
+      aria-hidden
+      viewBox="0 0 16 16"
+      width="12"
+      height="12"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.4"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <title>Subtree</title>
+      <circle cx="8" cy="2.5" r="1.5" />
+      <circle cx="3" cy="13" r="1.5" />
+      <circle cx="8" cy="13" r="1.5" />
+      <circle cx="13" cy="13" r="1.5" />
+      <path d="M8 4v3M8 7l-5 4M8 7v4M8 7l5 4" />
+    </svg>
+  );
+}
+
+function BlastIcon() {
+  return (
+    <svg
+      aria-hidden
+      viewBox="0 0 16 16"
+      width="12"
+      height="12"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.4"
+      strokeLinecap="round"
+    >
+      <title>Blast radius</title>
+      <circle cx="8" cy="8" r="1.5" />
+      <circle cx="8" cy="8" r="3.5" />
+      <circle cx="8" cy="8" r="5.5" />
+    </svg>
+  );
+}
+
+function CodeIcon() {
+  return (
+    <svg
+      aria-hidden
+      viewBox="0 0 16 16"
+      width="12"
+      height="12"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.4"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <title>Code</title>
+      <path d="M5.5 4.5 2.5 8l3 3.5" />
+      <path d="M10.5 4.5 13.5 8l-3 3.5" />
+      <path d="M9 3 7 13" />
+    </svg>
+  );
+}
+
+function FocusIcon() {
+  return (
+    <svg
+      aria-hidden
+      viewBox="0 0 16 16"
+      width="12"
+      height="12"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.4"
+      strokeLinecap="round"
+    >
+      <title>Focus</title>
+      <circle cx="8" cy="8" r="5.5" />
+      <path d="M8 2.5v2M8 11.5v2M2.5 8h2M11.5 8h2" />
+      <circle cx="8" cy="8" r="1.5" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+
+function CopyIcon() {
+  return (
+    <svg
+      aria-hidden
+      viewBox="0 0 16 16"
+      width="12"
+      height="12"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.4"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <title>Copy</title>
+      <rect x="5.5" y="5.5" width="7" height="8" rx="1" />
+      <path d="M5.5 11.5H4.5a1 1 0 0 1-1-1v-8a1 1 0 0 1 1-1H9.5" />
+    </svg>
   );
 }

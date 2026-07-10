@@ -12,6 +12,7 @@ import { useGraphStore } from "@/lib/store";
 import { useBlastRadiusShortcut } from "@/lib/use-blast-radius-shortcut";
 import { useCodeViewerAutoOpen } from "@/lib/use-code-viewer-auto-open";
 import { useCodeViewerShortcut } from "@/lib/use-code-viewer-shortcut";
+import { useDetailViewShortcut } from "@/lib/use-detail-view-shortcut";
 import { useFocusModeShortcuts } from "@/lib/use-focus-mode-shortcuts";
 import { useServerGraphBootstrap } from "@/lib/use-server-graph-bootstrap";
 import { useUrlStateSync } from "@/lib/use-url-state-sync";
@@ -31,6 +32,14 @@ const ForceGraph3DCanvas = dynamic(
   { ssr: false, loading: () => <CanvasFallback /> },
 );
 
+// React Flow detail (hierarchical subtree of the selected node). Lazy-loaded
+// for the same reason as 3D: keeps `@xyflow/react` out of the base bundle
+// when the user never opens this view.
+const ReactFlowDetail = dynamic(
+  () => import("@/components/react-flow-detail").then((m) => m.ReactFlowDetail),
+  { ssr: false, loading: () => <CanvasFallback /> },
+);
+
 /**
  * Root page. The app is always launched by `depmod-ui`, which spawns the
  * Next server with a session file pointing at the freshly-analysed graph.
@@ -41,6 +50,7 @@ export default function DashboardPage() {
   useBlastRadiusShortcut();
   useFocusModeShortcuts();
   useCodeViewerShortcut();
+  useDetailViewShortcut();
   useCodeViewerAutoOpen();
   useUrlStateSync();
   const { showLoadingScreen, progress } = useServerGraphBootstrap();
@@ -62,6 +72,14 @@ export default function DashboardPage() {
   const [has3DBeenUsed, setHas3DBeenUsed] = useState(false);
   useEffect(() => {
     if (viewMode === "3d") setHas3DBeenUsed(true);
+  }, [viewMode]);
+
+  // Same "mount once, then keep" pattern for the detail view. React Flow is
+  // cheaper than three.js but re-mounting still resets pan/zoom and re-runs
+  // the dagre layout, which jitters as the user toggles between modes.
+  const [hasDetailBeenUsed, setHasDetailBeenUsed] = useState(false);
+  useEffect(() => {
+    if (viewMode === "detail") setHasDetailBeenUsed(true);
   }, [viewMode]);
 
   if (showLoadingScreen) {
@@ -121,6 +139,20 @@ export default function DashboardPage() {
               <ForceGraph3DCanvas graph={graph} />
             </div>
           ) : null}
+          {hasDetailBeenUsed ? (
+            <div
+              className={`absolute inset-0 ${
+                viewMode === "detail" ? "z-10" : "pointer-events-none invisible z-0"
+              }`}
+              aria-hidden={viewMode !== "detail"}
+            >
+              {selectedNodeId ? (
+                <ReactFlowDetail graph={graph} rootId={selectedNodeId} />
+              ) : (
+                <DetailEmpty />
+              )}
+            </div>
+          ) : null}
         </div>
         <Inspector graph={graph} />
         {codeViewerOpen ? <CodeViewer nodeId={selectedNodeId} /> : null}
@@ -134,6 +166,14 @@ function CanvasFallback() {
   return (
     <div className="flex h-full items-center justify-center bg-neutral-925 text-sm text-neutral-500">
       Loading canvas…
+    </div>
+  );
+}
+
+function DetailEmpty() {
+  return (
+    <div className="flex h-full items-center justify-center bg-neutral-925 px-6 text-center">
+      <p className="text-sm text-neutral-500">Select a module</p>
     </div>
   );
 }

@@ -18,6 +18,7 @@ export function useFocusModeShortcuts() {
     function onKey(e: KeyboardEvent) {
       if (e.ctrlKey || e.metaKey || e.altKey) return;
       if (isEditableTarget(e.target)) return;
+      if (useGraphStore.getState().viewMode === "detail") return;
       if (e.key === "f" || e.key === "F") {
         e.preventDefault();
         useGraphStore.getState().toggleFocusModeForSelection();

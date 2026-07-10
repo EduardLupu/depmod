@@ -71,7 +71,7 @@ function writeHash(state: {
   focusModeDepth: number;
   collapseDirectories: boolean;
   runtimeOnlyMetrics: boolean;
-  viewMode: "2d" | "3d";
+  viewMode: "2d" | "3d" | "detail";
 }): void {
   const encoded = encodeUrlState({
     pathMask: state.pathMask,

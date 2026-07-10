@@ -2,8 +2,9 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { GraphSchema } from "@depmod/types";
 import { describe, expect, it } from "vitest";
-import { analyze } from "../src/parser.js";
+import { analyze } from "../src";
 
+// @ts-ignore
 const here = dirname(fileURLToPath(import.meta.url));
 const FIXTURE_ROOT = join(here, "fixtures", "cyclic-app");
 const FIXED_NOW = new Date("2026-05-17T00:00:00.000Z");

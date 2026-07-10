@@ -18,7 +18,7 @@ export interface UrlState {
   focusModeDepth: number;
   collapseDirectories: boolean;
   runtimeOnlyMetrics: boolean;
-  viewMode: "2d" | "3d";
+  viewMode: "2d" | "3d" | "detail";
 }
 
 const MODE_LETTER: Record<ClassificationFilterMode, string> = {
@@ -60,8 +60,10 @@ export function encodeUrlState(state: UrlState): string {
   if (state.collapseDirectories) params.set("col", "1");
   // runtimeOnlyMetrics defaults to true; encode only when the user has flipped it off.
   if (!state.runtimeOnlyMetrics) params.set("ro", "0");
-  // viewMode defaults to "2d"; encode only "3d" so URLs stay clean for the common case.
+  // viewMode defaults to "2d"; encode only the non-default modes so URLs stay
+  // clean for the common case.
   if (state.viewMode === "3d") params.set("v", "3d");
+  else if (state.viewMode === "detail") params.set("v", "detail");
   return params.toString();
 }
 
@@ -101,7 +103,9 @@ export function decodeUrlState(hash: string): Partial<UrlState> | null {
 
   if (params.get("col") === "1") out.collapseDirectories = true;
   if (params.get("ro") === "0") out.runtimeOnlyMetrics = false;
-  if (params.get("v") === "3d") out.viewMode = "3d";
+  const v = params.get("v");
+  if (v === "3d") out.viewMode = "3d";
+  else if (v === "detail") out.viewMode = "detail";
 
   return Object.keys(out).length > 0 ? out : null;
 }

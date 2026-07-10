@@ -89,3 +89,38 @@ button:not(:disabled),
 .cytoscape-navigatorOverlay {
   pointer-events: none;
 }
+
+/* React Flow zoom/fit controls (subtree detail view). */
+.depmod-flow-controls.react-flow__controls {
+  background: #0f0f0f;
+  border: 1px solid #262626;
+  border-radius: 6px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+}
+
+.depmod-flow-controls .react-flow__controls-button {
+  background: #0f0f0f;
+  border: none;
+  border-bottom: 1px solid #262626;
+  color: #a3a3a3;
+  fill: #a3a3a3;
+  width: 28px;
+  height: 28px;
+}
+
+.depmod-flow-controls .react-flow__controls-button:last-child {
+  border-bottom: none;
+}
+
+.depmod-flow-controls .react-flow__controls-button:hover {
+  background: #1a1a1a;
+  color: #e5e5e5;
+  fill: #e5e5e5;
+}
+
+.depmod-flow-controls .react-flow__controls-button svg {
+  fill: currentColor;
+  max-width: 14px;
+  max-height: 14px;
+}

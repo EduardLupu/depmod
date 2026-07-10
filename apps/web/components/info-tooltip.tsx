@@ -21,6 +21,8 @@ interface InfoTooltipProps {
   align?: "start" | "center" | "end";
   /** Extra className applied to the trigger. */
   className?: string;
+  /** Stretch the trigger to the full width of its container (action buttons). */
+  block?: boolean;
 }
 
 /**
@@ -34,6 +36,7 @@ export function InfoTooltip({
   side = "top",
   align = "center",
   className,
+  block = false,
 }: InfoTooltipProps) {
   const entry = lookupGlossaryEntry(term);
   if (!entry) return <>{children}</>;
@@ -45,7 +48,7 @@ export function InfoTooltip({
   return (
     <Tooltip.Root delayDuration={150}>
       <Tooltip.Trigger asChild>
-        <span className="inline-flex items-center">{trigger}</span>
+        <span className={`inline-flex items-center ${block ? "w-full" : ""}`}>{trigger}</span>
       </Tooltip.Trigger>
       <Tooltip.Portal>
         <Tooltip.Content

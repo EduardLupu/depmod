@@ -43,8 +43,14 @@ interface GraphState {
    * briefly `"reloading"` when a reanalyzed event is in flight.
    */
   watchStatus: "watching" | "reloading" | null;
-  /** which canvas renderer is active. Default `"2d"` (Cytoscape). */
-  viewMode: "2d" | "3d";
+  /**
+   * Which canvas renderer is active. Default `"2d"` (Cytoscape full graph).
+   * `"3d"` swaps in the three.js force-graph. `"detail"` switches to a React
+   * Flow hierarchical view of the selected node's outgoing subtree (BFS); reuses
+   * `selectedNodeId` as the root, so picking a node anywhere in the
+   * UI re-renders the detail view rooted at that node.
+   */
+  viewMode: "2d" | "3d" | "detail";
   /**
    * When set, isolates the named cycle (index into `graph.cycles`). Both
    * canvases hide every other node and highlight the cycle's edges.
@@ -72,8 +78,9 @@ interface GraphState {
   setCollapseDirectories: (collapsed: boolean) => void;
   setCodeViewerOpen: (open: boolean) => void;
   toggleCodeViewer: () => void;
+  toggleDetailViewForSelection: () => void;
   setWatchStatus: (status: "watching" | "reloading" | null) => void;
-  setViewMode: (mode: "2d" | "3d") => void;
+  setViewMode: (mode: "2d" | "3d" | "detail") => void;
   setFocusedCycle: (index: number | null) => void;
   cycleDirectoryFilter: (path: string) => void;
   clearDirectoryFilters: () => void;
@@ -137,12 +144,30 @@ export const useGraphStore = create<GraphState>((set) => ({
       focusedCycle: null,
     }),
   setSelection: (id) =>
-    set((state) => ({
-      selectedNodeId: id,
-      blastRadiusFor: id === state.blastRadiusFor ? state.blastRadiusFor : null,
-    })),
+    set((state) => {
+      if (id === null) {
+        return {
+          selectedNodeId: null,
+          blastRadiusFor: null,
+          focusModeRoot: null,
+          focusedCycle: null,
+          viewMode: "2d",
+          codeViewerOpen: false,
+        };
+      }
+      return {
+        selectedNodeId: id,
+        blastRadiusFor: id === state.blastRadiusFor ? state.blastRadiusFor : null,
+      };
+    }),
   setCodeViewerOpen: (open) => set({ codeViewerOpen: open }),
   toggleCodeViewer: () => set((state) => ({ codeViewerOpen: !state.codeViewerOpen })),
+  toggleDetailViewForSelection: () =>
+    set((state) => {
+      if (state.viewMode === "detail") return { viewMode: "2d" };
+      if (!state.selectedNodeId) return {};
+      return { viewMode: "detail", focusModeRoot: null };
+    }),
   setWatchStatus: (status) => set({ watchStatus: status }),
   setViewMode: (mode) => set({ viewMode: mode }),
   setFocusedCycle: (index) => set({ focusedCycle: index }),
@@ -183,12 +208,15 @@ export const useGraphStore = create<GraphState>((set) => ({
   setFocusModeRoot: (rootId) => set({ focusModeRoot: rootId }),
   setFocusModeDepth: (depth) => set({ focusModeDepth: clampFocusDepth(depth) }),
   toggleFocusModeForSelection: () =>
-    set((state) => ({
-      focusModeRoot:
-        state.focusModeRoot !== null && state.focusModeRoot === state.selectedNodeId
-          ? null
-          : state.selectedNodeId,
-    })),
+    set((state) => {
+      if (state.viewMode === "detail") return {};
+      return {
+        focusModeRoot:
+          state.focusModeRoot !== null && state.focusModeRoot === state.selectedNodeId
+            ? null
+            : state.selectedNodeId,
+      };
+    }),
   bumpFocusModeDepth: (delta) =>
     set((state) => {
       if (state.focusModeRoot === null) return {};

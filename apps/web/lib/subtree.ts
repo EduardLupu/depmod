@@ -13,7 +13,8 @@ export interface Subtree {
   truncated: boolean;
 }
 
-export const DEFAULT_DETAIL_DEPTH = 4;
+/** Max outgoing-import hops in the React Flow subtree view. */
+export const DEFAULT_DETAIL_DEPTH = 12;
 
 /**
  * Extract the descendant subtree rooted at `rootId` via outgoing-edge BFS, stopping
